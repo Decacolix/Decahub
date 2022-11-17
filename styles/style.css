@@ -37,7 +37,7 @@ body {
 }
 
 .clock {
-    font-family: 'NotoSansMonoMedium';
+    font-family: 'NotoSansMonoMedium', sans-serif;
 }
 
 .stopwatch-button:hover, .timer-button:hover {
