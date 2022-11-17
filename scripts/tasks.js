@@ -5,6 +5,7 @@ const taskAddButtonElement = document.querySelector('.add-task-btn')
 //Add task to local storage.
 function addTask() {
     localStorage.setItem('task' + new Date().getTime(), taskInputElement.value)
+    taskInputElement.value = ''
     loadTasks()
 }
 
