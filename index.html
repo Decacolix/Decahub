@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="author" content="davidtoman1997@gmail.com">
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+    <script defer src="scripts/time.js"></script>
+    <script defer src="scripts/calendar.js"></script>
+    <script defer src="scripts/exchange.js"></script>
+    <script defer src="scripts/weather.js"></script>
+    <script defer src="scripts/tasks.js"></script>
+    <title>Decahub</title>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xxl-8 left-container">
+                <div class="row">
+                    <div class="col-lg-6 p-5 d-flex flex-column justify-content-center">
+                        <div class="weather-container">
+                            <a class="weatherwidget-io" href="" data-label_1="" data-icons="Climacons Animated" data-mode="Current" data-days="5" data-textcolor="#ffffff" >OSTRAVA</a>
+                            <script>
+                            !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');
+                            </script>
+                        </div>
+                        <button type="button" class="btn btn-link weather-city-selection-btn align-self-center mt-4" data-bs-toggle="modal" data-bs-target="#weatherCitySelection">
+                            VYBRAT MĚSTO
+                        </button>
+                        <div class="modal fade" id="weatherCitySelection" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h1 class="modal-title fs-5">Vybrat město</h1>
+                                </div>
+                                <div class="modal-body">
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary weather-close-button" data-bs-dismiss="modal">ZAVŘÍT</button>
+                                </div>
+                              </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 p-5 d-flex flex-column justify-content-center align-items-center">
+                        <div class="clock display-1"></div>
+                        <div class="clock-buttons p-3">
+                            <span class="stopwatch"></span>
+                            <span class="stopwatch-button p-2"><img src="images/stopwatch.svg" height="35px"></span>
+                        </div>
+                        <div class="date-info p-3"></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 p-5 d-flex flex-column justify-content-start align-items-center">
+                        <div class="exchange-container container-fluid d-flex flex-column justify-content-center text-center">
+                            <div class="row exchange-row py-4">
+                                <span class="col-6 exchange-left-value-container">
+                                    <span class="exchange-left-arrow pe-2"><img src="images/arrow.svg" height="10px"></span>
+                                    <span class="exchange-left-value"></span>
+                                    <span class="exchange-right-arrow ps-2"><img src="images/arrow.svg" height="10px"></span>
+                                </span>
+                                <span class="col-6 exchange-right-value"></span>
+                            </div>
+                            <div class="row exchange-row py-4">
+                                <span class="col-6 exchange-left-value-container">
+                                    <span class="exchange-left-arrow pe-2"><img src="images/arrow.svg" height="10px"></span>
+                                    <span class="exchange-left-value"></span>
+                                    <span class="exchange-right-arrow ps-2"><img src="images/arrow.svg" height="10px"></span>
+                                </span>
+                                <span class="col-6 exchange-right-value"></span>
+                            </div>
+                            <div class="row exchange-row py-4">
+                                <span class="col-6 exchange-left-value-container">
+                                    <span class="exchange-left-arrow pe-2"><img src="images/arrow.svg" height="10px"></span>
+                                    <span class="exchange-left-value"></span>
+                                    <span class="exchange-right-arrow ps-2"><img src="images/arrow.svg" height="10px"></span>
+                                </span>
+                                <span class="col-6 exchange-right-value"></span>
+                            </div>
+                            <div class="row exchange-row py-4">
+                                <span class="col-6 exchange-left-value-container">
+                                    <span class="exchange-left-arrow pe-2"><img src="images/arrow.svg" height="10px"></span>
+                                    <span class="exchange-left-value"></span>
+                                    <span class="exchange-right-arrow ps-2"><img src="images/arrow.svg" height="10px"></span>
+                                </span>
+                                <span class="col-6 exchange-right-value"></span>
+                            </div>
+                            <div class="row exchange-row py-4">
+                                <span class="col-6 exchange-left-value-container">
+                                    <span class="exchange-left-arrow pe-2"><img src="images/arrow.svg" height="10px"></span>
+                                    <span class="exchange-left-value"></span>
+                                    <span class="exchange-right-arrow ps-2"><img src="images/arrow.svg" height="10px"></span>
+                                </span>
+                                <span class="col-6 exchange-right-value"></span>
+                            </div>
+                            <div class="row exchange-row py-4">
+                                <span class="col-6 exchange-left-value-container">
+                                    <span class="exchange-left-arrow pe-2"><img src="images/arrow.svg" height="10px"></span>
+                                    <span class="exchange-left-value"></span>
+                                    <span class="exchange-right-arrow ps-2"><img src="images/arrow.svg" height="10px"></span>
+                                </span>
+                                <span class="col-6 exchange-right-value"></span>
+                            </div>
+                            <div class="exchange-date"></div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 p-5 d-flex flex-column justify-content-center align-items-center">
+                        <div class="w-100 p-2 date-switch d-flex justify-content-evenly align-items-stretch">
+                            <span class="date-arrow-left"><img src="images/arrow.svg" height="20px"></span>
+                            <span class="date-month-year">ČERVEN 2023</span>
+                            <span class="date-arrow-right"><img src="images/arrow.svg" height="20px"></span>
+                        </div>
+                        <div class="calendar-days pt-3">
+                            <div class="row">
+                                <div class="col p-3 day-cell-header day-cell-monday d-flex justify-content-center">PO</div>
+                                <div class="col p-3 day-cell-header day-cell-tuesday d-flex justify-content-center">ÚT</div>
+                                <div class="col p-3 day-cell-header day-cell-wednesday d-flex justify-content-center">ST</div>
+                                <div class="col p-3 day-cell-header day-cell-thursday d-flex justify-content-center">ČT</div>
+                                <div class="col p-3 day-cell-header day-cell-friday d-flex justify-content-center">PÁ</div>
+                                <div class="col p-3 day-cell-header day-cell-saturday d-flex justify-content-center">SO</div>
+                                <div class="col p-3 day-cell-header day-cell-sunday d-flex justify-content-center">NE</div>
+                            </div>
+                            <div class="row">
+                                <div class="col p-3 day-cell day-cell-0-0 d-flex justify-content-center"></div>
+                                <div class="col p-3 day-cell day-cell-1-0 d-flex justify-content-center"></div>
+                                <div class="col p-3 day-cell day-cell-2-0 d-flex justify-content-center"></div>
+                                <div class="col p-3 day-cell day-cell-3-0 d-flex justify-content-center"></div>
+                                <div class="col p-3 day-cell day-cell-4-0 d-flex justify-content-center"></div>
+                                <div class="col p-3 day-cell day-cell-5-0 d-flex justify-content-center"></div>
+                                <div class="col p-3 day-cell day-cell-6-0 d-flex justify-content-center"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col p-3 day-cell day-cell-0-1 d-flex justify-content-center"></div>
+                                <div class="col p-3 day-cell day-cell-1-1 d-flex justify-content-center"></div>
+                                <div class="col p-3 day-cell day-cell-2-1 d-flex justify-content-center"></div>
+                                <div class="col p-3 day-cell day-cell-3-1 d-flex justify-content-center"></div>
+                                <div class="col p-3 day-cell day-cell-4-1 d-flex justify-content-center"></div>
+                                <div class="col p-3 day-cell day-cell-5-1 d-flex justify-content-center"></div>
+                                <div class="col p-3 day-cell day-cell-6-1 d-flex justify-content-center"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col p-3 day-cell day-cell-0-2 d-flex justify-content-center"></div>
+                                <div class="col p-3 day-cell day-cell-1-2 d-flex justify-content-center"></div>
+                                <div class="col p-3 day-cell day-cell-2-2 d-flex justify-content-center"></div>
+                                <div class="col p-3 day-cell day-cell-3-2 d-flex justify-content-center"></div>
+                                <div class="col p-3 day-cell day-cell-4-2 d-flex justify-content-center"></div>
+                                <div class="col p-3 day-cell day-cell-5-2 d-flex justify-content-center"></div>
+                                <div class="col p-3 day-cell day-cell-6-2 d-flex justify-content-center"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col p-3 day-cell day-cell-0-3 d-flex justify-content-center"></div>
+                                <div class="col p-3 day-cell day-cell-1-3 d-flex justify-content-center"></div>
+                                <div class="col p-3 day-cell day-cell-2-3 d-flex justify-content-center"></div>
+                                <div class="col p-3 day-cell day-cell-3-3 d-flex justify-content-center"></div>
+                                <div class="col p-3 day-cell day-cell-4-3 d-flex justify-content-center"></div>
+                                <div class="col p-3 day-cell day-cell-5-3 d-flex justify-content-center"></div>
+                                <div class="col p-3 day-cell day-cell-6-3 d-flex justify-content-center"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col p-3 day-cell day-cell-0-4 d-flex justify-content-center"></div>
+                                <div class="col p-3 day-cell day-cell-1-4 d-flex justify-content-center"></div>
+                                <div class="col p-3 day-cell day-cell-2-4 d-flex justify-content-center"></div>
+                                <div class="col p-3 day-cell day-cell-3-4 d-flex justify-content-center"></div>
+                                <div class="col p-3 day-cell day-cell-4-4 d-flex justify-content-center"></div>
+                                <div class="col p-3 day-cell day-cell-5-4 d-flex justify-content-center"></div>
+                                <div class="col p-3 day-cell day-cell-6-4 d-flex justify-content-center"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col p-3 day-cell day-cell-0-5 d-flex justify-content-center"></div>
+                                <div class="col p-3 day-cell day-cell-1-5 d-flex justify-content-center"></div>
+                                <div class="col p-3 day-cell day-cell-2-5 d-flex justify-content-center"></div>
+                                <div class="col p-3 day-cell day-cell-3-5 d-flex justify-content-center"></div>
+                                <div class="col p-3 day-cell day-cell-4-5 d-flex justify-content-center"></div>
+                                <div class="col p-3 day-cell day-cell-5-5 d-flex justify-content-center"></div>
+                                <div class="col p-3 day-cell day-cell-6-5 d-flex justify-content-center"></div>
+                            </div>
+                        </div>
+                        <div class="calendar-months p-3">
+                            <div class="row">
+                                <div class="col-4 p-4 month-cell d-flex justify-content-center">LEDEN</div>
+                                <div class="col-4 p-4 month-cell d-flex justify-content-center">ÚNOR</div>
+                                <div class="col-4 p-4 month-cell d-flex justify-content-center">BŘEZEN</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4 p-4 month-cell d-flex justify-content-center">DUBEN</div>
+                                <div class="col-4 p-4 month-cell d-flex justify-content-center">KVĚTEN</div>
+                                <div class="col-4 p-4 month-cell d-flex justify-content-center">ČERVEN</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4 p-4 month-cell d-flex justify-content-center">ČERVENEC</div>
+                                <div class="col-4 p-4 month-cell d-flex justify-content-center">SRPEN</div>
+                                <div class="col-4 p-4 month-cell d-flex justify-content-center">ZÁŘÍ</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4 p-4 month-cell d-flex justify-content-center">ŘÍJEN</div>
+                                <div class="col-4 p-4 month-cell d-flex justify-content-center">LISTOPAD</div>
+                                <div class="col-4 p-4 month-cell d-flex justify-content-center">PROSINEC</div>
+                            </div>
+                        </div>
+                        <div class="calendar-years p-3">
+                            <div class="row">
+                                <div class="col-4 p-4 year-cell d-flex justify-content-center"></div>
+                                <div class="col-4 p-4 year-cell d-flex justify-content-center"></div>
+                                <div class="col-4 p-4 year-cell d-flex justify-content-center"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4 p-4 year-cell d-flex justify-content-center"></div>
+                                <div class="col-4 p-4 year-cell d-flex justify-content-center"></div>
+                                <div class="col-4 p-4 year-cell d-flex justify-content-center"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4 p-4 year-cell d-flex justify-content-center"></div>
+                                <div class="col-4 p-4 year-cell d-flex justify-content-center"></div>
+                                <div class="col-4 p-4 year-cell d-flex justify-content-center"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4 p-4 year-cell d-flex justify-content-center"></div>
+                                <div class="col-4 p-4 year-cell d-flex justify-content-center"></div>
+                                <div class="col-4 p-4 year-cell d-flex justify-content-center"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xxl-4 p-5 d-flex justify-content-center right-container">
+                <div class="task-container p-5 mt-4">
+                    <div class="task-input-row">
+                        <input type="text" placeholder="Přidat úkol..." class="task-input">
+                        <button class="add-task-btn">
+                            <img class="add-task-plus-img" src="images/plus.svg" width="25px">
+                        </button>
+                    </div>
+                    <div class="task-list mt-4">
+                        <!---<div class="task my-4 px-2 pb-4">
+                            <div class="task-content">
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique placeat repudiandae repellendus inventore ab minima quibusdam quos ea explicabo architecto.
+                            </div>
+                            <div class="task-delete"></div>
+                        </div>--->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
