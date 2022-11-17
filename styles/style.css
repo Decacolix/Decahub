@@ -1,0 +1,261 @@
+@font-face {
+    font-family: 'GothamBook';
+    src: url('../fonts/gotham/Gotham-Book.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'NotoSansMonoMedium';
+    src: url('../fonts/noto-sans-mono/NotoSansMono-Medium.woff2') format('woff2');
+}
+
+:root {
+    --primary-color: #2c1c49;
+    --secondary-color: #1d0e36;
+    --tertiary-color: #ffffff;
+}
+
+*::-webkit-scrollbar {
+    width: 10px;
+}
+   
+*::-webkit-scrollbar-thumb {
+    background: var(--tertiary-color); 
+}
+
+body {
+    background-color: var(--primary-color);
+}
+
+.left-container {
+    color: var(--tertiary-color);
+    font-family: 'GothamBook', sans-serif;
+}
+
+.right-container {
+    color: var(--tertiary-color);
+    font-family: 'GothamBook', sans-serif;
+}
+
+.clock {
+    font-family: 'NotoSansMonoMedium';
+}
+
+.stopwatch-button:hover, .timer-button:hover {
+    cursor: pointer;
+    opacity: 0.4;
+}
+
+.clock-buttons {
+    position: relative;
+}
+
+.stopwatch {
+    position: absolute;
+    left: -7rem;
+    top: 25%;
+    font-size: 1.5rem;
+    font-family: 'NotoSansMonoMedium';
+    display: none;
+}
+
+.date-info {
+    font-size: calc(1.25rem + 0.5vw);
+}
+
+.date-switch {
+    position: relative;
+    max-width: 450px;
+    font-size: 1.5rem;
+    background-color: var(--secondary-color);
+    border-radius: 9999px;
+}
+
+.date-arrow-left {
+    position: absolute;
+    left: 2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+.date-arrow-right {
+    position: absolute;
+    right: 2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+.date-month-year {
+    transform: translateY(0.1rem);
+    cursor: pointer;
+}
+
+.date-month-year:hover {
+    opacity: 0.4;
+}
+
+.date-arrow-right img {
+    transform: rotate(180deg);
+}
+
+.date-arrow-left:hover, .date-arrow-right:hover {
+    opacity: 0.4;
+}
+
+.month-cell:hover {
+    cursor: pointer;
+    opacity: 0.4;
+}
+
+.year-cell:hover {
+    cursor: pointer;
+    opacity: 0.4;
+}
+
+.current-date {
+    background-color: #1d0e36;
+    border-radius: 9999px;
+}
+
+.previous-month-day, .next-month-day {
+    opacity: 0.4;
+}
+
+.calendar-months {
+    display: none;
+}
+
+.calendar-years {
+    display: none;
+}
+
+.exchange-row {
+    font-size: 1.15rem;
+}
+
+.exchange-right-arrow img {
+    transform: rotate(180deg);
+}
+
+.exchange-left-arrow:hover, .exchange-right-arrow:hover {
+    opacity: 0.4;
+    cursor: pointer;
+}
+
+.weather-city-selection-btn {
+    color: var(--tertiary-color);
+    text-decoration: none;
+}
+
+.weather-city-selection-btn:hover {
+    color: var(--tertiary-color);
+    opacity: 0.4;
+}
+
+.weather-city-selection-btn:active {
+    color: var(--tertiary-color) !important;
+    background-color: transparent !important;
+}
+
+.modal-content {
+    background-color: var(--secondary-color);
+    border: none;
+}
+
+.weather-close-button {
+    background-color: transparent;
+    border: none;
+}
+
+.weather-close-button:hover {
+    background-color: transparent;
+    opacity: 0.4;
+}
+
+.weather-close-button:active {
+    background-color: transparent !important;
+}
+
+.weather-select-city {
+    margin: 1rem 0;
+}
+
+.weather-select-city:hover {
+    cursor: pointer;
+    opacity: 0.4;
+}
+
+.locationName  {
+    font-family: 'GothamBook', sans-serif;
+}
+
+.task-container {
+    width: 100%;
+}
+
+.task-list {
+    max-height: 620px;
+    overflow-y: scroll;
+}
+
+.task-input-row {
+    position: relative;
+}
+
+.task-input {
+    background-color: var(--secondary-color);
+    border: none;
+    border-radius: 9999px;
+    padding: 1rem;
+    width: 100%;
+    color: var(--tertiary-color);
+}
+
+.add-task-btn {
+    background-color: transparent;
+    border: none;
+    background-color: var(--secondary-color);
+    border-radius: 100%;
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+}
+
+.add-task-btn:hover {
+    background-color: var(--primary-color);
+}
+
+.task {
+    font-size: 1.15rem;
+    border-bottom: 1px solid var(--tertiary-color);
+    position: relative;
+    word-wrap: break-word;
+}
+
+.task:last-of-type {
+    border-bottom: none;
+}
+
+.task-delete {
+    position: absolute;
+    top: -15px;
+    right: 10px;
+    transform: rotate(45deg);
+    background-image: url('../images/plus.svg');
+    background-size: cover;
+    width: 15px;
+    height: 15px;
+}
+
+.task-delete:hover {
+    cursor: pointer;
+    opacity: 0.4;
+}
+
+.task-delete img {
+    width: 15px;
+}
