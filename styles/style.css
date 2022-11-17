@@ -259,3 +259,18 @@ body {
 .task-delete img {
     width: 15px;
 }
+
+.date {
+    font-size: 1.75rem;
+    display: none;
+}
+
+@media screen and (max-width: 576px) {
+    .calendar-container {
+        display: none !important;
+    }
+
+    .date {
+        display: block;
+    }
+}

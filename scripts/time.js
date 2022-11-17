@@ -1,7 +1,8 @@
 const clockElement = document.querySelector('.clock')
 const dateInfoElement = document.querySelector('.date-info')
 const stopwatchButtonElement = document.querySelector('.stopwatch-button')
-const stopwatchElement = document. querySelector('.stopwatch')
+const stopwatchElement = document.querySelector('.stopwatch')
+const dateElement = document.querySelector('.date')
 
 function getWeekNumber(date) {
     date = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()))
@@ -45,7 +46,12 @@ function showClock() {
     let minutes = time.getMinutes()
     let seconds = time.getSeconds()
 
+    let day = time.getDate()
+    let month = time.getMonth()
+    let year = time.getFullYear()
+
     clockElement.innerText = `${addZero(hours)}:${addZero(minutes)}:${addZero(seconds)}`
+    dateElement.innerText = `${day}. ${month + 1}. ${year}`
 
     showDateInfo()
 
