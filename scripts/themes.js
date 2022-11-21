@@ -32,6 +32,7 @@ function loadTheme() {
 
         stopwatchImageElement.setAttribute('src', 'images/stopwatch-white.svg')
         plusImageElement.setAttribute('src', 'images/plus-white.svg')
+        root.style.setProperty('--close-image', "url('../images/plus-white.svg')")
     }
 
     if (localStorage.getItem('theme') == themes.light || localStorage.getItem('theme') == themes.blue || localStorage.getItem('theme') == themes.pink) {
@@ -41,6 +42,7 @@ function loadTheme() {
 
         stopwatchImageElement.setAttribute('src', 'images/stopwatch-black.svg')
         plusImageElement.setAttribute('src', 'images/plus-black.svg')
+        root.style.setProperty('--close-image', "url('../images/plus-black.svg')")
     }
 }
 

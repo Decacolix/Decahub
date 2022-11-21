@@ -250,7 +250,7 @@ body {
     top: -15px;
     right: 10px;
     transform: rotate(45deg);
-    background-image: url('../images/plus.svg');
+    background-image: var(--close-image);
     background-size: cover;
     width: 15px;
     height: 15px;
