@@ -74,7 +74,7 @@ const cities = {
 }
 
 const cityKeys = Object.keys(cities)
-const modalBodyElement = document.querySelector('.modal-body')
+const modalBodyElement = document.querySelector('.modal-weather-selection-body')
 const weatherLinkElement = document.querySelector('.weatherwidget-io')
 
 //Fill modal with cities from the list.

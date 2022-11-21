@@ -8,18 +8,20 @@
     src: url('../fonts/noto-sans-mono/NotoSansMono-Medium.woff2') format('woff2');
 }
 
-:root {
-    --primary-color: #2c1c49;
-    --secondary-color: #1d0e36;
-    --tertiary-color: #ffffff;
-}
-
 *::-webkit-scrollbar {
     width: 10px;
 }
    
 *::-webkit-scrollbar-thumb {
     background: var(--tertiary-color); 
+}
+
+::placeholder {
+    color: var(--tertiary-color)
+}
+
+::-ms-input-placeholder {
+    color: var(--tertiary-color)
 }
 
 body {
@@ -114,7 +116,7 @@ body {
 }
 
 .current-date {
-    background-color: #1d0e36;
+    background-color: var(--secondary-color);
     border-radius: 9999px;
 }
 
@@ -164,16 +166,19 @@ body {
 }
 
 .weather-close-button {
+    color: var(--tertiary-color);
     background-color: transparent;
     border: none;
 }
 
 .weather-close-button:hover {
+    color: var(--tertiary-color);
     background-color: transparent;
     opacity: 0.4;
 }
 
 .weather-close-button:active {
+    color: var(--tertiary-color) !important;
     background-color: transparent !important;
 }
 
@@ -226,7 +231,7 @@ body {
 }
 
 .add-task-btn:hover {
-    background-color: var(--primary-color);
+    border: 1px solid var(--tertiary-color);
 }
 
 .task {
@@ -263,6 +268,79 @@ body {
 .date {
     font-size: 1.75rem;
     display: none;
+}
+
+.theme-btn {
+    color: var(--tertiary-color);
+    float: right;
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    text-decoration: none;
+}
+
+.theme-btn {
+    color: var(--tertiary-color);
+    text-decoration: none;
+}
+
+.theme-btn:hover {
+    color: var(--tertiary-color);
+    opacity: 0.4;
+}
+
+.theme-btn:active {
+    color: var(--tertiary-color) !important;
+    background-color: transparent !important;
+}
+
+.theme-btn:hover {
+    cursor: pointer;
+    opacity: 0.4;
+}
+
+.modal-theme {
+    color: var(--tertiary-color);
+    font-family: 'GothamBook', sans-serif;
+}
+
+.theme-safe-button {
+    color: var(--tertiary-color);
+    background-color: transparent;
+    border: none;
+}
+
+.theme-safe-button:hover {
+    color: var(--tertiary-color);
+    background-color: transparent;
+    opacity: 0.4;
+}
+
+.theme-safe-button:active {
+    color: var(--tertiary-color) !important;
+    background-color: transparent !important;
+}
+
+.theme-select-button:hover {
+    cursor: pointer;
+    opacity: 0.4;
+}
+
+.theme-close-button {
+    color: var(--tertiary-color);
+    background-color: transparent;
+    border: none;
+}
+
+.theme-close-button:hover {
+    color: var(--tertiary-color);
+    background-color: transparent;
+    opacity: 0.4;
+}
+
+.theme-close-button:active {
+    color: var(--tertiary-color) !important;
+    background-color: transparent !important;
 }
 
 @media screen and (max-width: 576px) {

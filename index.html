@@ -15,10 +15,36 @@
     <script defer src="scripts/exchange.js"></script>
     <script defer src="scripts/weather.js"></script>
     <script defer src="scripts/tasks.js"></script>
+    <script defer src="scripts/themes.js"></script>
     <title>Decahub</title>
 </head>
 <body>
     <div class="container-fluid">
+        <button type="button" class="btn btn-link theme-btn" data-bs-toggle="modal" data-bs-target="#themeSelection">TÉMA</button>
+        <div class="modal modal-theme fade" id="themeSelection" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+              <div class="modal-content">
+                <div class="modal-header border-0">
+                  <h1 class="modal-title fs-5">Vybrat téma</h1>
+                </div>
+                <div class="modal-body modal-theme-selection-body">
+                    <div class="row text-center">
+                        <div class="col-lg theme-select-button theme-select-default p-4">ZÁKLADNÍ</div>
+                        <div class="col-lg theme-select-button theme-select-dark p-4">TMAVÉ</div>
+                        <div class="col-lg theme-select-button theme-select-light p-4">SVĚTLÉ</div>
+                    </div>
+                    <div class="row text-center">
+                        <div class="col-lg theme-select-button theme-select-blue p-4">MODRÉ</div>
+                        <div class="col-lg theme-select-button theme-select-red p-4">ČERVENÉ</div>
+                        <div class="col-lg theme-select-button theme-select-pink p-4">RŮŽOVÉ</div>
+                    </div>
+                </div>
+                <div class="modal-footer border-0">
+                    <button type="button" class="btn btn-secondary theme-close-button" data-bs-dismiss="modal">ZAVŘÍT</button>
+                </div>
+              </div>
+            </div>
+        </div>
         <div class="row">
             <div class="col-xxl-8 left-container">
                 <div class="row">
@@ -32,15 +58,15 @@
                         <button type="button" class="btn btn-link weather-city-selection-btn align-self-center mt-4" data-bs-toggle="modal" data-bs-target="#weatherCitySelection">
                             VYBRAT MĚSTO
                         </button>
-                        <div class="modal fade" id="weatherCitySelection" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal modal-weather fade" id="weatherCitySelection" tabindex="-1">
                             <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                               <div class="modal-content">
-                                <div class="modal-header">
+                                <div class="modal-header border-0">
                                   <h1 class="modal-title fs-5">Vybrat město</h1>
                                 </div>
-                                <div class="modal-body">
+                                <div class="modal-body modal-weather-selection-body">
                                 </div>
-                                <div class="modal-footer">
+                                <div class="modal-footer border-0">
                                     <button type="button" class="btn btn-secondary weather-close-button" data-bs-dismiss="modal">ZAVŘÍT</button>
                                 </div>
                               </div>
@@ -52,7 +78,7 @@
                         <div class="date p-3"></div>
                         <div class="clock-buttons p-3">
                             <span class="stopwatch"></span>
-                            <span class="stopwatch-button p-2"><img src="images/stopwatch.svg" height="35px"></span>
+                            <span class="stopwatch-button p-2"><img class="image-stopwatch" height="35px"></span>
                         </div>
                         <div class="date-info p-3 text-center"></div>
                     </div>
@@ -62,49 +88,49 @@
                         <div class="exchange-container container-fluid d-flex flex-column justify-content-center text-center">
                             <div class="row exchange-row py-4">
                                 <span class="col-6 exchange-left-value-container">
-                                    <span class="exchange-left-arrow pe-2"><img src="images/arrow.svg" height="10px"></span>
+                                    <span class="exchange-left-arrow pe-2"><img class="image-arrow" height="10px"></span>
                                     <span class="exchange-left-value"></span>
-                                    <span class="exchange-right-arrow ps-2"><img src="images/arrow.svg" height="10px"></span>
+                                    <span class="exchange-right-arrow ps-2"><img class="image-arrow" height="10px"></span>
                                 </span>
                                 <span class="col-6 exchange-right-value"></span>
                             </div>
                             <div class="row exchange-row py-4">
                                 <span class="col-6 exchange-left-value-container">
-                                    <span class="exchange-left-arrow pe-2"><img src="images/arrow.svg" height="10px"></span>
+                                    <span class="exchange-left-arrow pe-2"><img class="image-arrow" height="10px"></span>
                                     <span class="exchange-left-value"></span>
-                                    <span class="exchange-right-arrow ps-2"><img src="images/arrow.svg" height="10px"></span>
+                                    <span class="exchange-right-arrow ps-2"><img class="image-arrow" height="10px"></span>
                                 </span>
                                 <span class="col-6 exchange-right-value"></span>
                             </div>
                             <div class="row exchange-row py-4">
                                 <span class="col-6 exchange-left-value-container">
-                                    <span class="exchange-left-arrow pe-2"><img src="images/arrow.svg" height="10px"></span>
+                                    <span class="exchange-left-arrow pe-2"><img class="image-arrow" height="10px"></span>
                                     <span class="exchange-left-value"></span>
-                                    <span class="exchange-right-arrow ps-2"><img src="images/arrow.svg" height="10px"></span>
+                                    <span class="exchange-right-arrow ps-2"><img class="image-arrow" height="10px"></span>
                                 </span>
                                 <span class="col-6 exchange-right-value"></span>
                             </div>
                             <div class="row exchange-row py-4">
                                 <span class="col-6 exchange-left-value-container">
-                                    <span class="exchange-left-arrow pe-2"><img src="images/arrow.svg" height="10px"></span>
+                                    <span class="exchange-left-arrow pe-2"><img class="image-arrow" height="10px"></span>
                                     <span class="exchange-left-value"></span>
-                                    <span class="exchange-right-arrow ps-2"><img src="images/arrow.svg" height="10px"></span>
+                                    <span class="exchange-right-arrow ps-2"><img class="image-arrow" height="10px"></span>
                                 </span>
                                 <span class="col-6 exchange-right-value"></span>
                             </div>
                             <div class="row exchange-row py-4">
                                 <span class="col-6 exchange-left-value-container">
-                                    <span class="exchange-left-arrow pe-2"><img src="images/arrow.svg" height="10px"></span>
+                                    <span class="exchange-left-arrow pe-2"><img class="image-arrow" height="10px"></span>
                                     <span class="exchange-left-value"></span>
-                                    <span class="exchange-right-arrow ps-2"><img src="images/arrow.svg" height="10px"></span>
+                                    <span class="exchange-right-arrow ps-2"><img class="image-arrow" height="10px"></span>
                                 </span>
                                 <span class="col-6 exchange-right-value"></span>
                             </div>
                             <div class="row exchange-row py-4">
                                 <span class="col-6 exchange-left-value-container">
-                                    <span class="exchange-left-arrow pe-2"><img src="images/arrow.svg" height="10px"></span>
+                                    <span class="exchange-left-arrow pe-2"><img class="image-arrow" height="10px"></span>
                                     <span class="exchange-left-value"></span>
-                                    <span class="exchange-right-arrow ps-2"><img src="images/arrow.svg" height="10px"></span>
+                                    <span class="exchange-right-arrow ps-2"><img class="image-arrow" height="10px"></span>
                                 </span>
                                 <span class="col-6 exchange-right-value"></span>
                             </div>
@@ -113,9 +139,9 @@
                     </div>
                     <div class="col-lg-6 p-5 pt-0 d-flex flex-column justify-content-center align-items-center calendar-container">
                         <div class="w-100 p-2 date-switch d-flex justify-content-evenly align-items-stretch">
-                            <span class="date-arrow-left"><img src="images/arrow.svg" height="20px"></span>
+                            <span class="date-arrow-left"><img class="image-arrow" height="20px"></span>
                             <span class="date-month-year">ČERVEN 2023</span>
-                            <span class="date-arrow-right"><img src="images/arrow.svg" height="20px"></span>
+                            <span class="date-arrow-right"><img class="image-arrow" height="20px"></span>
                         </div>
                         <div class="calendar-days pt-3">
                             <div class="row">
@@ -234,7 +260,7 @@
                     <div class="task-input-row">
                         <input type="text" placeholder="Přidat úkol..." class="task-input">
                         <button class="add-task-btn">
-                            <img class="add-task-plus-img" src="images/plus.svg" width="25px">
+                            <img class="add-task-plus-img" width="25px">
                         </button>
                     </div>
                     <div class="task-list mt-4"></div>
