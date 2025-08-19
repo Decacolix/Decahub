@@ -1,6 +1,6 @@
 # Decahub.cz
 
-Decahub is a dashboard website that consists of information about current time, currency exchange rates, cryptocurrency rates, weather information and news.
+Decahub is a dashboard website that consists of information about current time, currency exchange rates, cryptocurrency rates, weather information and news.\_\_
 The website is a purely front-end solution, using free APIs to gather the data, and allowing user to configure the displayed information.
 
 ## Technologies used
