@@ -1,5 +1,5 @@
-import Lock from '../options/Lock';
-import Settings from '../options/Settings';
+import Lock from '../options/lock/LockIcon';
+import Settings from '../options/settings/SettingsIcon';
 
 const Menu = () => {
 	return (
