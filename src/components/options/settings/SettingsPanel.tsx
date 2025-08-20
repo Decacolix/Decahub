@@ -17,14 +17,12 @@ const SettingsPanel = () => {
 
 	const panelStyles: string =
 		(settingsDisplayed ? 'translate-x-0' : 'translate-x-full') +
-		' absolute top-0 right-0 h-[100vh] w-[30vw] bg-black/30 backdrop-blur-sm z-50 duration-500';
-
-	console.log(panelStyles);
+		' absolute top-0 right-0 h-[100vh] w-[30vw] bg-black/30 backdrop-blur-sm pt-16 z-50 duration-500';
 
 	return (
 		<div className={panelStyles}>
 			<div
-				className="bg-[url(./assets/icons/confirm-icon.svg)] bg-no-repeat bg-center h-5 w-5 absolute top-2 right-2 hover:cursor-pointer hover:opacity-50"
+				className="bg-[url(./assets/icons/confirm-icon.svg)] bg-no-repeat bg-center h-6 w-6 absolute top-6 right-6 hover:cursor-pointer hover:opacity-50"
 				onClick={() => handleSettingsClose()}
 			/>
 			<SettingsTheme />

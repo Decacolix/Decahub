@@ -1,8 +1,10 @@
 import { DEFAULT_SETTINGS } from '../../../constants/defaultSettings';
 import { STORAGE_SETTINGS_KEY } from '../../../constants/storageSettingsKey';
 
+export type TypeTheme = 'pink' | 'green' | 'blue';
+
 export type TypeSettings = {
-	theme: 'pink' | 'green' | 'blue';
+	theme: TypeTheme;
 	timezone: string;
 	location: string;
 	baseCurrency: string;
@@ -33,11 +35,20 @@ export const setDefaultSettings = (): void => {
 	setLocalStorageItem(STORAGE_SETTINGS_KEY, DEFAULT_SETTINGS);
 };
 
-export const setThemeSettings = (value: 'pink' | 'green' | 'blue'): void => {
-	setLocalStorageItem(
-		STORAGE_SETTINGS_KEY,
-		setSettingsValue('timezone', value)
-	);
+export const getDefaultSettings = (): TypeSettings => {
+	return JSON.parse(getLocalStorageItem(STORAGE_SETTINGS_KEY));
+};
+
+export const getThemeSettings = (): TypeTheme => {
+	return JSON.parse(getLocalStorageItem(STORAGE_SETTINGS_KEY)).theme;
+};
+
+export const setThemeSettings = (value: TypeTheme): void => {
+	setLocalStorageItem(STORAGE_SETTINGS_KEY, setSettingsValue('theme', value));
+};
+
+export const getTimezoneSettings = (): string => {
+	return JSON.parse(getLocalStorageItem(STORAGE_SETTINGS_KEY)).timezone;
 };
 
 export const setTimezoneSettings = (value: string): void => {
@@ -47,6 +58,10 @@ export const setTimezoneSettings = (value: string): void => {
 	);
 };
 
+export const getLocationSettings = (): string => {
+	return JSON.parse(getLocalStorageItem(STORAGE_SETTINGS_KEY)).location;
+};
+
 export const setLocationSettings = (value: string): void => {
 	setLocalStorageItem(
 		STORAGE_SETTINGS_KEY,
@@ -54,11 +69,19 @@ export const setLocationSettings = (value: string): void => {
 	);
 };
 
+export const getBaseCurrencySettings = (): string => {
+	return JSON.parse(getLocalStorageItem(STORAGE_SETTINGS_KEY)).baseCurrency;
+};
+
 export const setBaseCurrencySettings = (value: string): void => {
 	setLocalStorageItem(
 		STORAGE_SETTINGS_KEY,
 		setSettingsValue('baseCurrency', value)
 	);
+};
+
+export const getBaseCryptoSettings = (): string => {
+	return JSON.parse(getLocalStorageItem(STORAGE_SETTINGS_KEY)).baseCrypto;
 };
 
 export const setBaseCryptoSettings = (value: string): void => {
