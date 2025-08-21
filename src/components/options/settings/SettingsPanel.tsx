@@ -16,7 +16,9 @@ const SettingsPanel = () => {
 	};
 
 	const panelStyles: string =
-		(settingsDisplayed ? 'translate-x-0' : 'translate-x-full') +
+		(settingsDisplayed
+			? 'translate-x-0 pointer-events-auto'
+			: 'translate-x-full pointer-events-none') +
 		' absolute top-0 right-0 h-[100vh] w-[30vw] bg-black/30 backdrop-blur-sm pt-16 z-50 duration-500';
 
 	return (

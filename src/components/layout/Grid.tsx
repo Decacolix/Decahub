@@ -6,14 +6,22 @@ import TimeTile from '../tiles/time/TimeTile';
 import WeatherTile from '../tiles/WeatherTile';
 import TileFrame from '../tiles/ui/TileFrame';
 
-const Grid = () => {
+export type TypeGrid = {
+	clockErrorMessage: string;
+	timezoneErrorMessage: string;
+};
+
+const Grid = ({ clockErrorMessage, timezoneErrorMessage }: TypeGrid) => {
 	return (
 		<div className="grid grid-cols-3 gap-8 pt-4 px-20">
 			<TileFrame>
 				<CurrencyTile />
 			</TileFrame>
 			<TileFrame>
-				<TimeTile />
+				<TimeTile
+					clockErrorMessage={clockErrorMessage}
+					timezoneErrorMessage={timezoneErrorMessage}
+				/>
 			</TileFrame>
 			<TileFrame>
 				<WeatherTile />

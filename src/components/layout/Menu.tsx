@@ -7,7 +7,9 @@ const Menu = () => {
 	const { settingsDisplayed } = use(SettingsDisplayedContext);
 
 	const menuStyles: string =
-		(settingsDisplayed ? 'translate-y-[-150%]' : 'translate-y-0') +
+		(settingsDisplayed
+			? 'translate-y-[-150%] pointer-events-none'
+			: 'translate-y-0 pointer-events-auto') +
 		' flex-col absolute right-2 top-4 bg-black/30 backdrop-blur-sm p-2 rounded-4xl z-50 duration-500';
 
 	return (

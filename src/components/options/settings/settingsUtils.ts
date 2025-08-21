@@ -1,4 +1,3 @@
-import { DEFAULT_SETTINGS } from '../../../constants/defaultSettings';
 import { STORAGE_SETTINGS_KEY } from '../../../constants/storageSettingsKey';
 
 export type TypeTheme = 'pink' | 'green' | 'blue';
@@ -31,11 +30,7 @@ const setSettingsValue = (
 	return item;
 };
 
-export const setDefaultSettings = (): void => {
-	setLocalStorageItem(STORAGE_SETTINGS_KEY, DEFAULT_SETTINGS);
-};
-
-export const getDefaultSettings = (): TypeSettings => {
+export const getSettings = (): TypeSettings => {
 	return JSON.parse(getLocalStorageItem(STORAGE_SETTINGS_KEY));
 };
 
@@ -45,6 +40,10 @@ export const getThemeSettings = (): TypeTheme => {
 
 export const setThemeSettings = (value: TypeTheme): void => {
 	setLocalStorageItem(STORAGE_SETTINGS_KEY, setSettingsValue('theme', value));
+};
+
+export const setTheme = (value: TypeTheme): void => {
+	document.body.style.backgroundImage = `url("./src/assets/backgrounds/background-${value}.svg")`;
 };
 
 export const getTimezoneSettings = (): string => {
