@@ -1,16 +1,15 @@
-export type FetchTime = {
+export type TypeFetchTime = {
 	failed: boolean;
 	error: string;
 	day?: number;
 	month?: number;
 	year?: number;
-	dayOfWeek?: string;
 	hour?: number;
 	minute?: number;
 	seconds?: number;
 };
 
-export type FetchTimezone = {
+export type TypeFetchTimezone = {
 	failed: boolean;
 	error: string;
 	timeZone?: string;
@@ -19,8 +18,8 @@ export type FetchTimezone = {
 	isDayLightSavingActive?: boolean;
 };
 
-export const fetchTime = async (timezone: string): Promise<FetchTime> => {
-	let result: FetchTime = {
+export const fetchTime = async (timezone: string): Promise<TypeFetchTime> => {
+	let result: TypeFetchTime = {
 		failed: true,
 		error: 'Funkce "fetch" nebyla provedena',
 	};
@@ -38,7 +37,6 @@ export const fetchTime = async (timezone: string): Promise<FetchTime> => {
 				day: data.day,
 				month: data.month,
 				year: data.year,
-				dayOfWeek: data.dayOfWeek,
 				hour: data.hour,
 				minute: data.minute,
 				seconds: data.seconds,
@@ -56,8 +54,8 @@ export const fetchTime = async (timezone: string): Promise<FetchTime> => {
 
 export const fetchTimezone = async (
 	timezone: string
-): Promise<FetchTimezone> => {
-	let result: FetchTimezone = {
+): Promise<TypeFetchTimezone> => {
+	let result: TypeFetchTimezone = {
 		failed: true,
 		error: 'fetch',
 	};

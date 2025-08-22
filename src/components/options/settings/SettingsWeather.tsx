@@ -1,5 +1,5 @@
 const SettingsWeather = () => {
-	return <div>SettingsWeather</div>;
+	return '';
 };
 
 export default SettingsWeather;

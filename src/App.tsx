@@ -7,12 +7,14 @@ import {
 	getBaseCryptoSettings,
 	getBaseCurrencySettings,
 	getLocationSettings,
+	getNewsSourceSettings,
 	getSettings,
 	getThemeSettings,
 	getTimezoneSettings,
 	setBaseCryptoSettings,
 	setBaseCurrencySettings,
 	setLocationSettings,
+	setNewsSourceSettings,
 	setTheme,
 	setThemeSettings,
 	setTimezoneSettings,
@@ -20,8 +22,8 @@ import {
 import {
 	fetchTime,
 	fetchTimezone,
-	type FetchTime,
-	type FetchTimezone,
+	type TypeFetchTime,
+	type TypeFetchTimezone,
 } from './components/tiles/time/timeUtils';
 import { DEFAULT_SETTINGS } from './constants/defaultSettings';
 
@@ -35,10 +37,15 @@ type TypeTimeContext = {
 	setClock: React.Dispatch<React.SetStateAction<Date>>;
 	date: Date;
 	setDate: React.Dispatch<React.SetStateAction<Date>>;
-	timezoneInfo: FetchTimezone;
-	setTimezoneInfo: React.Dispatch<React.SetStateAction<FetchTimezone>>;
+	timezoneInfo: TypeFetchTimezone;
+	setTimezoneInfo: React.Dispatch<React.SetStateAction<TypeFetchTimezone>>;
 	isTimeLoading: boolean;
 	setIsTimeLoading: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+type TypeNewsSourceContext = {
+	currentNewsSource: string;
+	setCurrentNewSource: React.Dispatch<React.SetStateAction<string>>;
 };
 
 export const SettingsDisplayedContext =
@@ -61,6 +68,11 @@ export const TimeContext = createContext<TypeTimeContext>({
 	setIsTimeLoading: () => '',
 });
 
+export const NewsSourceContext = createContext<TypeNewsSourceContext>({
+	currentNewsSource: '',
+	setCurrentNewSource: () => '',
+});
+
 const processFetchedTime = (
 	hour: number,
 	minute: number,
@@ -68,10 +80,9 @@ const processFetchedTime = (
 	day: number,
 	month: number,
 	year: number,
-	dayOfWeek: string,
 	setClock: React.Dispatch<React.SetStateAction<Date>>,
 	setDate: React.Dispatch<React.SetStateAction<Date>>,
-	clockFetch: FetchTime
+	clockFetch: TypeFetchTime
 ) => {
 	hour = clockFetch.hour as number;
 	minute = clockFetch.minute as number;
@@ -79,7 +90,6 @@ const processFetchedTime = (
 	day = clockFetch.day as number;
 	month = clockFetch.month as number;
 	year = clockFetch.year as number;
-	dayOfWeek = clockFetch.dayOfWeek as string;
 
 	const current: Date = new Date();
 
@@ -105,11 +115,14 @@ const App = () => {
 	const [settingsDisplayed, setSettingsDisplayed] = useState(false);
 	const [clock, setClock] = useState(new Date());
 	const [date, setDate] = useState(new Date());
-	const [timezoneInfo, setTimezoneInfo] = useState<FetchTimezone>({
+	const [timezoneInfo, setTimezoneInfo] = useState<TypeFetchTimezone>({
 		failed: false,
 		error: '',
 	});
-	const [isTimeLoading, setIsTimeLoading] = useState(true);
+	const [isTimeLoading, setIsTimeLoading] = useState<boolean>(true);
+	const [currentNewsSource, setCurrentNewSource] = useState<string>(
+		getNewsSourceSettings() || DEFAULT_SETTINGS.newsSource
+	);
 
 	const hour: number = 0;
 	const minute: number = 0;
@@ -117,20 +130,13 @@ const App = () => {
 	const day: number = 0;
 	const month: number = 0;
 	const year: number = 0;
-	const dayOfWeek: string = '';
 
 	let clockErrorMessage: string = '';
 	let timezoneErrorMessage: string = '';
 
 	useEffect(() => {
-		document.body.style.overflowX = 'hidden';
-		document.body.style.backgroundRepeat = 'no-repeat';
-		document.body.style.backgroundSize = 'cover';
-		document.body.style.backgroundPosition = 'center';
-
 		if (!Object.hasOwn(getSettings(), 'theme') || !getThemeSettings()) {
 			setThemeSettings(DEFAULT_SETTINGS.theme);
-			setTheme(getThemeSettings());
 		}
 
 		if (!Object.hasOwn(getSettings(), 'timezone') || !getTimezoneSettings()) {
@@ -155,11 +161,22 @@ const App = () => {
 			setBaseCryptoSettings(DEFAULT_SETTINGS.baseCrypto);
 		}
 
+		if (
+			!Object.hasOwn(getSettings(), 'newsSource') ||
+			!getNewsSourceSettings()
+		) {
+			setNewsSourceSettings(DEFAULT_SETTINGS.newsSource);
+		}
+
+		document.body.style.overflowX = 'hidden';
+		document.body.style.backgroundRepeat = 'no-repeat';
+		document.body.style.backgroundSize = 'cover';
+		document.body.style.backgroundPosition = 'center';
+		setTheme(getThemeSettings());
+
 		const clockSetInterval = setInterval(async () => {
-			const clockFetch: FetchTime = await fetchTime(
-				!getTimezoneSettings()
-					? DEFAULT_SETTINGS.timezone
-					: getTimezoneSettings()
+			const clockFetch: TypeFetchTime = await fetchTime(
+				getTimezoneSettings() || DEFAULT_SETTINGS.timezone
 			);
 
 			if (clockFetch.failed) {
@@ -175,7 +192,6 @@ const App = () => {
 				day,
 				month,
 				year,
-				dayOfWeek,
 				setClock,
 				setDate,
 				clockFetch
@@ -191,13 +207,13 @@ const App = () => {
 		const fetchDataOnTimezoneChange = async () => {
 			setIsTimeLoading(true);
 
-			const clockFetch: FetchTime = await fetchTime(
+			const clockFetch: TypeFetchTime = await fetchTime(
 				!getTimezoneSettings()
 					? DEFAULT_SETTINGS.timezone
 					: getTimezoneSettings()
 			);
 
-			const timezoneFetch: FetchTimezone = await fetchTimezone(
+			const timezoneFetch: TypeFetchTimezone = await fetchTimezone(
 				getTimezoneSettings()
 			);
 
@@ -220,7 +236,6 @@ const App = () => {
 				day,
 				month,
 				year,
-				dayOfWeek,
 				setClock,
 				setDate,
 				clockFetch
@@ -239,24 +254,26 @@ const App = () => {
 				value={{ settingsDisplayed, setSettingsDisplayed }}
 			>
 				<Menu />
-				<SettingsPanel />
-				<TimeContext
-					value={{
-						clock,
-						setClock,
-						date,
-						setDate,
-						timezoneInfo,
-						setTimezoneInfo,
-						isTimeLoading,
-						setIsTimeLoading,
-					}}
-				>
-					<Grid
-						clockErrorMessage={clockErrorMessage}
-						timezoneErrorMessage={timezoneErrorMessage}
-					/>
-				</TimeContext>
+				<NewsSourceContext value={{ currentNewsSource, setCurrentNewSource }}>
+					<SettingsPanel />
+					<TimeContext
+						value={{
+							clock,
+							setClock,
+							date,
+							setDate,
+							timezoneInfo,
+							setTimezoneInfo,
+							isTimeLoading,
+							setIsTimeLoading,
+						}}
+					>
+						<Grid
+							clockErrorMessage={clockErrorMessage}
+							timezoneErrorMessage={timezoneErrorMessage}
+						/>
+					</TimeContext>
+				</NewsSourceContext>
 			</SettingsDisplayedContext>
 			<Footer />
 		</div>

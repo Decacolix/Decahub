@@ -1,7 +1,7 @@
 import { use } from 'react';
 import type { TypeGrid } from '../../layout/Grid';
 import Clock from './Clock';
-import Date from './Date';
+import Day from './Day';
 import Loader from '../../layout/Loader';
 import { TimeContext } from '../../../App';
 
@@ -18,7 +18,7 @@ const TimeTile = ({ clockErrorMessage, timezoneErrorMessage }: TypeGrid) => {
 						clockErrorMessage={clockErrorMessage}
 						timezoneErrorMessage={timezoneErrorMessage}
 					/>
-					<Date />
+					<Day />
 				</>
 			)}
 		</div>

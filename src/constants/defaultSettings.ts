@@ -6,4 +6,5 @@ export const DEFAULT_SETTINGS: TypeSettings = {
 	location: 'Praha',
 	baseCurrency: 'CZK',
 	baseCrypto: 'USD',
+	newsSource: 'https://servis.idnes.cz/rss.aspx?c=zpravodaj',
 };

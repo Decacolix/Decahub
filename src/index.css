@@ -23,3 +23,21 @@
 		transform: rotate(360deg);
 	}
 }
+
+@layer utilities {
+	::-webkit-scrollbar {
+		width: 5px;
+		height: 10px;
+	}
+	::-webkit-scrollbar-track {
+		border-radius: 100vh;
+		background: transparent;
+	}
+
+	::-webkit-scrollbar-thumb {
+		background: #ffffff;
+	}
+	::-webkit-scrollbar-thumb:hover {
+		background: #d1d5dc;
+	}
+}

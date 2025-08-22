@@ -5,6 +5,7 @@ import SettingsTheme from './SettingsTheme';
 import SettingsTime from './SettingsTime';
 import SettingsWeather from './SettingsWeather';
 import { SettingsDisplayedContext } from '../../../App';
+import SettingsNews from './SettingsNews';
 
 const SettingsPanel = () => {
 	const { settingsDisplayed, setSettingsDisplayed } = use(
@@ -29,6 +30,7 @@ const SettingsPanel = () => {
 			/>
 			<SettingsTheme />
 			<SettingsTime />
+			<SettingsNews />
 			<SettingsWeather />
 			<SettingsCurrency />
 			<SettingsCrypto />

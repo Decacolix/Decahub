@@ -8,6 +8,7 @@ export type TypeSettings = {
 	location: string;
 	baseCurrency: string;
 	baseCrypto: string;
+	newsSource: string;
 };
 
 const setLocalStorageItem = (key: string, value: object): void => {
@@ -19,7 +20,13 @@ const getLocalStorageItem = (key: string): string => {
 };
 
 const setSettingsValue = (
-	property: 'theme' | 'timezone' | 'location' | 'baseCurrency' | 'baseCrypto',
+	property:
+		| 'theme'
+		| 'timezone'
+		| 'location'
+		| 'baseCurrency'
+		| 'baseCrypto'
+		| 'newsSource',
 	value: string
 ): TypeSettings => {
 	const item: TypeSettings = {
@@ -87,5 +94,16 @@ export const setBaseCryptoSettings = (value: string): void => {
 	setLocalStorageItem(
 		STORAGE_SETTINGS_KEY,
 		setSettingsValue('baseCrypto', value)
+	);
+};
+
+export const getNewsSourceSettings = (): string => {
+	return JSON.parse(getLocalStorageItem(STORAGE_SETTINGS_KEY)).newsSource;
+};
+
+export const setNewsSourceSettings = (value: string): void => {
+	setLocalStorageItem(
+		STORAGE_SETTINGS_KEY,
+		setSettingsValue('newsSource', value)
 	);
 };

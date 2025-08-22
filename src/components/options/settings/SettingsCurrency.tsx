@@ -1,5 +1,5 @@
 const SettingsCurrency = () => {
-	return <div>SettingsCurrency</div>;
+	return '';
 };
 
 export default SettingsCurrency;
