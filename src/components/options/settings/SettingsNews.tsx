@@ -3,20 +3,30 @@ import { NewsSourceContext } from '../../../App';
 import { use, useCallback } from 'react';
 import { setNewsSourceSettings } from './settingsUtils';
 
-export const newsSourceUrls: { source: string; url: string; page: string }[] = [
+export const newsSourceUrls: {
+	source: string;
+	urlBg: string;
+	urlImg: string;
+	page: string;
+}[] = [
 	{
 		source: NEWS_SOURCES[0],
-		url: 'src/assets/logos/idnes-logo.svg',
+		urlBg: 'bg-[url(src/assets/logos/idnes-logo.svg)]',
+		urlImg: 'src/assets/logos/idnes-logo.svg',
 		page: 'https://www.idnes.cz/',
 	},
 	{
 		source: NEWS_SOURCES[1],
-		url: 'src/assets/logos/ct24-logo.svg',
+		urlBg: 'bg-[url(src/assets/logos/ct24-logo.svg)]',
+		urlImg: 'src/assets/logos/ct24-logo.svg',
 		page: 'https://ct24.ceskatelevize.cz/',
 	},
 ];
 
 const SettingsNews = () => {
+	const newsStyles: string =
+		'bg-no-repeat bg-center w-[50%] h-20 mx-2 hover:cursor-pointer hover:outline-2 list-none flex';
+
 	const { currentNewsSource, setCurrentNewSource } = use(NewsSourceContext);
 
 	const handleNewsSourceChange = useCallback(
@@ -33,18 +43,19 @@ const SettingsNews = () => {
 				{newsSourceUrls.map(newsSourceUrl => (
 					<li
 						className={
-							'w-45 h-20 mx-2 hover:cursor-pointer hover:outline-2 list-none flex ' +
 							(newsSourceUrl.source === currentNewsSource
 								? 'outline-2'
-								: 'outline-0')
+								: 'outline-0') +
+							' ' +
+							newsStyles +
+							' ' +
+							newsSourceUrl.urlBg
 						}
 						key={newsSourceUrl.source}
 						onClick={() => {
 							handleNewsSourceChange(newsSourceUrl.source);
 						}}
-					>
-						<img src={newsSourceUrl.url} />
-					</li>
+					/>
 				))}
 			</div>
 		</>

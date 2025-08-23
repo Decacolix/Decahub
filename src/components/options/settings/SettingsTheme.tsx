@@ -8,7 +8,7 @@ import {
 
 const SettingsTheme = () => {
 	const themeStyles: string =
-		'bg-no-repeat bg-center bg-cover w-40 h-20 list-none mx-2 hover:cursor-pointer hover:outline-2 ';
+		'bg-no-repeat bg-center bg-cover w-[33%] h-20 list-none mx-2 hover:cursor-pointer hover:outline-2 ';
 	const themeUrls: { name: string; url: string }[] = [
 		{
 			name: 'pink',

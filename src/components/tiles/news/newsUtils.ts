@@ -27,8 +27,6 @@ export const fetchFeed = async (source: string): Promise<TypeFetchFeed> => {
 				'application/xml'
 			);
 
-			console.log(xmlData);
-
 			const guids: NodeListOf<Element> =
 				xmlData.querySelectorAll('channel item guid');
 			const titles: NodeListOf<Element> =

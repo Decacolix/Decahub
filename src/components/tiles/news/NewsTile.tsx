@@ -28,40 +28,46 @@ const NewsTile = () => {
 	) : isFeedLoading ? (
 		<Loader size={7} />
 	) : (
-		<div className="p-4 list-none overflow-y-scroll">
-			<a
-				href={newsSourceUrls.find(n => n.source === currentNewsSource)?.page}
-				target="_blank"
-			>
-				<img
-					className="h-8 mt-2 mb-6 ml-[-0.75rem]"
-					src={newsSourceUrls.find(n => n.source === currentNewsSource)?.url}
-				/>
-			</a>
-			{feed?.news.map(article => {
-				return (
-					<li className="my-3" key={article.guid}>
-						<a
-							className="flex justify-between items-center hover:underline"
-							href={article.link}
-							target="_blank"
-						>
-							<p>{article.title}</p>
-							<div className="bg-[url(./assets/icons/link-icon.svg)] bg-no-repeat bg-center min-w-3 min-h-3 ml-3" />
-						</a>
-						<p className="text-xs text-gray-300">{`${article.date.getDate()}. ${
-							article.date.getMonth() + 1
-						} ${article.date.getFullYear()}, ${article.date
-							.getHours()
-							.toString()
-							.padStart(2, '0')}:${article.date
-							.getMinutes()
-							.toString()
-							.padStart(2, '0')}`}</p>
-					</li>
-				);
-			})}
-		</div>
+		<>
+			<div className="my-6 mx-2 flex-1 mr-auto">
+				<a
+					href={newsSourceUrls.find(n => n.source === currentNewsSource)?.page}
+					target="_blank"
+				>
+					<img
+						className="h-8"
+						src={
+							newsSourceUrls.find(n => n.source === currentNewsSource)?.urlImg
+						}
+					/>
+				</a>
+			</div>
+			<div className="list-none overflow-y-scroll w-[100%]">
+				{feed?.news.map(article => {
+					return (
+						<li className="my-3 mx-4" key={article.guid}>
+							<a
+								className="flex justify-between items-center hover:underline"
+								href={article.link}
+								target="_blank"
+							>
+								<p>{article.title}</p>
+								<div className="bg-[url(./assets/icons/link-icon.svg)] bg-no-repeat bg-center min-w-3 min-h-3 ml-3" />
+							</a>
+							<p className="text-xs text-gray-300">{`${article.date.getDate()}. ${
+								article.date.getMonth() + 1
+							} ${article.date.getFullYear()}, ${article.date
+								.getHours()
+								.toString()
+								.padStart(2, '0')}:${article.date
+								.getMinutes()
+								.toString()
+								.padStart(2, '0')}`}</p>
+						</li>
+					);
+				})}
+			</div>
+		</>
 	);
 };
 
