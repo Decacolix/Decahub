@@ -3,7 +3,7 @@ import CryptoTile from '../tiles/CryptoTile';
 import CurrencyTile from '../tiles/CurrencyTile';
 import NewsTile from '../tiles/news/NewsTile';
 import TimeTile from '../tiles/time/TimeTile';
-import WeatherTile from '../tiles/WeatherTile';
+import WeatherTile from '../tiles/weather/WeatherTile';
 import TileFrame from '../tiles/ui/TileFrame';
 
 export type TypeGrid = {

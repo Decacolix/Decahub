@@ -21,7 +21,7 @@ export type TypeFetchTimezone = {
 export const fetchTime = async (timezone: string): Promise<TypeFetchTime> => {
 	let result: TypeFetchTime = {
 		failed: true,
-		error: 'Funkce "fetch" nebyla provedena',
+		error: 'fetch',
 	};
 
 	await fetch(

@@ -29,7 +29,7 @@ const NewsTile = () => {
 		<Loader size={7} />
 	) : (
 		<>
-			<div className="my-6 mx-2 flex-1 mr-auto">
+			<div className="my-6 ml-4 flex-1 mr-auto">
 				<a
 					href={newsSourceUrls.find(n => n.source === currentNewsSource)?.page}
 					target="_blank"

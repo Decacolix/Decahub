@@ -45,7 +45,12 @@ type TypeTimeContext = {
 
 type TypeNewsSourceContext = {
 	currentNewsSource: string;
-	setCurrentNewSource: React.Dispatch<React.SetStateAction<string>>;
+	setCurrentNewsSource: React.Dispatch<React.SetStateAction<string>>;
+};
+
+type TypeWeatherLocationContext = {
+	weatherLocation: string;
+	setWeatherLocation: React.Dispatch<React.SetStateAction<string>>;
 };
 
 export const SettingsDisplayedContext =
@@ -70,8 +75,15 @@ export const TimeContext = createContext<TypeTimeContext>({
 
 export const NewsSourceContext = createContext<TypeNewsSourceContext>({
 	currentNewsSource: '',
-	setCurrentNewSource: () => '',
+	setCurrentNewsSource: () => '',
 });
+
+export const WeatherLocationContext = createContext<TypeWeatherLocationContext>(
+	{
+		weatherLocation: '',
+		setWeatherLocation: () => '',
+	}
+);
 
 const processFetchedTime = (
 	hour: number,
@@ -120,8 +132,11 @@ const App = () => {
 		error: '',
 	});
 	const [isTimeLoading, setIsTimeLoading] = useState<boolean>(true);
-	const [currentNewsSource, setCurrentNewSource] = useState<string>(
+	const [currentNewsSource, setCurrentNewsSource] = useState<string>(
 		getNewsSourceSettings() || DEFAULT_SETTINGS.newsSource
+	);
+	const [weatherLocation, setWeatherLocation] = useState<string>(
+		getLocationSettings() || DEFAULT_SETTINGS.location
 	);
 
 	const hour: number = 0;
@@ -254,25 +269,29 @@ const App = () => {
 				value={{ settingsDisplayed, setSettingsDisplayed }}
 			>
 				<Menu />
-				<NewsSourceContext value={{ currentNewsSource, setCurrentNewSource }}>
-					<SettingsPanel />
-					<TimeContext
-						value={{
-							clock,
-							setClock,
-							date,
-							setDate,
-							timezoneInfo,
-							setTimezoneInfo,
-							isTimeLoading,
-							setIsTimeLoading,
-						}}
+				<NewsSourceContext value={{ currentNewsSource, setCurrentNewsSource }}>
+					<WeatherLocationContext
+						value={{ weatherLocation, setWeatherLocation }}
 					>
-						<Grid
-							clockErrorMessage={clockErrorMessage}
-							timezoneErrorMessage={timezoneErrorMessage}
-						/>
-					</TimeContext>
+						<SettingsPanel />
+						<TimeContext
+							value={{
+								clock,
+								setClock,
+								date,
+								setDate,
+								timezoneInfo,
+								setTimezoneInfo,
+								isTimeLoading,
+								setIsTimeLoading,
+							}}
+						>
+							<Grid
+								clockErrorMessage={clockErrorMessage}
+								timezoneErrorMessage={timezoneErrorMessage}
+							/>
+						</TimeContext>
+					</WeatherLocationContext>
 				</NewsSourceContext>
 			</SettingsDisplayedContext>
 			<Footer />
