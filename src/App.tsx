@@ -18,6 +18,7 @@ import {
 	setTheme,
 	setThemeSettings,
 	setTimezoneSettings,
+	type TypeLocation,
 } from './components/options/settings/settingsUtils';
 import {
 	fetchTime,
@@ -49,8 +50,8 @@ type TypeNewsSourceContext = {
 };
 
 type TypeWeatherLocationContext = {
-	weatherLocation: string;
-	setWeatherLocation: React.Dispatch<React.SetStateAction<string>>;
+	weatherLocation: TypeLocation;
+	setWeatherLocation: React.Dispatch<React.SetStateAction<TypeLocation>>;
 };
 
 export const SettingsDisplayedContext =
@@ -80,7 +81,7 @@ export const NewsSourceContext = createContext<TypeNewsSourceContext>({
 
 export const WeatherLocationContext = createContext<TypeWeatherLocationContext>(
 	{
-		weatherLocation: '',
+		weatherLocation: { municipality: '', country: '' },
 		setWeatherLocation: () => '',
 	}
 );
@@ -135,7 +136,7 @@ const App = () => {
 	const [currentNewsSource, setCurrentNewsSource] = useState<string>(
 		getNewsSourceSettings() || DEFAULT_SETTINGS.newsSource
 	);
-	const [weatherLocation, setWeatherLocation] = useState<string>(
+	const [weatherLocation, setWeatherLocation] = useState<TypeLocation>(
 		getLocationSettings() || DEFAULT_SETTINGS.location
 	);
 

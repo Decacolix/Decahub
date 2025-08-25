@@ -1,4 +1,4 @@
-import CalendarTile from '../tiles/CalendarTile';
+import CalendarTile from '../tiles/calendar/CalendarTile';
 import CryptoTile from '../tiles/CryptoTile';
 import CurrencyTile from '../tiles/CurrencyTile';
 import NewsTile from '../tiles/news/NewsTile';

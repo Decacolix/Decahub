@@ -30,7 +30,7 @@ const SettingsNews = () => {
 	const { currentNewsSource, setCurrentNewsSource } = use(NewsSourceContext);
 
 	const handleNewsSourceChange = useCallback(
-		(source: string) => {
+		(source: string): void => {
 			setCurrentNewsSource(source);
 		},
 		[setNewsSourceSettings(currentNewsSource)]

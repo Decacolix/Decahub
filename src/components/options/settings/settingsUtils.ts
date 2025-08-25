@@ -2,10 +2,15 @@ import { STORAGE_SETTINGS_KEY } from '../../../constants/storageSettingsKey';
 
 export type TypeTheme = 'pink' | 'green' | 'blue';
 
+export type TypeLocation = {
+	municipality: string;
+	country: string;
+};
+
 export type TypeSettings = {
 	theme: TypeTheme;
 	timezone: string;
-	location: string;
+	location: TypeLocation;
 	baseCurrency: string;
 	baseCrypto: string;
 	newsSource: string;
@@ -27,7 +32,7 @@ const setSettingsValue = (
 		| 'baseCurrency'
 		| 'baseCrypto'
 		| 'newsSource',
-	value: string
+	value: string | TypeLocation
 ): TypeSettings => {
 	const item: TypeSettings = {
 		...JSON.parse(getLocalStorageItem(STORAGE_SETTINGS_KEY)),
@@ -64,11 +69,11 @@ export const setTimezoneSettings = (value: string): void => {
 	);
 };
 
-export const getLocationSettings = (): string => {
+export const getLocationSettings = (): TypeLocation => {
 	return JSON.parse(getLocalStorageItem(STORAGE_SETTINGS_KEY)).location;
 };
 
-export const setLocationSettings = (value: string): void => {
+export const setLocationSettings = (value: TypeLocation): void => {
 	setLocalStorageItem(
 		STORAGE_SETTINGS_KEY,
 		setSettingsValue('location', value)

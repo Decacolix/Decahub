@@ -62,15 +62,15 @@ const WeatherTile = () => {
 
 	useEffect(() => {
 		setisWeatherLoading(true);
+
 		const fetchWeatherOnLoad = async () => {
-			await fetchLocation(weatherLocation).then(async location => {
+			await fetchLocation(weatherLocation.municipality).then(async location => {
 				await fetchWeather(
 					location.latitude as number,
 					location.longitude as number
 				).then(data => {
 					setWeatherInfo(data);
 					setisWeatherLoading(false);
-					console.log(setForecastDays(weatherInfo?.current?.time as Date)[0]);
 				});
 			});
 		};
@@ -80,7 +80,7 @@ const WeatherTile = () => {
 
 	return weatherInfo?.failed ? (
 		<p className="p-4">
-			{'Nepodařilo se načíst zprávy. Chyba: ' + weatherInfo?.error}
+			{'Nepodařilo se načíst počasí. Chyba: ' + weatherInfo?.error}
 		</p>
 	) : isWeatherLoading ? (
 		<Loader size={7} />
@@ -88,7 +88,11 @@ const WeatherTile = () => {
 		<>
 			<div className="flex justify-between items-center w-full">
 				<span className="ml-8 text-6xl font-bold">
-					{weatherInfo?.current?.temperature.toString().replace('.', ',')} °C
+					{weatherInfo?.current?.temperature
+						.toFixed(1)
+						.toString()
+						.replace('.', ',')}{' '}
+					°C
 				</span>
 				<span className="mr-8 mt-2">
 					<img
@@ -115,10 +119,12 @@ const WeatherTile = () => {
 								</div>
 								<div className="text-2xl font-bold  text-left">
 									{weatherInfo?.forecast?.temperature_min[i]
+										.toFixed(1)
 										.toString()
 										.replace('.', ',')}{' '}
 									–{' '}
 									{weatherInfo?.forecast?.temperature_max[i]
+										.toFixed(1)
 										.toString()
 										.replace('.', ',')}{' '}
 									°C
@@ -135,7 +141,7 @@ const WeatherTile = () => {
 					);
 				})}
 			</div>
-			<div>{weatherLocation}</div>
+			<div>{weatherLocation.municipality}</div>
 		</>
 	);
 };
