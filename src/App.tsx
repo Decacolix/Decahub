@@ -8,6 +8,7 @@ import {
 	getBaseCurrencySettings,
 	getLocationSettings,
 	getNewsSourceSettings,
+	getPinnedCurrencies,
 	getSettings,
 	getThemeSettings,
 	getTimezoneSettings,
@@ -15,6 +16,7 @@ import {
 	setBaseCurrencySettings,
 	setLocationSettings,
 	setNewsSourceSettings,
+	setPinnedCurrencies,
 	setTheme,
 	setThemeSettings,
 	setTimezoneSettings,
@@ -28,12 +30,9 @@ import {
 } from './components/tiles/time/timeUtils';
 import { DEFAULT_SETTINGS } from './constants/defaultSettings';
 
-type TypeSettingsDisplayedContext = {
+type TypeSettingsContext = {
 	settingsDisplayed: boolean;
 	setSettingsDisplayed: React.Dispatch<React.SetStateAction<boolean>>;
-};
-
-type TypeTimeContext = {
 	clock: Date;
 	setClock: React.Dispatch<React.SetStateAction<Date>>;
 	date: Date;
@@ -42,25 +41,17 @@ type TypeTimeContext = {
 	setTimezoneInfo: React.Dispatch<React.SetStateAction<TypeFetchTimezone>>;
 	isTimeLoading: boolean;
 	setIsTimeLoading: React.Dispatch<React.SetStateAction<boolean>>;
-};
-
-type TypeNewsSourceContext = {
 	currentNewsSource: string;
 	setCurrentNewsSource: React.Dispatch<React.SetStateAction<string>>;
-};
-
-type TypeWeatherLocationContext = {
 	weatherLocation: TypeLocation;
 	setWeatherLocation: React.Dispatch<React.SetStateAction<TypeLocation>>;
+	baseCurrency: string;
+	setBaseCurrency: React.Dispatch<React.SetStateAction<string>>;
 };
 
-export const SettingsDisplayedContext =
-	createContext<TypeSettingsDisplayedContext>({
-		settingsDisplayed: false,
-		setSettingsDisplayed: () => '',
-	});
-
-export const TimeContext = createContext<TypeTimeContext>({
+export const SettingsContext = createContext<TypeSettingsContext>({
+	settingsDisplayed: false,
+	setSettingsDisplayed: () => false,
 	clock: new Date(),
 	setClock: () => '',
 	date: new Date(),
@@ -71,20 +62,14 @@ export const TimeContext = createContext<TypeTimeContext>({
 	},
 	setTimezoneInfo: () => '',
 	isTimeLoading: false,
-	setIsTimeLoading: () => '',
-});
-
-export const NewsSourceContext = createContext<TypeNewsSourceContext>({
+	setIsTimeLoading: () => false,
 	currentNewsSource: '',
 	setCurrentNewsSource: () => '',
+	weatherLocation: { municipality: '', country: '' },
+	setWeatherLocation: () => '',
+	baseCurrency: '',
+	setBaseCurrency: () => '',
 });
-
-export const WeatherLocationContext = createContext<TypeWeatherLocationContext>(
-	{
-		weatherLocation: { municipality: '', country: '' },
-		setWeatherLocation: () => '',
-	}
-);
 
 const processFetchedTime = (
 	hour: number,
@@ -117,7 +102,6 @@ const processFetchedTime = (
 		current.setDate(day as number);
 		current.setMonth((month - 1) as number);
 		current.setFullYear(year as number);
-
 		return current;
 	});
 
@@ -138,6 +122,9 @@ const App = () => {
 	);
 	const [weatherLocation, setWeatherLocation] = useState<TypeLocation>(
 		getLocationSettings() || DEFAULT_SETTINGS.location
+	);
+	const [baseCurrency, setBaseCurrency] = useState<string>(
+		getBaseCurrencySettings() || DEFAULT_SETTINGS.baseCurrency
 	);
 
 	const hour: number = 0;
@@ -184,10 +171,18 @@ const App = () => {
 			setNewsSourceSettings(DEFAULT_SETTINGS.newsSource);
 		}
 
+		if (
+			!Object.hasOwn(getSettings(), 'pinnedCurrencies') ||
+			!getPinnedCurrencies()
+		) {
+			setPinnedCurrencies(DEFAULT_SETTINGS.pinnedCurrencies);
+		}
+
 		document.body.style.overflowX = 'hidden';
 		document.body.style.backgroundRepeat = 'no-repeat';
 		document.body.style.backgroundSize = 'cover';
 		document.body.style.backgroundPosition = 'center';
+		document.body.style.backgroundAttachment = 'fixed';
 		setTheme(getThemeSettings());
 
 		const clockSetInterval = setInterval(async () => {
@@ -266,35 +261,36 @@ const App = () => {
 
 	return (
 		<div className="h-screen font-[Nata_Sans] text-white">
-			<SettingsDisplayedContext
-				value={{ settingsDisplayed, setSettingsDisplayed }}
+			<SettingsContext
+				value={{
+					settingsDisplayed,
+					setSettingsDisplayed,
+					clock,
+					setClock,
+					date,
+					setDate,
+					timezoneInfo,
+					setTimezoneInfo,
+					isTimeLoading,
+					setIsTimeLoading,
+					currentNewsSource,
+					setCurrentNewsSource,
+					weatherLocation,
+					setWeatherLocation,
+					baseCurrency,
+					setBaseCurrency,
+				}}
 			>
 				<Menu />
-				<NewsSourceContext value={{ currentNewsSource, setCurrentNewsSource }}>
-					<WeatherLocationContext
-						value={{ weatherLocation, setWeatherLocation }}
-					>
-						<SettingsPanel />
-						<TimeContext
-							value={{
-								clock,
-								setClock,
-								date,
-								setDate,
-								timezoneInfo,
-								setTimezoneInfo,
-								isTimeLoading,
-								setIsTimeLoading,
-							}}
-						>
-							<Grid
-								clockErrorMessage={clockErrorMessage}
-								timezoneErrorMessage={timezoneErrorMessage}
-							/>
-						</TimeContext>
-					</WeatherLocationContext>
-				</NewsSourceContext>
-			</SettingsDisplayedContext>
+
+				<SettingsPanel />
+
+				<Grid
+					clockErrorMessage={clockErrorMessage}
+					timezoneErrorMessage={timezoneErrorMessage}
+				/>
+			</SettingsContext>
+
 			<Footer />
 		</div>
 	);

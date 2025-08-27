@@ -1,7 +1,7 @@
 import { use, useEffect } from 'react';
 import { formatClock } from './timeUtils';
 import type { TypeGrid } from '../../layout/Grid';
-import { TimeContext } from '../../../App';
+import { SettingsContext } from '../../../App';
 
 const formatTimezone = (value: number | undefined): string => {
 	if (!value) return '';
@@ -38,7 +38,7 @@ const formatTimezone = (value: number | undefined): string => {
 };
 
 const Clock = ({ clockErrorMessage, timezoneErrorMessage }: TypeGrid) => {
-	const { clock, setClock, timezoneInfo } = use(TimeContext);
+	const { clock, setClock, timezoneInfo } = use(SettingsContext);
 
 	useEffect(() => {
 		const clockUpdateInterval = setInterval(async () => {

@@ -1,11 +1,11 @@
 import { use, useEffect, useState } from 'react';
 import { fetchFeed, type TypeFetchFeed } from './newsUtils';
 import Loader from '../../layout/Loader';
-import { NewsSourceContext } from '../../../App';
+import { SettingsContext } from '../../../App';
 import { newsSourceUrls } from '../../options/settings/SettingsNews';
 
 const NewsTile = () => {
-	const { currentNewsSource } = use(NewsSourceContext);
+	const { currentNewsSource } = use(SettingsContext);
 
 	const [feed, setFeed] = useState<TypeFetchFeed>();
 	const [isFeedLoading, setIsFeedLoading] = useState<boolean>(true);

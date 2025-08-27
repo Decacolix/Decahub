@@ -4,13 +4,11 @@ import SettingsCurrency from './SettingsCurrency';
 import SettingsTheme from './SettingsTheme';
 import SettingsTime from './SettingsTime';
 import SettingsWeather from './SettingsWeather';
-import { SettingsDisplayedContext } from '../../../App';
+import { SettingsContext } from '../../../App';
 import SettingsNews from './SettingsNews';
 
 const SettingsPanel = () => {
-	const { settingsDisplayed, setSettingsDisplayed } = use(
-		SettingsDisplayedContext
-	);
+	const { settingsDisplayed, setSettingsDisplayed } = use(SettingsContext);
 
 	const handleSettingsClose = (): void => {
 		setSettingsDisplayed(prevSettingsDisplayed => !prevSettingsDisplayed);

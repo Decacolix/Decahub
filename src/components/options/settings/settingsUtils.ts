@@ -14,6 +14,7 @@ export type TypeSettings = {
 	baseCurrency: string;
 	baseCrypto: string;
 	newsSource: string;
+	pinnedCurrencies: string[];
 };
 
 const setLocalStorageItem = (key: string, value: object): void => {
@@ -31,8 +32,9 @@ const setSettingsValue = (
 		| 'location'
 		| 'baseCurrency'
 		| 'baseCrypto'
-		| 'newsSource',
-	value: string | TypeLocation
+		| 'newsSource'
+		| 'pinnedCurrencies',
+	value: string | string[] | TypeLocation | TypeTheme
 ): TypeSettings => {
 	const item: TypeSettings = {
 		...JSON.parse(getLocalStorageItem(STORAGE_SETTINGS_KEY)),
@@ -110,5 +112,16 @@ export const setNewsSourceSettings = (value: string): void => {
 	setLocalStorageItem(
 		STORAGE_SETTINGS_KEY,
 		setSettingsValue('newsSource', value)
+	);
+};
+
+export const getPinnedCurrencies = (): string[] => {
+	return JSON.parse(getLocalStorageItem(STORAGE_SETTINGS_KEY)).pinnedCurrencies;
+};
+
+export const setPinnedCurrencies = (value: string[]) => {
+	setLocalStorageItem(
+		STORAGE_SETTINGS_KEY,
+		setSettingsValue('pinnedCurrencies', value)
 	);
 };

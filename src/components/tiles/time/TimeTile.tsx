@@ -3,10 +3,10 @@ import type { TypeGrid } from '../../layout/Grid';
 import Clock from './Clock';
 import Day from './Day';
 import Loader from '../../layout/Loader';
-import { TimeContext } from '../../../App';
+import { SettingsContext } from '../../../App';
 
 const TimeTile = ({ clockErrorMessage, timezoneErrorMessage }: TypeGrid) => {
-	const { isTimeLoading } = use(TimeContext);
+	const { isTimeLoading } = use(SettingsContext);
 
 	return (
 		<div className="text-center">

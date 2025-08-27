@@ -1,5 +1,5 @@
 import { use } from 'react';
-import { TimeContext } from '../../../App';
+import { SettingsContext } from '../../../App';
 import { MONTHS_GENITIVE } from '../../../constants/months';
 import { WEEKDAYS } from '../../../constants/weekdays';
 import { NAMEDAYS } from '../../../constants/namedays';
@@ -17,7 +17,7 @@ const getWeekNumber = (date: Date): number => {
 };
 
 const Day = () => {
-	const { date } = use(TimeContext);
+	const { date } = use(SettingsContext);
 
 	let weekday: string = '';
 

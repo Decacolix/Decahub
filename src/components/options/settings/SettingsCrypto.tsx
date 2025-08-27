@@ -1,5 +1,5 @@
 const SettingsCrypto = () => {
-	return '';
+	return <div />;
 };
 
 export default SettingsCrypto;

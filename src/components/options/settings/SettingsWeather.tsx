@@ -1,10 +1,10 @@
 import { use, useState } from 'react';
-import { WeatherLocationContext } from '../../../App';
+import { SettingsContext } from '../../../App';
 import { fetchLocation } from '../../tiles/weather/weatherUtils';
 import { setLocationSettings, type TypeLocation } from './settingsUtils';
 
 const SettingsWeather = () => {
-	const { weatherLocation, setWeatherLocation } = use(WeatherLocationContext);
+	const { weatherLocation, setWeatherLocation } = use(SettingsContext);
 	const [locationInput, setLocationInput] = useState<string>('');
 	const [locationInformation, setLocationInformation] = useState<string>(
 		`Aktuální lokalita: ${weatherLocation.municipality}, ${weatherLocation.country}`

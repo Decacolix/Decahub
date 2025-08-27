@@ -1,8 +1,8 @@
 import { use } from 'react';
-import { SettingsDisplayedContext } from '../../../App';
+import { SettingsContext } from '../../../App';
 
 const SettingsIcon = () => {
-	const { setSettingsDisplayed } = use(SettingsDisplayedContext);
+	const { setSettingsDisplayed } = use(SettingsContext);
 
 	const handleSettingsOpen = (): void => {
 		setSettingsDisplayed(prevSettingsDisplayed => !prevSettingsDisplayed);

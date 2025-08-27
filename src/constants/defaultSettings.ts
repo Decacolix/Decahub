@@ -7,4 +7,5 @@ export const DEFAULT_SETTINGS: TypeSettings = {
 	baseCurrency: 'CZK',
 	baseCrypto: 'USD',
 	newsSource: 'https://servis.idnes.cz/rss.aspx?c=zpravodaj',
+	pinnedCurrencies: [],
 };

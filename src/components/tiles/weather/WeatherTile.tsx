@@ -1,5 +1,5 @@
 import { use, useEffect, useState } from 'react';
-import { WeatherLocationContext } from '../../../App';
+import { SettingsContext } from '../../../App';
 import { fetchLocation, fetchWeather, type TypeWeather } from './weatherUtils';
 import Loader from '../../layout/Loader';
 import { WEEKDAYS } from '../../../constants/weekdays';
@@ -56,7 +56,7 @@ const setForecastDays = (date: Date): string[] => {
 };
 
 const WeatherTile = () => {
-	const { weatherLocation } = use(WeatherLocationContext);
+	const { weatherLocation } = use(SettingsContext);
 	const [weatherInfo, setWeatherInfo] = useState<TypeWeather>();
 	const [isWeatherLoading, setisWeatherLoading] = useState<boolean>(true);
 
@@ -104,7 +104,9 @@ const WeatherTile = () => {
 			<div className="mt-4">
 				<span>Vlhkost: {weatherInfo?.current?.humidity} %</span>
 				<span> &#9679; </span>
-				<span>Vítr: {weatherInfo?.current?.wind} km/h</span>
+				<span>
+					Vítr: {weatherInfo?.current?.wind.toString().replace('.', ',')} km/h
+				</span>
 			</div>
 			<div className="w-full ">
 				{weatherInfo?.forecast?.time.map((time, i) => {

@@ -1,10 +1,10 @@
 import { use } from 'react';
 import Lock from '../options/lock/LockIcon';
 import SettingsIcon from '../options/settings/SettingsIcon';
-import { SettingsDisplayedContext } from '../../App';
+import { SettingsContext } from '../../App';
 
 const Menu = () => {
-	const { settingsDisplayed } = use(SettingsDisplayedContext);
+	const { settingsDisplayed } = use(SettingsContext);
 
 	const menuStyles: string =
 		(settingsDisplayed

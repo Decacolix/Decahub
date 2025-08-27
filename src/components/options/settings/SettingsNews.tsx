@@ -1,5 +1,5 @@
 import { NEWS_SOURCES } from '../../../constants/newsSources';
-import { NewsSourceContext } from '../../../App';
+import { SettingsContext } from '../../../App';
 import { use, useCallback } from 'react';
 import { setNewsSourceSettings } from './settingsUtils';
 
@@ -27,7 +27,7 @@ const SettingsNews = () => {
 	const newsStyles: string =
 		'bg-no-repeat bg-center bg-size-[75%] w-[50%] h-20 mx-2 hover:cursor-pointer hover:outline-2 list-none flex';
 
-	const { currentNewsSource, setCurrentNewsSource } = use(NewsSourceContext);
+	const { currentNewsSource, setCurrentNewsSource } = use(SettingsContext);
 
 	const handleNewsSourceChange = useCallback(
 		(source: string): void => {
