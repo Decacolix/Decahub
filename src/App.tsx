@@ -8,7 +8,7 @@ import {
 	getBaseCurrencySettings,
 	getLocationSettings,
 	getNewsSourceSettings,
-	getPinnedCurrencies,
+	getPinnedCurrenciesSettings,
 	getSettings,
 	getThemeSettings,
 	getTimezoneSettings,
@@ -16,7 +16,7 @@ import {
 	setBaseCurrencySettings,
 	setLocationSettings,
 	setNewsSourceSettings,
-	setPinnedCurrencies,
+	setPinnedCurrenciesSettings,
 	setTheme,
 	setThemeSettings,
 	setTimezoneSettings,
@@ -138,45 +138,32 @@ const App = () => {
 	let timezoneErrorMessage: string = '';
 
 	useEffect(() => {
-		if (!Object.hasOwn(getSettings(), 'theme') || !getThemeSettings()) {
+		if (!Object.hasOwn(getSettings(), 'theme') || !getThemeSettings())
 			setThemeSettings(DEFAULT_SETTINGS.theme);
-		}
 
-		if (!Object.hasOwn(getSettings(), 'timezone') || !getTimezoneSettings()) {
+		if (!Object.hasOwn(getSettings(), 'timezone') || !getTimezoneSettings())
 			setTimezoneSettings(DEFAULT_SETTINGS.timezone);
-		}
 
-		if (!Object.hasOwn(getSettings(), 'location') || !getLocationSettings()) {
+		if (!Object.hasOwn(getSettings(), 'location') || !getLocationSettings())
 			setLocationSettings(DEFAULT_SETTINGS.location);
-		}
 
 		if (
 			!Object.hasOwn(getSettings(), 'baseCurrency') ||
 			!getBaseCurrencySettings()
-		) {
+		)
 			setBaseCurrencySettings(DEFAULT_SETTINGS.baseCurrency);
-		}
 
-		if (
-			!Object.hasOwn(getSettings(), 'baseCrypto') ||
-			!getBaseCryptoSettings()
-		) {
+		if (!Object.hasOwn(getSettings(), 'baseCrypto') || !getBaseCryptoSettings())
 			setBaseCryptoSettings(DEFAULT_SETTINGS.baseCrypto);
-		}
 
-		if (
-			!Object.hasOwn(getSettings(), 'newsSource') ||
-			!getNewsSourceSettings()
-		) {
+		if (!Object.hasOwn(getSettings(), 'newsSource') || !getNewsSourceSettings())
 			setNewsSourceSettings(DEFAULT_SETTINGS.newsSource);
-		}
 
 		if (
 			!Object.hasOwn(getSettings(), 'pinnedCurrencies') ||
-			!getPinnedCurrencies()
-		) {
-			setPinnedCurrencies(DEFAULT_SETTINGS.pinnedCurrencies);
-		}
+			!getPinnedCurrenciesSettings()
+		)
+			setPinnedCurrenciesSettings(DEFAULT_SETTINGS.pinnedCurrencies);
 
 		document.body.style.overflowX = 'hidden';
 		document.body.style.backgroundRepeat = 'no-repeat';

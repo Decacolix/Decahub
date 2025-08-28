@@ -4,6 +4,7 @@ import { fetchCurrencies } from './currenciesUtils';
 import RateRow from './RateRow';
 import { CURRENCIES } from '../../../constants/currencies';
 import Loader from '../../layout/Loader';
+import { getPinnedCurrenciesSettings } from '../../options/settings/settingsUtils';
 
 type TypeCurrency = {
 	code: string;
@@ -30,7 +31,7 @@ const CurrencyTile = () => {
 
 	return currenciesError ? (
 		<p className="p-4">
-			{'Nepodařilo se načíst zprávy. Chyba: ' + currenciesError}
+			{'Nepodařilo se načíst měny. Chyba: ' + currenciesError}
 		</p>
 	) : isCurrenciesLoading ? (
 		<Loader size={7} />
@@ -38,13 +39,30 @@ const CurrencyTile = () => {
 		<div className="list-none overflow-y-scroll w-[100%]">
 			{currencies?.map(currency => {
 				return (
-					<li className="my-3 mx-4" key={currency.code}>
-						<RateRow
-							code={currency.code}
-							name={CURRENCIES[currency.code as keyof typeof CURRENCIES]}
-							value={currency.value}
-						/>
-					</li>
+					getPinnedCurrenciesSettings().includes(currency.code) && (
+						<li className="my-3 mx-4" id={currency.code} key={currency.code}>
+							<RateRow
+								code={currency.code}
+								name={CURRENCIES[currency.code as keyof typeof CURRENCIES]}
+								pinned={true}
+								value={currency.value}
+							/>
+						</li>
+					)
+				);
+			})}
+			{currencies?.map(currency => {
+				return (
+					!getPinnedCurrenciesSettings().includes(currency.code) && (
+						<li className="my-3 mx-4" id={currency.code} key={currency.code}>
+							<RateRow
+								code={currency.code}
+								name={CURRENCIES[currency.code as keyof typeof CURRENCIES]}
+								pinned={false}
+								value={currency.value}
+							/>
+						</li>
+					)
 				);
 			})}
 		</div>

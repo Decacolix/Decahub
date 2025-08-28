@@ -115,11 +115,11 @@ export const setNewsSourceSettings = (value: string): void => {
 	);
 };
 
-export const getPinnedCurrencies = (): string[] => {
+export const getPinnedCurrenciesSettings = (): string[] => {
 	return JSON.parse(getLocalStorageItem(STORAGE_SETTINGS_KEY)).pinnedCurrencies;
 };
 
-export const setPinnedCurrencies = (value: string[]) => {
+export const setPinnedCurrenciesSettings = (value: string[]) => {
 	setLocalStorageItem(
 		STORAGE_SETTINGS_KEY,
 		setSettingsValue('pinnedCurrencies', value)
