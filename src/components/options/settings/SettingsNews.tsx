@@ -25,7 +25,7 @@ export const newsSourceUrls: {
 
 const SettingsNews = () => {
 	const newsStyles: string =
-		'bg-no-repeat bg-center bg-size-[75%] w-[50%] h-20 mx-2 hover:cursor-pointer hover:outline-2 list-none flex';
+		'bg-no-repeat bg-center bg-size-[65%] w-[50%] h-20 mx-2 hover:cursor-pointer hover:outline-2 list-none flex';
 
 	const { currentNewsSource, setCurrentNewsSource } = use(SettingsContext);
 

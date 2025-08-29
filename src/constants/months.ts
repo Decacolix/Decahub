@@ -1,4 +1,4 @@
-export const MONTHS_DEFAULT = [
+export const MONTHS_DEFAULT: string[] = [
 	'leden',
 	'únor',
 	'březen',
@@ -13,7 +13,7 @@ export const MONTHS_DEFAULT = [
 	'prosinec',
 ];
 
-export const MONTHS_GENITIVE = [
+export const MONTHS_GENITIVE: string[] = [
 	'ledna',
 	'února',
 	'března',

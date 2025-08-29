@@ -1,4 +1,4 @@
-export const CURRENCIES = {
+export const CURRENCIES: Record<string, string> = {
 	AED: 'Dirham SAE',
 	AFN: 'Afghánský afghání',
 	ALL: 'Albánský lek',

@@ -1,4 +1,4 @@
-export const WEEKDAYS = [
+export const WEEKDAYS: string[] = [
 	'pondělí',
 	'úterý',
 	'středa',

@@ -1,1 +1,1 @@
-export const STORAGE_SETTINGS_KEY = 'decahub.settings';
+export const STORAGE_SETTINGS_KEY: string = 'decahub.settings';

@@ -1,4 +1,4 @@
-export const TIME_ZONES = [
+export const TIME_ZONES: { code: string; name: string; utc: string }[] = [
 	{
 		code: 'Etc/GMT+12',
 		name: 'Bakerův ostrov (Pacifik)',

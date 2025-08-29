@@ -1,12 +1,15 @@
 import type { ReactNode } from 'react';
 
-type Props = {
+type TypeTileFrameProps = {
+	height: string;
 	children?: ReactNode;
 };
 
-const TileFrame = ({ children }: Props) => {
+const TileFrame = ({ height, children }: TypeTileFrameProps) => {
 	return (
-		<div className="h-[40vh] bg-black/30 backdrop-blur-sm flex flex-col justify-center items-center z-40">
+		<div
+			className={`${height} bg-black/30 backdrop-blur-sm flex flex-col justify-center items-center z-40`}
+		>
 			{children}
 		</div>
 	);

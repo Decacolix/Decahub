@@ -1,10 +1,9 @@
 import CalendarTile from '../tiles/calendar/CalendarTile';
-import CryptoTile from '../tiles/currencies/CryptoTile';
-import CurrencyTile from '../tiles/currencies/CurrencyTile';
 import NewsTile from '../tiles/news/NewsTile';
 import TimeTile from '../tiles/time/TimeTile';
 import WeatherTile from '../tiles/weather/WeatherTile';
 import TileFrame from '../tiles/ui/TileFrame';
+import RateTile from '../tiles/rates/RateTile';
 
 export type TypeGrid = {
 	clockErrorMessage: string;
@@ -12,28 +11,32 @@ export type TypeGrid = {
 };
 
 const Grid = ({ clockErrorMessage, timezoneErrorMessage }: TypeGrid) => {
+	const topHeight: string = 'h-[25rem]';
+	const bottomHeight: string = 'h-[35rem]';
+
 	return (
-		<div className="grid grid-cols-3 gap-8 pt-4 px-20">
-			<TileFrame>
-				<CurrencyTile />
+		<div className="grid grid-cols-3 gap-8 py-6 px-20">
+			<TileFrame height={topHeight}>
+				<WeatherTile />
 			</TileFrame>
-			<TileFrame>
+
+			<TileFrame height={topHeight}>
 				<TimeTile
 					clockErrorMessage={clockErrorMessage}
 					timezoneErrorMessage={timezoneErrorMessage}
 				/>
 			</TileFrame>
-			<TileFrame>
-				<WeatherTile />
+			<TileFrame height={topHeight}>
+				<NewsTile />
 			</TileFrame>
-			<TileFrame>
-				<CryptoTile />
+			<TileFrame height={bottomHeight}>
+				<RateTile source="currency" />
 			</TileFrame>
-			<TileFrame>
+			<TileFrame height={bottomHeight}>
 				<CalendarTile />
 			</TileFrame>
-			<TileFrame>
-				<NewsTile />
+			<TileFrame height={bottomHeight}>
+				<RateTile source="crypto" />
 			</TileFrame>
 		</div>
 	);

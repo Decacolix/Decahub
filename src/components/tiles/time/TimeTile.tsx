@@ -4,24 +4,28 @@ import Clock from './Clock';
 import Day from './Day';
 import Loader from '../../layout/Loader';
 import { SettingsContext } from '../../../App';
+import Author from '../../layout/Author';
 
 const TimeTile = ({ clockErrorMessage, timezoneErrorMessage }: TypeGrid) => {
 	const { isTimeLoading } = use(SettingsContext);
 
 	return (
-		<div className="text-center">
-			{isTimeLoading ? (
-				<Loader size={7} />
-			) : (
-				<>
-					<Clock
-						clockErrorMessage={clockErrorMessage}
-						timezoneErrorMessage={timezoneErrorMessage}
-					/>
-					<Day />
-				</>
-			)}
-		</div>
+		<>
+			<Author />
+			<div className="text-center">
+				{isTimeLoading ? (
+					<Loader size={7} />
+				) : (
+					<>
+						<Clock
+							clockErrorMessage={clockErrorMessage}
+							timezoneErrorMessage={timezoneErrorMessage}
+						/>
+						<Day />
+					</>
+				)}
+			</div>
+		</>
 	);
 };
 

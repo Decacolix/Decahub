@@ -1,14 +1,7 @@
-import { getThemeSettings } from '../options/settings/settingsUtils';
-
 const Footer = () => {
 	return (
-		<footer
-			className={
-				(getThemeSettings() === 'green' ? 'text-gray-900' : 'text-gray-600') +
-				' text-center absolute left-[50vw] bottom-1 translate-[-50%]'
-			}
-		>
-			&copy; 2025 David Toman |{' '}
+		<div className="absolute top-2 text-center text-sm text-gray-800">
+			Vytvořil David Toman v roce 2025 |{' '}
 			<a href="mailto:davidtoman1997@gmail.com" target="_blank">
 				<u>E-mail</u>
 			</a>{' '}
@@ -20,7 +13,7 @@ const Footer = () => {
 			<a href="https://github.com/Decacolix/" target="_blank">
 				<u>GitHub</u>
 			</a>
-		</footer>
+		</div>
 	);
 };
 

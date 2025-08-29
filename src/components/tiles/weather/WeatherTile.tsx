@@ -85,28 +85,30 @@ const WeatherTile = () => {
 	) : isWeatherLoading ? (
 		<Loader size={7} />
 	) : (
-		<>
-			<div className="flex justify-between items-center w-full">
-				<span className="ml-8 text-6xl font-bold">
-					{weatherInfo?.current?.temperature
-						.toFixed(1)
-						.toString()
-						.replace('.', ',')}{' '}
-					°C
-				</span>
-				<span className="mr-8 mt-2">
-					<img
-						className="w-22 "
-						src={setImage(weatherInfo?.current?.code as number)}
-					/>
-				</span>
-			</div>
-			<div className="mt-4">
-				<span>Vlhkost: {weatherInfo?.current?.humidity} %</span>
-				<span> &#9679; </span>
-				<span>
-					Vítr: {weatherInfo?.current?.wind.toString().replace('.', ',')} km/h
-				</span>
+		<div className="flex flex-col justify-between h-full w-full text-center">
+			<div className="mt-6">
+				<div className="flex justify-between items-center">
+					<span className="ml-8 text-6xl font-bold">
+						{weatherInfo?.current?.temperature
+							.toFixed(1)
+							.toString()
+							.replace('.', ',')}{' '}
+						°C
+					</span>
+					<span className="mr-8 mt-2">
+						<img
+							className="w-22 "
+							src={setImage(weatherInfo?.current?.code as number)}
+						/>
+					</span>
+				</div>
+				<div className="mt-4">
+					<span>Vlhkost: {weatherInfo?.current?.humidity} %</span>
+					<span> &#9679; </span>
+					<span>
+						Vítr: {weatherInfo?.current?.wind.toString().replace('.', ',')} km/h
+					</span>
+				</div>
 			</div>
 			<div className="w-full ">
 				{weatherInfo?.forecast?.time.map((time, i) => {
@@ -143,8 +145,8 @@ const WeatherTile = () => {
 					);
 				})}
 			</div>
-			<div>{weatherLocation.municipality}</div>
-		</>
+			<div className="mb-6">{weatherLocation.municipality}</div>
+		</div>
 	);
 };
 

@@ -1,5 +1,4 @@
 import { createContext, useEffect, useState } from 'react';
-import Footer from './components/layout/Footer';
 import Grid from './components/layout/Grid';
 import Menu from './components/layout/Menu';
 import SettingsPanel from './components/options/settings/SettingsPanel';
@@ -8,18 +7,8 @@ import {
 	getBaseCurrencySettings,
 	getLocationSettings,
 	getNewsSourceSettings,
-	getPinnedCurrenciesSettings,
-	getSettings,
-	getThemeSettings,
 	getTimezoneSettings,
-	setBaseCryptoSettings,
-	setBaseCurrencySettings,
-	setLocationSettings,
-	setNewsSourceSettings,
-	setPinnedCurrenciesSettings,
-	setTheme,
-	setThemeSettings,
-	setTimezoneSettings,
+	setDefatuls,
 	type TypeLocation,
 } from './components/options/settings/settingsUtils';
 import {
@@ -47,6 +36,8 @@ type TypeSettingsContext = {
 	setWeatherLocation: React.Dispatch<React.SetStateAction<TypeLocation>>;
 	baseCurrency: string;
 	setBaseCurrency: React.Dispatch<React.SetStateAction<string>>;
+	baseCrypto: string;
+	setBaseCrypto: React.Dispatch<React.SetStateAction<string>>;
 };
 
 export const SettingsContext = createContext<TypeSettingsContext>({
@@ -69,6 +60,8 @@ export const SettingsContext = createContext<TypeSettingsContext>({
 	setWeatherLocation: () => '',
 	baseCurrency: '',
 	setBaseCurrency: () => '',
+	baseCrypto: '',
+	setBaseCrypto: () => '',
 });
 
 const processFetchedTime = (
@@ -126,6 +119,9 @@ const App = () => {
 	const [baseCurrency, setBaseCurrency] = useState<string>(
 		getBaseCurrencySettings() || DEFAULT_SETTINGS.baseCurrency
 	);
+	const [baseCrypto, setBaseCrypto] = useState<string>(
+		getBaseCryptoSettings() || DEFAULT_SETTINGS.baseCrypto
+	);
 
 	const hour: number = 0;
 	const minute: number = 0;
@@ -138,39 +134,7 @@ const App = () => {
 	let timezoneErrorMessage: string = '';
 
 	useEffect(() => {
-		if (!Object.hasOwn(getSettings(), 'theme') || !getThemeSettings())
-			setThemeSettings(DEFAULT_SETTINGS.theme);
-
-		if (!Object.hasOwn(getSettings(), 'timezone') || !getTimezoneSettings())
-			setTimezoneSettings(DEFAULT_SETTINGS.timezone);
-
-		if (!Object.hasOwn(getSettings(), 'location') || !getLocationSettings())
-			setLocationSettings(DEFAULT_SETTINGS.location);
-
-		if (
-			!Object.hasOwn(getSettings(), 'baseCurrency') ||
-			!getBaseCurrencySettings()
-		)
-			setBaseCurrencySettings(DEFAULT_SETTINGS.baseCurrency);
-
-		if (!Object.hasOwn(getSettings(), 'baseCrypto') || !getBaseCryptoSettings())
-			setBaseCryptoSettings(DEFAULT_SETTINGS.baseCrypto);
-
-		if (!Object.hasOwn(getSettings(), 'newsSource') || !getNewsSourceSettings())
-			setNewsSourceSettings(DEFAULT_SETTINGS.newsSource);
-
-		if (
-			!Object.hasOwn(getSettings(), 'pinnedCurrencies') ||
-			!getPinnedCurrenciesSettings()
-		)
-			setPinnedCurrenciesSettings(DEFAULT_SETTINGS.pinnedCurrencies);
-
-		document.body.style.overflowX = 'hidden';
-		document.body.style.backgroundRepeat = 'no-repeat';
-		document.body.style.backgroundSize = 'cover';
-		document.body.style.backgroundPosition = 'center';
-		document.body.style.backgroundAttachment = 'fixed';
-		setTheme(getThemeSettings());
+		setDefatuls();
 
 		const clockSetInterval = setInterval(async () => {
 			const clockFetch: TypeFetchTime = await fetchTime(
@@ -266,19 +230,17 @@ const App = () => {
 					setWeatherLocation,
 					baseCurrency,
 					setBaseCurrency,
+					baseCrypto,
+					setBaseCrypto,
 				}}
 			>
 				<Menu />
-
 				<SettingsPanel />
-
 				<Grid
 					clockErrorMessage={clockErrorMessage}
 					timezoneErrorMessage={timezoneErrorMessage}
 				/>
 			</SettingsContext>
-
-			<Footer />
 		</div>
 	);
 };

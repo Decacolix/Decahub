@@ -1,3 +1,4 @@
+import { DEFAULT_SETTINGS } from '../../../constants/defaultSettings';
 import { STORAGE_SETTINGS_KEY } from '../../../constants/storageSettingsKey';
 
 export type TypeTheme = 'pink' | 'green' | 'blue';
@@ -15,6 +16,7 @@ export type TypeSettings = {
 	baseCrypto: string;
 	newsSource: string;
 	pinnedCurrencies: string[];
+	pinnedCryptos: string[];
 };
 
 const setLocalStorageItem = (key: string, value: object): void => {
@@ -33,7 +35,8 @@ const setSettingsValue = (
 		| 'baseCurrency'
 		| 'baseCrypto'
 		| 'newsSource'
-		| 'pinnedCurrencies',
+		| 'pinnedCurrencies'
+		| 'pinnedCryptos',
 	value: string | string[] | TypeLocation | TypeTheme
 ): TypeSettings => {
 	const item: TypeSettings = {
@@ -42,6 +45,48 @@ const setSettingsValue = (
 	};
 
 	return item;
+};
+
+export const setDefatuls = (): void => {
+	if (!Object.hasOwn(getSettings(), 'theme') || !getThemeSettings())
+		setThemeSettings(DEFAULT_SETTINGS.theme);
+
+	if (!Object.hasOwn(getSettings(), 'timezone') || !getTimezoneSettings())
+		setTimezoneSettings(DEFAULT_SETTINGS.timezone);
+
+	if (!Object.hasOwn(getSettings(), 'location') || !getLocationSettings())
+		setLocationSettings(DEFAULT_SETTINGS.location);
+
+	if (
+		!Object.hasOwn(getSettings(), 'baseCurrency') ||
+		!getBaseCurrencySettings()
+	)
+		setBaseCurrencySettings(DEFAULT_SETTINGS.baseCurrency);
+
+	if (!Object.hasOwn(getSettings(), 'baseCrypto') || !getBaseCryptoSettings())
+		setBaseCryptoSettings(DEFAULT_SETTINGS.baseCrypto);
+
+	if (!Object.hasOwn(getSettings(), 'newsSource') || !getNewsSourceSettings())
+		setNewsSourceSettings(DEFAULT_SETTINGS.newsSource);
+
+	if (
+		!Object.hasOwn(getSettings(), 'pinnedCurrencies') ||
+		!getPinnedCurrenciesSettings()
+	)
+		setPinnedCurrenciesSettings(DEFAULT_SETTINGS.pinnedCurrencies);
+
+	if (
+		!Object.hasOwn(getSettings(), 'pinnedCryptos') ||
+		!getPinnedCryptosSettings()
+	)
+		setPinnedCryptosSettings(DEFAULT_SETTINGS.pinnedCryptos);
+
+	document.body.style.overflowX = 'hidden';
+	document.body.style.backgroundRepeat = 'no-repeat';
+	document.body.style.backgroundSize = 'cover';
+	document.body.style.backgroundPosition = 'center';
+	document.body.style.backgroundAttachment = 'fixed';
+	setTheme(getThemeSettings());
 };
 
 export const getSettings = (): TypeSettings => {
@@ -123,5 +168,24 @@ export const setPinnedCurrenciesSettings = (value: string[]) => {
 	setLocalStorageItem(
 		STORAGE_SETTINGS_KEY,
 		setSettingsValue('pinnedCurrencies', value)
+	);
+};
+
+export const getPinnedCryptosSettings = (): string[] => {
+	return JSON.parse(getLocalStorageItem(STORAGE_SETTINGS_KEY)).pinnedCryptos;
+};
+
+export const setPinnedCryptosSettings = (value: string[]) => {
+	setLocalStorageItem(
+		STORAGE_SETTINGS_KEY,
+		setSettingsValue('pinnedCryptos', value)
+	);
+};
+
+export const formatNumber = (value: string): string => {
+	return (
+		value.split('.')[0].replace(/\B(?=(\d{3})+(?!\d))/g, ' ') +
+		',' +
+		value.split('.')[1]
 	);
 };
