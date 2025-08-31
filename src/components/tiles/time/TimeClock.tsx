@@ -37,7 +37,7 @@ const formatTimezone = (value: number | undefined): string => {
 	);
 };
 
-const Clock = ({ clockErrorMessage, timezoneErrorMessage }: TypeGrid) => {
+const TimeClock = ({ clockErrorMessage, timezoneErrorMessage }: TypeGrid) => {
 	const { clock, setClock, timezoneInfo } = use(SettingsContext);
 
 	useEffect(() => {
@@ -90,4 +90,4 @@ const Clock = ({ clockErrorMessage, timezoneErrorMessage }: TypeGrid) => {
 	);
 };
 
-export default Clock;
+export default TimeClock;

@@ -16,7 +16,7 @@ const getWeekNumber = (date: Date): number => {
 	return Math.ceil(dayOfYear / 7);
 };
 
-const Day = () => {
+const TimeDate = () => {
 	const { date } = use(SettingsContext);
 
 	let weekday: string = '';
@@ -73,4 +73,4 @@ const Day = () => {
 	);
 };
 
-export default Day;
+export default TimeDate;
