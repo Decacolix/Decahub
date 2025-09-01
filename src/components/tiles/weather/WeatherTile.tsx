@@ -2,7 +2,7 @@ import { use, useEffect, useState } from 'react';
 import { SettingsContext } from '../../../App';
 import { fetchLocation, fetchWeather, type TypeWeather } from './weatherUtils';
 import Loader from '../../layout/Loader';
-import { WEEKDAYS } from '../../../constants/weekdays';
+import { WEEKDAYS_DEFAULT } from '../../../constants/weekdays';
 
 const setImage = (code: number): string => {
 	switch (code) {
@@ -51,7 +51,7 @@ const setForecastDays = (date: Date): string[] => {
 
 	return Array.from({ length: 3 }, (_, i) => {
 		const forecastDays = (((currentDay + 6) % 7) + i + 1) % 7;
-		return WEEKDAYS[forecastDays];
+		return WEEKDAYS_DEFAULT[forecastDays];
 	});
 };
 

@@ -9,4 +9,5 @@ export const DEFAULT_SETTINGS: TypeSettings = {
 	newsSource: 'https://servis.idnes.cz/rss.aspx?c=zpravodaj',
 	pinnedCurrencies: [],
 	pinnedCryptos: [],
+	animation: true,
 };

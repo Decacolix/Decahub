@@ -1,7 +1,7 @@
 import { use } from 'react';
 import { SettingsContext } from '../../../App';
 import { MONTHS_GENITIVE } from '../../../constants/months';
-import { WEEKDAYS } from '../../../constants/weekdays';
+import { WEEKDAYS_DEFAULT } from '../../../constants/weekdays';
 import { NAMEDAYS } from '../../../constants/namedays';
 
 const getWeekNumber = (date: Date): number => {
@@ -23,25 +23,25 @@ const TimeDate = () => {
 
 	switch (date.getDay()) {
 		case 0:
-			weekday = WEEKDAYS[6];
+			weekday = WEEKDAYS_DEFAULT[6];
 			break;
 		case 1:
-			weekday = WEEKDAYS[0];
+			weekday = WEEKDAYS_DEFAULT[0];
 			break;
 		case 2:
-			weekday = WEEKDAYS[1];
+			weekday = WEEKDAYS_DEFAULT[1];
 			break;
 		case 3:
-			weekday = WEEKDAYS[2];
+			weekday = WEEKDAYS_DEFAULT[2];
 			break;
 		case 4:
-			weekday = WEEKDAYS[3];
+			weekday = WEEKDAYS_DEFAULT[3];
 			break;
 		case 5:
-			weekday = WEEKDAYS[4];
+			weekday = WEEKDAYS_DEFAULT[4];
 			break;
 		case 6:
-			weekday = WEEKDAYS[5];
+			weekday = WEEKDAYS_DEFAULT[5];
 			break;
 		default:
 			break;

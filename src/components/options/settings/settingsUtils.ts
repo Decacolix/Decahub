@@ -17,6 +17,7 @@ export type TypeSettings = {
 	newsSource: string;
 	pinnedCurrencies: string[];
 	pinnedCryptos: string[];
+	animation: boolean;
 };
 
 const setLocalStorageItem = (key: string, value: object): void => {
@@ -36,8 +37,9 @@ const setSettingsValue = (
 		| 'baseCrypto'
 		| 'newsSource'
 		| 'pinnedCurrencies'
-		| 'pinnedCryptos',
-	value: string | string[] | TypeLocation | TypeTheme
+		| 'pinnedCryptos'
+		| 'animation',
+	value: string | string[] | TypeLocation | TypeTheme | boolean
 ): TypeSettings => {
 	const item: TypeSettings = {
 		...JSON.parse(getLocalStorageItem(STORAGE_SETTINGS_KEY)),
@@ -80,6 +82,9 @@ export const setDefatuls = (): void => {
 		!getPinnedCryptosSettings()
 	)
 		setPinnedCryptosSettings(DEFAULT_SETTINGS.pinnedCryptos);
+
+	if (!Object.hasOwn(getSettings(), 'animation') || !getAnimationSettings())
+		setAnimationSettings(DEFAULT_SETTINGS.animation);
 
 	document.body.style.overflowX = 'hidden';
 	document.body.style.backgroundRepeat = 'no-repeat';
@@ -179,6 +184,17 @@ export const setPinnedCryptosSettings = (value: string[]) => {
 	setLocalStorageItem(
 		STORAGE_SETTINGS_KEY,
 		setSettingsValue('pinnedCryptos', value)
+	);
+};
+
+export const getAnimationSettings = (): boolean => {
+	return JSON.parse(getLocalStorageItem(STORAGE_SETTINGS_KEY)).animation;
+};
+
+export const setAnimationSettings = (value: boolean) => {
+	setLocalStorageItem(
+		STORAGE_SETTINGS_KEY,
+		setSettingsValue('animation', value)
 	);
 };
 

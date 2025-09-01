@@ -3,12 +3,13 @@ import { SettingsContext } from '../../../App';
 import { MONTHS_DEFAULT } from '../../../constants/months';
 import {
 	calculateYearRange,
+	getBackgroundColor,
 	getCurrentMonthDays,
 	getCurrentMonthFirstWeekday,
 	getPreviousMonthDays,
 } from './calendarUtils';
 import CalendarDay from './CalendarDay';
-import { NAMEDAYS } from '../../../constants/namedays';
+import CalendarDayInfo from './CalendarDayInfo';
 
 type TypeViews = 'month' | 'year' | 'years';
 
@@ -27,6 +28,15 @@ const CalendarTile = () => {
 	const [maximumReached, setMaximumReached] = useState<boolean>(false);
 
 	const [previousMonthDays, setPreviousMonthDays] = useState<number[]>([]);
+
+	const [hoverInfo, setHoverInfo] = useState<{
+		month: number;
+		day: number;
+		weekday: number;
+		x: number;
+		y: number;
+		display: boolean;
+	}>({ month: 1, day: 1, weekday: 0, x: 0, y: 0, display: false });
 
 	const handleLeftArrowClick = () => {
 		setMaximumReached(false);
@@ -108,9 +118,20 @@ const CalendarTile = () => {
 	const handleHoverDay = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
 		const month: number = e.currentTarget.id.split('-')[0] as unknown as number;
 		const day: number = e.currentTarget.id.split('-')[1] as unknown as number;
-		console.log(NAMEDAYS[month - 1][day - 1]);
-		console.log(e.currentTarget.getBoundingClientRect().x);
-		console.log(e.currentTarget.getBoundingClientRect().y);
+		const weekday: number = e.currentTarget.id.split(
+			'-'
+		)[2] as unknown as number;
+
+		setHoverInfo({
+			month: month,
+			weekday: weekday,
+			day: day,
+			x: e.currentTarget.offsetTop - 100,
+			y: e.currentTarget.offsetLeft,
+			display: true,
+		});
+
+		e.currentTarget.style.backgroundColor = getBackgroundColor().hex;
 	};
 
 	useEffect(() => {
@@ -122,23 +143,23 @@ const CalendarTile = () => {
 		);
 		firstWeekday = firstWeekday === 0 ? firstWeekday + 5 : firstWeekday - 2;
 
-		for (let i = 0; i <= firstWeekday; i++) {
+		for (let i: number = 0; i <= firstWeekday; i++) {
 			setPreviousMonthDays(prevPreviousMonthDays => [
 				...prevPreviousMonthDays,
 				getPreviousMonthDays(currentMonth, currentYear) - firstWeekday + i,
 			]);
 		}
-	}, [currentMonth]);
+	}, [currentMonth, currentYear]);
 
 	return (
-		<>
-			<div className="flex justify-between items-center w-[100%]">
+		<div className="flex flex-col justify-between items-center h-[100%]">
+			<div className="flex justify-between mt-4 2xl:mt-8">
 				<div
 					className={`${
 						minimumReached
 							? 'opacity-0 pointer-events-none'
 							: 'opacity-100 pointer-events-auto'
-					} bg-[url(src/assets/icons/arrow-left.svg)] ml-12 h-8 w-8 bg-no-repeat bg-center hover:cursor-pointer hover:opacity-50 '}`}
+					} bg-[url(src/assets/icons/arrow-left.svg)] h-[100%] w-14 bg-no-repeat bg-center bg-size-[30%] absolute left-0 top-[50%] translate-y-[-50%] hover:cursor-pointer hover:opacity-50`}
 					onClick={() => handleLeftArrowClick()}
 				/>
 				<div
@@ -146,7 +167,7 @@ const CalendarTile = () => {
 						currentView === 'years'
 							? ''
 							: 'hover:cursor-pointer hover:opacity-50'
-					} text-2xl`}
+					} text-2xl absolute left-[50%] translate-x-[-50%]`}
 					onClick={() => handleViewChange()}
 				>
 					{currentView === 'month'
@@ -160,63 +181,118 @@ const CalendarTile = () => {
 						maximumReached
 							? 'opacity-0 pointer-events-none'
 							: 'opacity-100 pointer-events-auto'
-					} bg-[url(src/assets/icons/arrow-right.svg)] mr-12 h-8 w-8 bg-no-repeat bg-center hover:cursor-pointer hover:opacity-50 '}`}
+					} bg-[url(src/assets/icons/arrow-right.svg)] h-[100%] w-14 bg-no-repeat bg-center bg-size-[30%] absolute right-0 top-[50%] translate-y-[-50%] hover:cursor-pointer hover:opacity-50`}
 					onClick={() => handleRightArrowClick()}
 				/>
 			</div>
-			<div className="grid grid-cols-7 gap-8 mt-12 text-center">
-				<div>PO</div>
-				<div>ÚT</div>
-				<div>ST</div>
-				<div>ČT</div>
-				<div>PÁ</div>
-				<div>SO</div>
-				<div>NE</div>
-				{previousMonthDays.map(i => {
-					return (
-						<div key={i}>
-							<CalendarDay current={false} day={i} today={false} />
-						</div>
-					);
-				})}
-				{Array.from(
-					{ length: getCurrentMonthDays(currentMonth, currentYear) },
-					(_, i) => (
+			{currentView === 'month' ? (
+				<div className="grid grid-cols-7 gap-3 2xl:gap-8 mb-8 text-center max-w-[75%]">
+					{hoverInfo.display ? (
+						<CalendarDayInfo
+							day={hoverInfo.day - 1}
+							month={hoverInfo.month - 1}
+							weekday={hoverInfo.weekday}
+							x={hoverInfo.x}
+							y={hoverInfo.y}
+						/>
+					) : (
+						''
+					)}
+					<div>PO</div>
+					<div>ÚT</div>
+					<div>ST</div>
+					<div>ČT</div>
+					<div>PÁ</div>
+					<div>SO</div>
+					<div>NE</div>
+					{previousMonthDays.map(i => {
+						return (
+							<div key={i}>
+								<CalendarDay current={false} day={i} today={false} />
+							</div>
+						);
+					})}
+					{Array.from(
+						{ length: getCurrentMonthDays(currentMonth, currentYear) },
+						(_, i) => (
+							<div
+								className="rounded-b-2xl hover:cursor-pointer"
+								id={`${currentMonth + 1}-${i + 1}-${new Date(
+									currentYear,
+									currentMonth,
+									i
+								).getDay()}`}
+								key={i}
+								onMouseLeave={e => {
+									setHoverInfo({ ...hoverInfo, display: false });
+									e.currentTarget.style.backgroundColor = 'inherit';
+								}}
+								onMouseOver={e => handleHoverDay(e)}
+							>
+								<CalendarDay
+									current={true}
+									day={i + 1}
+									today={
+										currentYear === date.getFullYear() &&
+										currentMonth === date.getMonth() &&
+										i + 1 === date.getDate()
+											? true
+											: false
+									}
+								/>
+							</div>
+						)
+					)}
+					{Array.from(
+						{
+							length:
+								42 -
+								(previousMonthDays.length +
+									getCurrentMonthDays(currentMonth, currentYear)),
+						},
+						(_, i) => (
+							<div key={i}>
+								<CalendarDay current={false} day={i + 1} today={false} />
+							</div>
+						)
+					)}
+				</div>
+			) : null}
+			{currentView === 'year' ? (
+				<div className="grid grid-cols-3 gap-8 mb-12 text-center">
+					{MONTHS_DEFAULT.map((month, index) => {
+						return (
+							<div
+								className="my-6 mx-3 hover:cursor-pointer hover:opacity-50"
+								key={month}
+								onClick={() => {
+									setCurrentMonth(index);
+									setCurrentView('month');
+								}}
+							>
+								{month.toUpperCase()}
+							</div>
+						);
+					})}
+				</div>
+			) : null}
+			{currentView === 'years' ? (
+				<div className="grid grid-cols-3 gap-8 mb-12 text-center">
+					{Array.from({ length: 12 }, (_, i) => (
 						<div
-							className="hover: cursor-pointer"
-							id={`${currentMonth + 1}-${i + 1}`}
+							className="my-6 mx-8 hover:cursor-pointer hover:opacity-50"
 							key={i}
-							onMouseOver={e => handleHoverDay(e)}
+							onClick={() => {
+								setCurrentYear(currentYearRange + i);
+								setCurrentView('year');
+							}}
 						>
-							<CalendarDay
-								current={true}
-								day={i + 1}
-								today={
-									currentYear === date.getFullYear() &&
-									currentMonth === date.getMonth() &&
-									i + 1 === date.getDate()
-										? true
-										: false
-								}
-							/>
+							{currentYearRange + i}
 						</div>
-					)
-				)}
-				{Array.from(
-					{
-						length:
-							42 -
-							(previousMonthDays.length +
-								getCurrentMonthDays(currentMonth, currentYear)),
-					},
-					(_, i) => (
-						<div key={i}>
-							<CalendarDay current={false} day={i + 1} today={false} />
-						</div>
-					)
-				)}
-			</div>
-		</>
+					))}
+				</div>
+			) : null}
+		</div>
 	);
 };
 

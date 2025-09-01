@@ -85,11 +85,11 @@ const RateRow = ({ code, name, value, pinned, source }: TypeRateRowProps) => {
 						onClick={e => handlePinnedChange(e)}
 					/>
 					<div>
-						<div className="text-2xl">{code}</div>
+						<div className="font-bold 2xl:font-normal 2xl:text-2xl">{code}</div>
 						<div>{name}</div>
 					</div>
 				</div>
-				<div className="text-2xl">{`${formatRate(fixedValue)} ${
+				<div className="2xl:text-2xl">{`${formatRate(fixedValue)} ${
 					source === 'currency' ? baseCurrency : baseCrypto
 				}`}</div>
 			</div>

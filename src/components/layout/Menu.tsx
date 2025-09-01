@@ -1,21 +1,21 @@
 import { use } from 'react';
-import Lock from '../options/lock/LockIcon';
 import SettingsIcon from '../options/settings/SettingsIcon';
 import { SettingsContext } from '../../App';
+import InfoIcon from '../options/info/InfoIcon';
 
 const Menu = () => {
-	const { settingsDisplayed } = use(SettingsContext);
+	const { settingsDisplayed, infoDisplayed } = use(SettingsContext);
 
 	const menuStyles: string =
-		(settingsDisplayed
+		(settingsDisplayed || infoDisplayed
 			? 'translate-y-[-150%] pointer-events-none opacity-0'
 			: 'translate-y-0 pointer-events-auto') +
-		' flex-col fixed right-2 top-4 bg-black/30 backdrop-blur-sm p-2 rounded-4xl z-50 duration-500';
+		' flex-col fixed right-2 top-4 bg-black/30 backdrop-blur-sm p-2 rounded-4xl z-10 duration-500';
 
 	return (
 		<div className={menuStyles}>
 			<SettingsIcon />
-			<Lock />
+			<InfoIcon />
 		</div>
 	);
 };

@@ -18,6 +18,7 @@ import {
 	type TypeFetchTimezone,
 } from './components/tiles/time/timeUtils';
 import { DEFAULT_SETTINGS } from './constants/defaultSettings';
+import InfoPanel from './components/options/info/InfoPanel';
 
 type TypeSettingsContext = {
 	settingsDisplayed: boolean;
@@ -38,6 +39,10 @@ type TypeSettingsContext = {
 	setBaseCurrency: React.Dispatch<React.SetStateAction<string>>;
 	baseCrypto: string;
 	setBaseCrypto: React.Dispatch<React.SetStateAction<string>>;
+	infoDisplayed: boolean;
+	setInfoDisplayed: React.Dispatch<React.SetStateAction<boolean>>;
+	animationOn: boolean;
+	setAnimationOn: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export const SettingsContext = createContext<TypeSettingsContext>({
@@ -62,6 +67,10 @@ export const SettingsContext = createContext<TypeSettingsContext>({
 	setBaseCurrency: () => '',
 	baseCrypto: '',
 	setBaseCrypto: () => '',
+	infoDisplayed: false,
+	setInfoDisplayed: () => false,
+	animationOn: true,
+	setAnimationOn: () => true,
 });
 
 const processFetchedTime = (
@@ -122,6 +131,8 @@ const App = () => {
 	const [baseCrypto, setBaseCrypto] = useState<string>(
 		getBaseCryptoSettings() || DEFAULT_SETTINGS.baseCrypto
 	);
+	const [infoDisplayed, setInfoDisplayed] = useState(false);
+	const [animationOn, setAnimationOn] = useState(true);
 
 	const hour: number = 0;
 	const minute: number = 0;
@@ -232,10 +243,15 @@ const App = () => {
 					setBaseCurrency,
 					baseCrypto,
 					setBaseCrypto,
+					infoDisplayed,
+					setInfoDisplayed,
+					animationOn,
+					setAnimationOn,
 				}}
 			>
 				<Menu />
 				<SettingsPanel />
+				<InfoPanel />
 				<Grid
 					clockErrorMessage={clockErrorMessage}
 					timezoneErrorMessage={timezoneErrorMessage}

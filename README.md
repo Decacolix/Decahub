@@ -7,8 +7,9 @@ The website is a purely front-end solution, using open APIs to gather the data, 
 
 - [TypeScript](https://www.typescriptlang.org/) as a programming language
 - [React](https://react.dev/) as a library
+- [Tailwind](https://tailwindcss.com/) as a CSS framework
 - [Visual Studio Code](https://code.visualstudio.com/) as an editor
-- [Adobe Illustrator](https://www.adobe.com/cz/products/illustrator.html) to create the icons and backgrounds
+- [Adobe Illustrator](https://www.adobe.com/products/illustrator.html) to create the icons and backgrounds
 
 ## Sources for data
 

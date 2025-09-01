@@ -18,12 +18,12 @@ const SettingsPanel = () => {
 		(settingsDisplayed
 			? 'translate-x-0 pointer-events-auto'
 			: 'translate-x-full pointer-events-none opacity-0') +
-		' fixed top-0 right-0 h-[100vh] w-[30vw] bg-black/30 backdrop-blur-sm pt-16 pb-4 z-50 duration-500 overflow-y-scroll';
+		' fixed top-0 right-0 h-[100vh] 2xl:w-[30vw] bg-black/40 backdrop-blur-sm pt-16 pb-4 z-20 duration-500 overflow-y-scroll';
 
 	return (
 		<div className={panelStyles}>
 			<div
-				className="bg-[url(./assets/icons/confirm-icon.svg)] bg-no-repeat bg-center h-6 w-6 absolute top-6 right-6 hover:cursor-pointer hover:opacity-50"
+				className="bg-[url(src/assets/icons/confirm-icon.svg)] bg-no-repeat bg-center h-6 w-6 absolute top-6 right-6 hover:cursor-pointer hover:opacity-50"
 				onClick={() => handleSettingsClose()}
 			/>
 			<SettingsTheme />

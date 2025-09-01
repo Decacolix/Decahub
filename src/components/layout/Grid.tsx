@@ -11,33 +11,44 @@ export type TypeGrid = {
 };
 
 const Grid = ({ clockErrorMessage, timezoneErrorMessage }: TypeGrid) => {
-	const topHeight: string = 'h-[25rem]';
-	const bottomHeight: string = 'h-[35rem]';
+	const topHeight: string = 'h-[25rem] 2xl:h-[25rem]';
+	const bottomHeight: string = 'h-[25rem] 2xl:h-[35rem]';
 
 	return (
-		<div className="grid grid-cols-3 gap-8 py-6 px-20">
-			<TileFrame height={topHeight}>
-				<WeatherTile />
-			</TileFrame>
-
-			<TileFrame height={topHeight}>
-				<TimeTile
-					clockErrorMessage={clockErrorMessage}
-					timezoneErrorMessage={timezoneErrorMessage}
-				/>
-			</TileFrame>
-			<TileFrame height={topHeight}>
-				<NewsTile />
-			</TileFrame>
-			<TileFrame height={bottomHeight}>
-				<RateTile source="currency" />
-			</TileFrame>
-			<TileFrame height={bottomHeight}>
-				<CalendarTile />
-			</TileFrame>
-			<TileFrame height={bottomHeight}>
-				<RateTile source="crypto" />
-			</TileFrame>
+		<div className="grid lg:grid-cols-2 2xl:grid-cols-3 gap-2 2xl:gap-8 py-2 2xl:py-6 2xl:px-20">
+			<div className="order-3 lg:order-2 2xl:order-1">
+				<TileFrame height={topHeight} z="z-1">
+					<WeatherTile />
+				</TileFrame>
+			</div>
+			<div className="order-1 lg:order-1 2xl:order-2">
+				<TileFrame height={topHeight} z="z-1">
+					<TimeTile
+						clockErrorMessage={clockErrorMessage}
+						timezoneErrorMessage={timezoneErrorMessage}
+					/>
+				</TileFrame>
+			</div>
+			<div className="order-4 lg:order-4 2xl:order-3">
+				<TileFrame height={topHeight} z="z-1">
+					<NewsTile />
+				</TileFrame>
+			</div>
+			<div className="order-5 lg:order-5 2xl:order-4">
+				<TileFrame height={bottomHeight} z="z-1">
+					<RateTile source="currency" />
+				</TileFrame>
+			</div>
+			<div className="order-2 lg:order-3 2xl:order-5">
+				<TileFrame height={bottomHeight} z="z-2">
+					<CalendarTile />
+				</TileFrame>
+			</div>
+			<div className="order-6 lg:order-6 2xl:order-6">
+				<TileFrame height={bottomHeight} z="z-1">
+					<RateTile source="crypto" />
+				</TileFrame>
+			</div>
 		</div>
 	);
 };
