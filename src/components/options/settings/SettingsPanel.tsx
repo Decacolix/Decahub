@@ -6,6 +6,8 @@ import SettingsTime from './SettingsTime';
 import SettingsWeather from './SettingsWeather';
 import { SettingsContext } from '../../../App';
 import SettingsNews from './SettingsNews';
+import SettingsAnimation from './SettingsAnimation';
+import SettingsLanguage from './SettingsLanguage';
 
 const SettingsPanel = () => {
 	const { settingsDisplayed, setSettingsDisplayed } = use(SettingsContext);
@@ -26,12 +28,14 @@ const SettingsPanel = () => {
 				className="bg-[url(src/assets/icons/confirm-icon.svg)] bg-no-repeat bg-center h-6 w-6 absolute top-6 right-6 hover:cursor-pointer hover:opacity-50"
 				onClick={() => handleSettingsClose()}
 			/>
+			<SettingsLanguage />
 			<SettingsTheme />
 			<SettingsTime />
 			<SettingsNews />
 			<SettingsWeather />
 			<SettingsCurrency />
 			<SettingsCrypto />
+			<SettingsAnimation />
 		</div>
 	);
 };

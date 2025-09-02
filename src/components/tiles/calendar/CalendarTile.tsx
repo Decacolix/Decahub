@@ -1,6 +1,6 @@
 import { use, useEffect, useState } from 'react';
 import { SettingsContext } from '../../../App';
-import { MONTHS_DEFAULT } from '../../../constants/months';
+import { MONTHS_DEFAULT, MONTHS_EN } from '../../../constants/months';
 import {
 	calculateYearRange,
 	getBackgroundColor,
@@ -10,6 +10,7 @@ import {
 } from './calendarUtils';
 import CalendarDay from './CalendarDay';
 import CalendarDayInfo from './CalendarDayInfo';
+import { getLanguageSettings } from '../../options/settings/settingsUtils';
 
 type TypeViews = 'month' | 'year' | 'years';
 
@@ -171,7 +172,10 @@ const CalendarTile = () => {
 					onClick={() => handleViewChange()}
 				>
 					{currentView === 'month'
-						? `${MONTHS_DEFAULT[currentMonth].toUpperCase()} ${currentYear}`
+						? `${(getLanguageSettings() === 'cs'
+								? MONTHS_DEFAULT[currentMonth]
+								: MONTHS_EN[currentMonth]
+						  ).toUpperCase()} ${currentYear}`
 						: currentView === 'year'
 						? currentYear
 						: `${currentYearRange} – ${currentYearRange + 11}`}
@@ -198,13 +202,13 @@ const CalendarTile = () => {
 					) : (
 						''
 					)}
-					<div>PO</div>
-					<div>ÚT</div>
-					<div>ST</div>
-					<div>ČT</div>
-					<div>PÁ</div>
-					<div>SO</div>
-					<div>NE</div>
+					<div>{getLanguageSettings() === 'cs' ? 'PO' : 'MO'}</div>
+					<div>{getLanguageSettings() === 'cs' ? 'ÚT' : 'TU'}</div>
+					<div>{getLanguageSettings() === 'cs' ? 'ST' : 'WE'}</div>
+					<div>{getLanguageSettings() === 'cs' ? 'ČT' : 'TH'}</div>
+					<div>{getLanguageSettings() === 'cs' ? 'PÁ' : 'FR'}</div>
+					<div>{getLanguageSettings() === 'cs' ? 'SO' : 'SA'}</div>
+					<div>{getLanguageSettings() === 'cs' ? 'NE' : 'SU'}</div>
 					{previousMonthDays.map(i => {
 						return (
 							<div key={i}>
@@ -260,20 +264,22 @@ const CalendarTile = () => {
 			) : null}
 			{currentView === 'year' ? (
 				<div className="grid grid-cols-3 gap-8 mb-12 text-center">
-					{MONTHS_DEFAULT.map((month, index) => {
-						return (
-							<div
-								className="my-6 mx-3 hover:cursor-pointer hover:opacity-50"
-								key={month}
-								onClick={() => {
-									setCurrentMonth(index);
-									setCurrentView('month');
-								}}
-							>
-								{month.toUpperCase()}
-							</div>
-						);
-					})}
+					{(getLanguageSettings() === 'cs' ? MONTHS_DEFAULT : MONTHS_EN).map(
+						(month, index) => {
+							return (
+								<div
+									className="my-6 hover:cursor-pointer hover:opacity-50"
+									key={month}
+									onClick={() => {
+										setCurrentMonth(index);
+										setCurrentView('month');
+									}}
+								>
+									{month.toUpperCase()}
+								</div>
+							);
+						}
+					)}
 				</div>
 			) : null}
 			{currentView === 'years' ? (

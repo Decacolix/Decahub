@@ -1,5 +1,6 @@
 import { use } from 'react';
 import { SettingsContext } from '../../../App';
+import { getLanguageSettings } from '../settings/settingsUtils';
 
 const InfoPanel = () => {
 	const imagePanelStyles: string = 'w-[200px] lg:w-[300px] p-4';
@@ -26,26 +27,35 @@ const InfoPanel = () => {
 				<div className={imagePanelStyles}>
 					<img src="src/assets/images/calendar-day.png" />
 					<p className={imageTextStyles}>
-						Najeďte na den v kalendáři pro zobrazení svátku.
+						{getLanguageSettings() === 'cs'
+							? 'Najeďte na den v kalendáři pro zobrazení svátku.'
+							: 'Hover over a day in the calendar to display the name day'}
 					</p>
 				</div>
 				<div className={imagePanelStyles}>
 					<img src="src/assets/images/calendar-years.png" />
 					<p className={imageTextStyles}>
-						Klikněte na rok v horní části kalendáře pro přepnutí zobrazení mezi
-						měsíci a roky.
+						{getLanguageSettings() === 'cs'
+							? 'Klikněte na rok v horní části kalendáře pro přepnutí zobrazení mezi měsíci a roky.'
+							: 'Click on the year in the upper part of the calendar to switch the view between months and years.'}
 					</p>
 				</div>
 				<div className={imagePanelStyles}>
 					<img src="src/assets/images/pin.png" />
 					<p className={imageTextStyles}>
-						Pro připnutí měny na vrch seznamu klikněte na ikonu hvězdy.
+						{getLanguageSettings() === 'cs'
+							? 'Pro připnutí měny na vrch seznamu klikněte na ikonu hvězdy.'
+							: 'To pin the currency to the top of the list, click on the star icon.'}
 					</p>
 				</div>
 			</div>
 			<div className="flex justify-between w-[100%] px-4 ">
 				<div className="mt-6 px-4">
-					<p>Použité technologie pro tvorbu stránky:</p>
+					<p>
+						{getLanguageSettings() === 'cs'
+							? 'Použité technologie pro tvorbu stránky:'
+							: 'Technologies used to build the website:'}
+					</p>
 					<ul className="list-disc list-inside mt-2">
 						<li>
 							<a
@@ -55,7 +65,9 @@ const InfoPanel = () => {
 							>
 								TypeScript
 							</a>{' '}
-							jako programovací jazyk
+							{getLanguageSettings() === 'cs'
+								? 'jako programovací jazyk'
+								: 'as a programming language'}
 						</li>
 						<li>
 							<a
@@ -65,7 +77,9 @@ const InfoPanel = () => {
 							>
 								React
 							</a>{' '}
-							jako knihovna
+							{getLanguageSettings() === 'cs'
+								? 'jako knihovna'
+								: 'as a library'}
 						</li>
 						<li>
 							<a
@@ -75,7 +89,9 @@ const InfoPanel = () => {
 							>
 								Tailwind
 							</a>{' '}
-							jako CSS framework
+							{getLanguageSettings() === 'cs'
+								? 'jako CSS framework'
+								: 'as a CSS framework'}
 						</li>
 						<li>
 							<a
@@ -85,22 +101,38 @@ const InfoPanel = () => {
 							>
 								Visual Studio Code
 							</a>{' '}
-							jako editor
+							{getLanguageSettings() === 'cs' ? 'jako editor' : 'as an editor'}
 						</li>
 						<li>
 							<a
 								className={linkStyles}
-								href="https://www.adobe.com/products/illustrator.html"
+								href="https://www.adobe.com/products/illustrator.html/"
 								target="_blank"
 							>
 								Adobe Illustrator
 							</a>{' '}
-							pro tvorbu ikon
+							{getLanguageSettings() === 'cs'
+								? 'pro tvorbu ikon a pozadí'
+								: 'to create the icons and backgrounds'}
+						</li>
+						<li>
+							<a
+								className={linkStyles}
+								href="https://chatgpt.com/"
+								target="_blank"
+							>
+								ChatGPT
+							</a>{' '}
+							{getLanguageSettings() === 'cs'
+								? 'jako AI pomocník'
+								: 'as an AI helper'}
 						</li>
 					</ul>
 				</div>
 				<div className="mt-6 px-4">
-					<p>Zdroje dat:</p>
+					<p>
+						{getLanguageSettings() === 'cs' ? 'Zdroje dat:' : 'Data sources:'}
+					</p>
 					<ul className="list-disc list-inside mt-2">
 						<li>
 							<a
@@ -110,7 +142,9 @@ const InfoPanel = () => {
 							>
 								Open Meteo
 							</a>{' '}
-							jako API pro počasí
+							{getLanguageSettings() === 'cs'
+								? 'jako API pro počasí'
+								: 'as an weather API'}
 						</li>
 						<li>
 							<a
@@ -120,7 +154,9 @@ const InfoPanel = () => {
 							>
 								ExchangeRate-API
 							</a>{' '}
-							jako API pro kurzy měn
+							{getLanguageSettings() === 'cs'
+								? 'jako API pro kurzy měn'
+								: 'as a currency API'}
 						</li>
 						<li>
 							<a
@@ -130,7 +166,9 @@ const InfoPanel = () => {
 							>
 								CryptoCompare
 							</a>{' '}
-							jako API pro kurzy kryptoměn
+							{getLanguageSettings() === 'cs'
+								? 'jako API pro kurzy kryptoměn'
+								: 'as a cryptocurrency API'}
 						</li>
 						<li>
 							<a
@@ -140,7 +178,9 @@ const InfoPanel = () => {
 							>
 								iDNES
 							</a>{' '}
-							jako RSS zdroj zpráv
+							{getLanguageSettings() === 'cs'
+								? 'jako RSS zdroj zpráv'
+								: 'as an RSS news source'}
 						</li>
 						<li>
 							<a
@@ -150,13 +190,29 @@ const InfoPanel = () => {
 							>
 								ČT24
 							</a>{' '}
-							jako RSS zdroj zpráv
+							{getLanguageSettings() === 'cs'
+								? 'jako RSS zdroj zpráv'
+								: 'as an RSS news source'}
+						</li>
+						<li>
+							<a
+								className={linkStyles}
+								href="https://www.nytimes.com/"
+								target="_blank"
+							>
+								The New York Times
+							</a>{' '}
+							{getLanguageSettings() === 'cs'
+								? 'jako RSS zdroj zpráv'
+								: 'as an RSS news source'}
 						</li>
 					</ul>
 				</div>
 			</div>
 			<p className="mt-6">
-				Předchozí verze:{' '}
+				{getLanguageSettings() === 'cs'
+					? 'Předchozí verze:'
+					: 'Previous version:'}{' '}
 				<a className={linkStyles} href="https://decahub.cz/v3" target="blank">
 					Decahub.cz/v3
 				</a>

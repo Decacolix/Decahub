@@ -1,7 +1,12 @@
+import { getLanguageSettings } from '../options/settings/settingsUtils';
+
 const Footer = () => {
 	return (
 		<div className="absolute top-2 text-center text-sm text-gray-800">
-			Vytvořil David Toman v roce 2025 |{' '}
+			{getLanguageSettings() === 'cs'
+				? 'Vytvořil David Toman v roce 2025'
+				: 'Created by David Toman in 2025'}{' '}
+			|{' '}
 			<a href="mailto:davidtoman1997@gmail.com" target="_blank">
 				<u>E-mail</u>
 			</a>{' '}

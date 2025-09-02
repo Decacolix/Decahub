@@ -7,6 +7,8 @@
 }
 
 .loader {
+	width: 2rem;
+	height: 2rem;
 	border: 5px solid #fff;
 	border-bottom-color: transparent;
 	border-radius: 50%;

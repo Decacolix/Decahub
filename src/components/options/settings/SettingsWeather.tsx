@@ -1,23 +1,31 @@
 import { use, useState } from 'react';
 import { SettingsContext } from '../../../App';
 import { fetchLocation } from '../../tiles/weather/weatherUtils';
-import { setLocationSettings, type TypeLocation } from './settingsUtils';
+import {
+	getLanguageSettings,
+	setLocationSettings,
+	type TypeLocation,
+} from './settingsUtils';
 
 const SettingsWeather = () => {
 	const { weatherLocation, setWeatherLocation } = use(SettingsContext);
 	const [locationInput, setLocationInput] = useState<string>('');
 	const [locationInformation, setLocationInformation] = useState<string>(
-		`Aktuální lokalita: ${weatherLocation.municipality}, ${weatherLocation.country}`
+		`${weatherLocation.municipality}, ${weatherLocation.country}`
 	);
 
 	const handleLocationChange = async (): Promise<void> => {
 		setLocationInput('');
 		await fetchLocation(locationInput).then(async location => {
 			if (location.failed) {
-				setLocationInformation('Lokalita nebyla nalezena');
+				setLocationInformation(
+					getLanguageSettings() === 'cs'
+						? 'Lokalita nebyla nalezena'
+						: 'Location was not found'
+				);
 				setTimeout(() => {
 					setLocationInformation(
-						`Aktuální lokalita: ${weatherLocation.municipality}, ${weatherLocation.country}`
+						`${weatherLocation.municipality}, ${weatherLocation.country}`
 					);
 				}, 2000);
 
@@ -31,15 +39,17 @@ const SettingsWeather = () => {
 
 			setLocationSettings(fetchedLocation);
 			setWeatherLocation(fetchedLocation);
-			setLocationInformation(
-				`Aktuální lokalita: ${location.name}, ${location.country}`
-			);
+			setLocationInformation(`${location.name}, ${location.country}`);
 		});
 	};
 
 	return (
 		<div className="pr-14">
-			<h1 className="pl-7 my-4 text-2xl">Lokalita počasí</h1>
+			<h1 className="pl-7 my-4 text-2xl">
+				{getLanguageSettings() === 'cs'
+					? 'Lokalita počasí'
+					: 'Weather location'}
+			</h1>
 			<div className="relative">
 				<input
 					className="ml-7 bg-gray-800 p-2.5 w-[100%] focus:outline-0"

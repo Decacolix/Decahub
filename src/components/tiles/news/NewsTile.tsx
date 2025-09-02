@@ -3,6 +3,7 @@ import { fetchFeed, type TypeFetchFeed } from './newsUtils';
 import Loader from '../../layout/Loader';
 import { SettingsContext } from '../../../App';
 import { newsSourceUrls } from '../../options/settings/SettingsNews';
+import { getLanguageSettings } from '../../options/settings/settingsUtils';
 
 const NewsTile = () => {
 	const { currentNewsSource } = use(SettingsContext);
@@ -23,10 +24,12 @@ const NewsTile = () => {
 
 	return feed?.failed ? (
 		<p className="p-4">
-			{'Nepodařilo se načíst zprávy. Chyba: ' + feed?.error}
+			{getLanguageSettings() === 'cs'
+				? 'Nepodařilo se načíst zprávy. Chyba: '
+				: 'Could not load the news. Error: ' + feed?.error}
 		</p>
 	) : isFeedLoading ? (
-		<Loader size={7} />
+		<Loader />
 	) : (
 		<>
 			<div className="my-6 ml-4 flex-1 mr-auto">

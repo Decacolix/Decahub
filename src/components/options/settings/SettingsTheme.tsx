@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import {
+	getLanguageSettings,
 	getThemeSettings,
 	setTheme,
 	setThemeSettings,
@@ -41,7 +42,9 @@ const SettingsTheme = () => {
 
 	return (
 		<>
-			<h1 className="px-7 mb-3 text-2xl">Téma</h1>
+			<h1 className="px-7 mb-3 text-2xl">
+				{getLanguageSettings() === 'cs' ? 'Téma' : 'Theme'}
+			</h1>
 			<div className="flex px-6">
 				{themeUrls.map(themeUrl => (
 					<li

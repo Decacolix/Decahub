@@ -27,3 +27,18 @@ export const MONTHS_GENITIVE: string[] = [
 	'listopadu',
 	'prosince',
 ];
+
+export const MONTHS_EN: string[] = [
+	'January',
+	'February',
+	'March',
+	'April',
+	'May',
+	'June',
+	'July',
+	'August',
+	'September',
+	'October',
+	'November',
+	'December',
+];

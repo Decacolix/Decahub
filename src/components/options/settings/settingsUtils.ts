@@ -8,6 +8,8 @@ export type TypeLocation = {
 	country: string;
 };
 
+export type TypeLanguage = 'cs' | 'en';
+
 export type TypeSettings = {
 	theme: TypeTheme;
 	timezone: string;
@@ -18,6 +20,7 @@ export type TypeSettings = {
 	pinnedCurrencies: string[];
 	pinnedCryptos: string[];
 	animation: boolean;
+	language: TypeLanguage;
 };
 
 const setLocalStorageItem = (key: string, value: object): void => {
@@ -38,8 +41,9 @@ const setSettingsValue = (
 		| 'newsSource'
 		| 'pinnedCurrencies'
 		| 'pinnedCryptos'
-		| 'animation',
-	value: string | string[] | TypeLocation | TypeTheme | boolean
+		| 'animation'
+		| 'language',
+	value: string | string[] | TypeLocation | TypeTheme | TypeLanguage | boolean
 ): TypeSettings => {
 	const item: TypeSettings = {
 		...JSON.parse(getLocalStorageItem(STORAGE_SETTINGS_KEY)),
@@ -85,6 +89,9 @@ export const setDefatuls = (): void => {
 
 	if (!Object.hasOwn(getSettings(), 'animation') || !getAnimationSettings())
 		setAnimationSettings(DEFAULT_SETTINGS.animation);
+
+	if (!Object.hasOwn(getSettings(), 'language') || !getLanguageSettings())
+		setLanguageSettings(DEFAULT_SETTINGS.language);
 
 	document.body.style.overflowX = 'hidden';
 	document.body.style.backgroundRepeat = 'no-repeat';
@@ -195,6 +202,17 @@ export const setAnimationSettings = (value: boolean) => {
 	setLocalStorageItem(
 		STORAGE_SETTINGS_KEY,
 		setSettingsValue('animation', value)
+	);
+};
+
+export const getLanguageSettings = (): TypeLanguage => {
+	return JSON.parse(getLocalStorageItem(STORAGE_SETTINGS_KEY)).language;
+};
+
+export const setLanguageSettings = (value: TypeLanguage) => {
+	setLocalStorageItem(
+		STORAGE_SETTINGS_KEY,
+		setSettingsValue('language', value)
 	);
 };
 

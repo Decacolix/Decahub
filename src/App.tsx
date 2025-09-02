@@ -3,12 +3,15 @@ import Grid from './components/layout/Grid';
 import Menu from './components/layout/Menu';
 import SettingsPanel from './components/options/settings/SettingsPanel';
 import {
+	getAnimationSettings,
 	getBaseCryptoSettings,
 	getBaseCurrencySettings,
+	getLanguageSettings,
 	getLocationSettings,
 	getNewsSourceSettings,
 	getTimezoneSettings,
 	setDefatuls,
+	type TypeLanguage,
 	type TypeLocation,
 } from './components/options/settings/settingsUtils';
 import {
@@ -43,6 +46,8 @@ type TypeSettingsContext = {
 	setInfoDisplayed: React.Dispatch<React.SetStateAction<boolean>>;
 	animationOn: boolean;
 	setAnimationOn: React.Dispatch<React.SetStateAction<boolean>>;
+	language: TypeLanguage;
+	setLanguage: React.Dispatch<React.SetStateAction<TypeLanguage>>;
 };
 
 export const SettingsContext = createContext<TypeSettingsContext>({
@@ -71,6 +76,8 @@ export const SettingsContext = createContext<TypeSettingsContext>({
 	setInfoDisplayed: () => false,
 	animationOn: true,
 	setAnimationOn: () => true,
+	language: 'cs',
+	setLanguage: () => '',
 });
 
 const processFetchedTime = (
@@ -132,7 +139,12 @@ const App = () => {
 		getBaseCryptoSettings() || DEFAULT_SETTINGS.baseCrypto
 	);
 	const [infoDisplayed, setInfoDisplayed] = useState(false);
-	const [animationOn, setAnimationOn] = useState(true);
+	const [animationOn, setAnimationOn] = useState(
+		getAnimationSettings() || DEFAULT_SETTINGS.animation
+	);
+	const [language, setLanguage] = useState<TypeLanguage>(
+		getLanguageSettings() || DEFAULT_SETTINGS.language
+	);
 
 	const hour: number = 0;
 	const minute: number = 0;
@@ -247,6 +259,8 @@ const App = () => {
 					setInfoDisplayed,
 					animationOn,
 					setAnimationOn,
+					language,
+					setLanguage,
 				}}
 			>
 				<Menu />

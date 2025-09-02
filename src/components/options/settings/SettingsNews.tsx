@@ -1,7 +1,7 @@
 import { NEWS_SOURCES } from '../../../constants/newsSources';
 import { SettingsContext } from '../../../App';
 import { use, useCallback } from 'react';
-import { setNewsSourceSettings } from './settingsUtils';
+import { getLanguageSettings, setNewsSourceSettings } from './settingsUtils';
 
 export const newsSourceUrls: {
 	source: string;
@@ -21,6 +21,12 @@ export const newsSourceUrls: {
 		urlImg: 'src/assets/logos/ct24-logo.svg',
 		page: 'https://ct24.ceskatelevize.cz/',
 	},
+	{
+		source: NEWS_SOURCES[2],
+		urlBg: 'bg-[url(src/assets/logos/newyorktimes-logo.svg)]',
+		urlImg: 'src/assets/logos/newyorktimes-logo.svg',
+		page: 'https://www.nytimes.com/',
+	},
 ];
 
 const SettingsNews = () => {
@@ -38,7 +44,9 @@ const SettingsNews = () => {
 
 	return (
 		<>
-			<h1 className="my-4 px-7 text-2xl">Zdroj zpráv</h1>
+			<h1 className="my-4 px-7 text-2xl">
+				{getLanguageSettings() === 'cs' ? 'Zdroj zpráv' : 'News source'}
+			</h1>
 			<div className="flex px-6">
 				{newsSourceUrls.map(newsSourceUrl => (
 					<li

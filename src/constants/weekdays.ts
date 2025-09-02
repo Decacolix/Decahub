@@ -17,3 +17,13 @@ export const WEEKDAYS_ACCUSATIVE: string[] = [
 	'sobotu',
 	'neděli',
 ];
+
+export const WEEKDAYS_EN: string[] = [
+	'Monday',
+	'Tuesday',
+	'Wednesday',
+	'Thursday',
+	'Friday',
+	'Saturday',
+	'Sunday',
+];

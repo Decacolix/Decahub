@@ -2,11 +2,12 @@ import { use, useEffect, useState } from 'react';
 import { SettingsContext } from '../../../App';
 import { fetchCryptos, fetchCurrencies } from './ratesUtils';
 import RateRow from './RateRow';
-import { CURRENCIES } from '../../../constants/currencies';
+import { CURRENCIES, CURRENCIES_EN } from '../../../constants/currencies';
 import Loader from '../../layout/Loader';
 import {
 	getPinnedCurrenciesSettings,
 	getPinnedCryptosSettings,
+	getLanguageSettings,
 } from '../../options/settings/settingsUtils';
 import { CRYPTOS } from '../../../constants/cryptos';
 
@@ -39,7 +40,9 @@ const displayRateRow = (
 				key={rate.code}
 				name={
 					source === 'currency'
-						? CURRENCIES[rate.code as keyof typeof CURRENCIES]
+						? getLanguageSettings() === 'cs'
+							? CURRENCIES[rate.code as keyof typeof CURRENCIES]
+							: CURRENCIES_EN[rate.code as keyof typeof CURRENCIES_EN]
 						: CRYPTOS[rate.code as keyof typeof CRYPTOS]
 				}
 				pinned={pinned}
@@ -86,9 +89,13 @@ const RateTile = ({ source }: TypeRateTileProps) => {
 	}
 
 	return ratesError ? (
-		<p className="p-4">{'Nepodařilo se načíst měny. Chyba: ' + ratesError}</p>
+		<p className="p-4">
+			{getLanguageSettings() === 'cs'
+				? 'Nepodařilo se načíst měny. Chyba: '
+				: 'Could not load the currencies. Error: ' + ratesError}
+		</p>
 	) : isRatesLoading ? (
-		<Loader size={7} />
+		<Loader />
 	) : (
 		<div className="list-none overflow-y-scroll w-[100%]">
 			{rates?.map(rate => {

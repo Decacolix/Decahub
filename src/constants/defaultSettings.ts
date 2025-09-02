@@ -10,4 +10,5 @@ export const DEFAULT_SETTINGS: TypeSettings = {
 	pinnedCurrencies: [],
 	pinnedCryptos: [],
 	animation: true,
+	language: 'cs',
 };

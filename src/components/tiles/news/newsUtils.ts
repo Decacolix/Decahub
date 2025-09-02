@@ -48,7 +48,11 @@ export const fetchFeed = async (source: string): Promise<TypeFetchFeed> => {
 				news.push({
 					guid: guids[i].textContent,
 					title: titles[i].textContent,
-					link: links[i].textContent,
+					link: links[
+						source === 'https://rss.nytimes.com/services/xml/rss/nyt/World.xml'
+							? i * 2
+							: i
+					].textContent,
 					date: new Date(Date.parse(dates[i].textContent)),
 				});
 			}

@@ -2,6 +2,7 @@ import { use, useEffect } from 'react';
 import { formatClock } from './timeUtils';
 import type { TypeGrid } from '../../layout/Grid';
 import { SettingsContext } from '../../../App';
+import { getLanguageSettings } from '../../options/settings/settingsUtils';
 
 const formatTimezone = (value: number | undefined): string => {
 	if (!value) return '';
@@ -61,21 +62,32 @@ const TimeClock = ({ clockErrorMessage, timezoneErrorMessage }: TypeGrid) => {
 			<div className="absolute bottom-2 left-[50%] translate-x-[-50%]">
 				{timezoneErrorMessage ? (
 					<p>
-						{'Nepodařilo se načíst časová pásma. Chyba: ' +
-							timezoneErrorMessage}
+						{getLanguageSettings() === 'cs'
+							? 'Nepodařilo se načíst časová pásma. Chyba: '
+							: 'Could not load the time zones. Error: ' + timezoneErrorMessage}
 					</p>
 				) : (
 					<p>
 						<span>{formatTimezone(timezoneInfo.currentUtcOffset)}</span>
 						<span>
-							{timezoneInfo.isDayLightSavingActive ? ' (letní čas)' : ''}
+							{timezoneInfo.isDayLightSavingActive
+								? `${
+										getLanguageSettings() === 'cs'
+											? ' (letní čas)'
+											: ' (summer time)'
+								  }`
+								: ''}
 						</span>
 					</p>
 				)}
 			</div>
 			<div>
 				{clockErrorMessage ? (
-					<p>{'Nepodařilo se načíst hodiny. Chyba: ' + clockErrorMessage}</p>
+					<p>
+						{getLanguageSettings() === 'cs'
+							? 'Nepodařilo se načíst hodiny. Chyba: '
+							: 'Could not load the clock. Error: ' + clockErrorMessage}
+					</p>
 				) : (
 					<p className="font-[Chivo_Mono] text-7xl">
 						{formatClock(

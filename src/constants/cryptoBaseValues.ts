@@ -5,3 +5,11 @@ export const CRYPTO_BASE_VALUES = {
 	PLN: 'Polský zlotý',
 	USD: 'Americký dolar',
 };
+
+export const CRYPTO_BASE_VALUES_EN = {
+	CZK: 'Czech koruna',
+	EUR: 'Euro',
+	GBP: 'British pound',
+	PLN: 'Polish złoty',
+	USD: 'United States dollar',
+};

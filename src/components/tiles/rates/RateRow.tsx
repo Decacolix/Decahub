@@ -1,6 +1,7 @@
 import { use } from 'react';
 import { SettingsContext } from '../../../App';
 import {
+	getLanguageSettings,
 	getPinnedCryptosSettings,
 	getPinnedCurrenciesSettings,
 	setPinnedCryptosSettings,
@@ -19,7 +20,7 @@ type TypeRateRowProps = {
 export const formatRate = (value: string): string => {
 	return (
 		value.split('.')[0].replace(/\B(?=(\d{3})+(?!\d))/g, ' ') +
-		',' +
+		(getLanguageSettings() === 'cs' ? ',' : '.') +
 		value.split('.')[1]
 	);
 };

@@ -2,17 +2,25 @@ import { use, useEffect, useState } from 'react';
 import { SettingsContext } from '../../../App';
 import { fetchLocation, fetchWeather, type TypeWeather } from './weatherUtils';
 import Loader from '../../layout/Loader';
-import { WEEKDAYS_DEFAULT } from '../../../constants/weekdays';
+import { WEEKDAYS_DEFAULT, WEEKDAYS_EN } from '../../../constants/weekdays';
+import {
+	getAnimationSettings,
+	getLanguageSettings,
+} from '../../options/settings/settingsUtils';
 
 const setImage = (code: number): string => {
 	switch (code) {
 		case 0:
-			return '/src/assets/weather/sun.gif';
+			return getAnimationSettings()
+				? '/src/assets/weather/sun.gif'
+				: '/src/assets/weather/sun-static.svg';
 			break;
 		case 1:
 		case 2:
 		case 3:
-			return '/src/assets/weather/sun-cloud.gif';
+			return getAnimationSettings()
+				? '/src/assets/weather/sun-cloud.gif'
+				: '/src/assets/weather/sun-cloud-static.svg';
 		case 45:
 		case 48:
 		case 51:
@@ -20,7 +28,9 @@ const setImage = (code: number): string => {
 		case 55:
 		case 56:
 		case 57:
-			return '/src/assets/weather/cloud.gif';
+			return getAnimationSettings()
+				? '/src/assets/weather/cloud.gif'
+				: '/src/assets/weather/cloud-static.svg';
 		case 61:
 		case 63:
 		case 65:
@@ -29,18 +39,24 @@ const setImage = (code: number): string => {
 		case 80:
 		case 81:
 		case 82:
-			return '/src/assets/weather/rain.gif';
+			return getAnimationSettings()
+				? '/src/assets/weather/rain.gif'
+				: '/src/assets/weather/rain-static.svg';
 		case 71:
 		case 73:
 		case 75:
 		case 77:
 		case 85:
 		case 86:
-			return '/src/assets/weather/snow.gif';
+			return getAnimationSettings()
+				? '/src/assets/weather/snow.gif'
+				: '/src/assets/weather/snow-static.svg';
 		case 95:
 		case 96:
 		case 99:
-			return '/src/assets/weather/thunder.gif';
+			return getAnimationSettings()
+				? '/src/assets/weather/thunder.gif'
+				: '/src/assets/weather/thunder-static.svg';
 		default:
 			return '';
 	}
@@ -51,7 +67,9 @@ const setForecastDays = (date: Date): string[] => {
 
 	return Array.from({ length: 3 }, (_, i) => {
 		const forecastDays = (((currentDay + 6) % 7) + i + 1) % 7;
-		return WEEKDAYS_DEFAULT[forecastDays];
+		return getLanguageSettings() === 'cs'
+			? WEEKDAYS_DEFAULT[forecastDays]
+			: WEEKDAYS_EN[forecastDays];
 	});
 };
 
@@ -80,19 +98,23 @@ const WeatherTile = () => {
 
 	return weatherInfo?.failed ? (
 		<p className="p-4">
-			{'Nepodařilo se načíst počasí. Chyba: ' + weatherInfo?.error}
+			{getLanguageSettings() === 'cs'
+				? 'Nepodařilo se načíst počasí. Chyba: '
+				: 'Could not load the weather. Error: ' + weatherInfo?.error}
 		</p>
 	) : isWeatherLoading ? (
-		<Loader size={7} />
+		<Loader />
 	) : (
 		<div className="flex flex-col justify-between h-full w-full text-center">
 			<div className="mt-6">
 				<div className="flex justify-between items-center">
 					<span className="ml-8 text-6xl font-bold">
-						{weatherInfo?.current?.temperature
-							.toFixed(1)
-							.toString()
-							.replace('.', ',')}{' '}
+						{getLanguageSettings() === 'cs'
+							? weatherInfo?.current?.temperature
+									.toFixed(1)
+									.toString()
+									.replace('.', ',')
+							: weatherInfo?.current?.temperature.toFixed(1)}{' '}
 						°C
 					</span>
 					<span className="mr-8 mt-2">
@@ -103,10 +125,17 @@ const WeatherTile = () => {
 					</span>
 				</div>
 				<div className="mt-4">
-					<span>Vlhkost: {weatherInfo?.current?.humidity} %</span>
+					<span>
+						{getLanguageSettings() === 'cs' ? 'Vlhkost:' : 'Humidity:'}{' '}
+						{weatherInfo?.current?.humidity} %
+					</span>
 					<span> &#9679; </span>
 					<span>
-						Vítr: {weatherInfo?.current?.wind.toString().replace('.', ',')} km/h
+						{getLanguageSettings() === 'cs' ? 'Vítr:' : 'Wind:'}{' '}
+						{getLanguageSettings() === 'cs'
+							? weatherInfo?.current?.wind.toString().replace('.', ',')
+							: weatherInfo?.current?.wind}{' '}
+						km/h
 					</span>
 				</div>
 			</div>
@@ -122,15 +151,19 @@ const WeatherTile = () => {
 									{setForecastDays(weatherInfo?.current?.time as Date)[i]}
 								</div>
 								<div className="text-2xl font-bold  text-left">
-									{weatherInfo?.forecast?.temperature_min[i]
-										.toFixed(1)
-										.toString()
-										.replace('.', ',')}{' '}
+									{getLanguageSettings() === 'cs'
+										? weatherInfo?.forecast?.temperature_min[i]
+												.toFixed(1)
+												.toString()
+												.replace('.', ',')
+										: weatherInfo?.forecast?.temperature_min[i].toFixed(1)}{' '}
 									–{' '}
-									{weatherInfo?.forecast?.temperature_max[i]
-										.toFixed(1)
-										.toString()
-										.replace('.', ',')}{' '}
+									{getLanguageSettings() === 'cs'
+										? weatherInfo?.forecast?.temperature_max[i]
+												.toFixed(1)
+												.toString()
+												.replace('.', ',')
+										: weatherInfo?.forecast?.temperature_max[i].toFixed(1)}{' '}
 									°C
 								</div>
 							</div>

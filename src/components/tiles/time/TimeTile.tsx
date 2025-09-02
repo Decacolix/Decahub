@@ -14,7 +14,7 @@ const TimeTile = ({ clockErrorMessage, timezoneErrorMessage }: TypeGrid) => {
 			<Author />
 			<div className="text-center">
 				{isTimeLoading ? (
-					<Loader size={7} />
+					<Loader />
 				) : (
 					<>
 						<TimeClock
