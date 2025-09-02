@@ -98,9 +98,9 @@ const WeatherTile = () => {
 
 	return weatherInfo?.failed ? (
 		<p className="p-4">
-			{getLanguageSettings() === 'cs'
+			{(getLanguageSettings() === 'cs'
 				? 'Nepodařilo se načíst počasí. Chyba: '
-				: 'Could not load the weather. Error: ' + weatherInfo?.error}
+				: 'Could not load the weather. Error: ') + weatherInfo?.error}
 		</p>
 	) : isWeatherLoading ? (
 		<Loader />

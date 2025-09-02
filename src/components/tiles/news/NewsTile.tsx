@@ -24,9 +24,9 @@ const NewsTile = () => {
 
 	return feed?.failed ? (
 		<p className="p-4">
-			{getLanguageSettings() === 'cs'
+			{(getLanguageSettings() === 'cs'
 				? 'Nepodařilo se načíst zprávy. Chyba: '
-				: 'Could not load the news. Error: ' + feed?.error}
+				: 'Could not load the news. Error: ') + feed?.error}
 		</p>
 	) : isFeedLoading ? (
 		<Loader />

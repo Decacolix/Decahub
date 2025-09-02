@@ -2,7 +2,7 @@
 
 Decahub is a dashboard website that consists of information about current time, currency exchange rates, cryptocurrency rates, weather information and news.
 The website is a purely front-end solution, using open APIs to gather the data, and allowing user to configure the displayed information.
-Users can switch between Czech and English language in the settings.
+Users can switch between the Czech and the English language in the settings.
 
 ## Technologies used
 

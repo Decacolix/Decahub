@@ -62,9 +62,10 @@ const TimeClock = ({ clockErrorMessage, timezoneErrorMessage }: TypeGrid) => {
 			<div className="absolute bottom-2 left-[50%] translate-x-[-50%]">
 				{timezoneErrorMessage ? (
 					<p>
-						{getLanguageSettings() === 'cs'
+						{(getLanguageSettings() === 'cs'
 							? 'Nepodařilo se načíst časová pásma. Chyba: '
-							: 'Could not load the time zones. Error: ' + timezoneErrorMessage}
+							: 'Could not load the time zones. Error: ') +
+							timezoneErrorMessage}
 					</p>
 				) : (
 					<p>
@@ -84,9 +85,9 @@ const TimeClock = ({ clockErrorMessage, timezoneErrorMessage }: TypeGrid) => {
 			<div>
 				{clockErrorMessage ? (
 					<p>
-						{getLanguageSettings() === 'cs'
+						{(getLanguageSettings() === 'cs'
 							? 'Nepodařilo se načíst hodiny. Chyba: '
-							: 'Could not load the clock. Error: ' + clockErrorMessage}
+							: 'Could not load the clock. Error: ') + clockErrorMessage}
 					</p>
 				) : (
 					<p className="font-[Chivo_Mono] text-7xl">

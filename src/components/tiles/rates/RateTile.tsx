@@ -90,9 +90,9 @@ const RateTile = ({ source }: TypeRateTileProps) => {
 
 	return ratesError ? (
 		<p className="p-4">
-			{getLanguageSettings() === 'cs'
+			{(getLanguageSettings() === 'cs'
 				? 'Nepodařilo se načíst měny. Chyba: '
-				: 'Could not load the currencies. Error: ' + ratesError}
+				: 'Could not load the currencies. Error: ') + ratesError}
 		</p>
 	) : isRatesLoading ? (
 		<Loader />
