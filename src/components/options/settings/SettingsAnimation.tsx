@@ -2,10 +2,12 @@ import { use, useCallback } from 'react';
 import { SettingsContext } from '../../../App';
 import { getLanguageSettings, setAnimationSettings } from './settingsUtils';
 
+/* Settings to enable or disable animated GIF icons on the page. */
 const SettingsAnimation = () => {
 	const { animationOn, setAnimationOn } = use(SettingsContext);
 
-	const handleAnimationChange = useCallback(() => {
+	/* Set the animation to be on or off on click of the switch. */
+	const handleAnimationChange = useCallback((): void => {
 		setAnimationOn(prevAnimationOn => !prevAnimationOn);
 	}, [setAnimationSettings(animationOn)]);
 

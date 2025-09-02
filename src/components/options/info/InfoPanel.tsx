@@ -2,6 +2,7 @@ import { use } from 'react';
 import { SettingsContext } from '../../../App';
 import { getLanguageSettings } from '../settings/settingsUtils';
 
+/* Info panel containing the information about the page, displayed when user clicks on the info icon in the menu. */
 const InfoPanel = () => {
 	const imagePanelStyles: string = 'w-[200px] lg:w-[300px] p-4';
 	const imageTextStyles: string = 'text-center pt-3';
@@ -9,13 +10,14 @@ const InfoPanel = () => {
 
 	const { infoDisplayed, setInfoDisplayed } = use(SettingsContext);
 
-	const handleInfoClose = (): void => {
-		setInfoDisplayed(prevInfoDisplayed => !prevInfoDisplayed);
-	};
-
 	const infoStyles: string =
 		(infoDisplayed ? 'pointer-events-auto' : 'pointer-events-none opacity-0') +
 		' duration-500 overflow-y-auto overflow-x-auto bg-black/40 backdrop-blur-sm fixed top-[50%] left-[50%] translate-[-50%] z-30 w-[100vw] h-[100vh] lg:w-[1000px] lg:h-auto p-8 flex flex-col justify-center items-center pt-35 sm:pt-15 lg:pt-10';
+
+	/* Hide the info panel on click of the close icon. */
+	const handleInfoClose = (): void => {
+		setInfoDisplayed(prevInfoDisplayed => !prevInfoDisplayed);
+	};
 
 	return (
 		<div className={infoStyles}>

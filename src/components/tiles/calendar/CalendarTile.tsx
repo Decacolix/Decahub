@@ -17,6 +17,7 @@ type TypeViews = 'month' | 'year' | 'years';
 const startYear: number = 1900;
 const endYear: number = 2151;
 
+/* Calendar tile has three different views, that can be switched by clicking on the header of the calendar. Month view displays list of days of the current month, year view displays list of months of the year, and years view displays list of 12 years. */
 const CalendarTile = () => {
 	const { date } = use(SettingsContext);
 	const [currentView, setCurrentView] = useState<TypeViews>('month');
@@ -39,7 +40,8 @@ const CalendarTile = () => {
 		display: boolean;
 	}>({ month: 1, day: 1, weekday: 0, x: 0, y: 0, display: false });
 
-	const handleLeftArrowClick = () => {
+	/* Decrease the number of the current month or year or years, depending on the current view. */
+	const handleLeftArrowClick = (): void => {
 		setMaximumReached(false);
 
 		if (
@@ -75,7 +77,8 @@ const CalendarTile = () => {
 		}
 	};
 
-	const handleRightArrowClick = () => {
+	/* Increase the number of the current month or year or years, depending on the current view. */
+	const handleRightArrowClick = (): void => {
 		setMinimumReached(false);
 
 		if (
@@ -111,12 +114,16 @@ const CalendarTile = () => {
 		}
 	};
 
-	const handleViewChange = () => {
+	/* Change the view between month, year and years view. */
+	const handleViewChange = (): void => {
 		if (currentView === 'month') setCurrentView('year');
 		if (currentView === 'year') setCurrentView('years');
 	};
 
-	const handleHoverDay = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+	/* Display information about the day of the month when hovered with cursor. */
+	const handleHoverDay = (
+		e: React.MouseEvent<HTMLDivElement, MouseEvent>
+	): void => {
 		const month: number = e.currentTarget.id.split('-')[0] as unknown as number;
 		const day: number = e.currentTarget.id.split('-')[1] as unknown as number;
 		const weekday: number = e.currentTarget.id.split(
@@ -135,6 +142,7 @@ const CalendarTile = () => {
 		e.currentTarget.style.backgroundColor = getBackgroundColor().hex;
 	};
 
+	/* Set the displayed month days when the current month or year changes.  */
 	useEffect(() => {
 		setPreviousMonthDays([]);
 

@@ -1,4 +1,4 @@
-import { use, useEffect, useState } from 'react';
+import { use, useEffect, useState, type JSX } from 'react';
 import { SettingsContext } from '../../../App';
 import { fetchCryptos, fetchCurrencies } from './ratesUtils';
 import RateRow from './RateRow';
@@ -22,43 +22,46 @@ type TypeRateTileProps = {
 	source: TypeRateSource;
 };
 
-const displayRateRow = (
-	source: TypeRateSource,
-	rate: TypeRate,
-	pinned: boolean
-) => {
-	return (
-		(source === 'currency'
-			? pinned
-				? getPinnedCurrenciesSettings().includes(rate.code)
-				: !getPinnedCurrenciesSettings().includes(rate.code)
-			: pinned
-			? getPinnedCryptosSettings().includes(rate.code)
-			: !getPinnedCryptosSettings().includes(rate.code)) && (
-			<RateRow
-				code={rate.code}
-				key={rate.code}
-				name={
-					source === 'currency'
-						? getLanguageSettings() === 'cs'
-							? CURRENCIES[rate.code as keyof typeof CURRENCIES]
-							: CURRENCIES_EN[rate.code as keyof typeof CURRENCIES_EN]
-						: CRYPTOS[rate.code as keyof typeof CRYPTOS]
-				}
-				pinned={pinned}
-				source={source}
-				value={rate.value}
-			/>
-		)
-	);
-};
-
+/* Rate tile to display either a list of currencies or cryptocurrencies. */
 const RateTile = ({ source }: TypeRateTileProps) => {
 	const { baseCurrency, baseCrypto } = use(SettingsContext);
 	const [rates, setRates] = useState<TypeRate[]>();
 	const [isRatesLoading, setIsRatesLoading] = useState<boolean>(true);
 	let ratesError: string = '';
 
+	/* Display one row of the currency, containing the information about the currency and its value. */
+	const displayRateRow = (
+		source: TypeRateSource,
+		rate: TypeRate,
+		pinned: boolean
+	): JSX.Element | false => {
+		return (
+			(source === 'currency'
+				? pinned
+					? getPinnedCurrenciesSettings().includes(rate.code)
+					: !getPinnedCurrenciesSettings().includes(rate.code)
+				: pinned
+				? getPinnedCryptosSettings().includes(rate.code)
+				: !getPinnedCryptosSettings().includes(rate.code)) && (
+				<RateRow
+					code={rate.code}
+					key={rate.code}
+					name={
+						source === 'currency'
+							? getLanguageSettings() === 'cs'
+								? CURRENCIES[rate.code as keyof typeof CURRENCIES]
+								: CURRENCIES_EN[rate.code as keyof typeof CURRENCIES_EN]
+							: CRYPTOS[rate.code as keyof typeof CRYPTOS]
+					}
+					pinned={pinned}
+					source={source}
+					value={rate.value}
+				/>
+			)
+		);
+	};
+
+	/* Fetch the currencies on change of the base currency. */
 	if (source === 'currency') {
 		useEffect(() => {
 			setIsRatesLoading(true);
@@ -73,6 +76,7 @@ const RateTile = ({ source }: TypeRateTileProps) => {
 		}, [baseCurrency]);
 	}
 
+	/* Fetch the cryptocurrencies on change of the base currency. */
 	if (source === 'crypto') {
 		useEffect(() => {
 			setIsRatesLoading(true);

@@ -1,13 +1,11 @@
 import { use } from 'react';
 import { SettingsContext } from '../../../App';
 import {
-	getLanguageSettings,
 	getPinnedCryptosSettings,
 	getPinnedCurrenciesSettings,
-	setPinnedCryptosSettings,
-	setPinnedCurrenciesSettings,
 } from '../../options/settings/settingsUtils';
 import type { TypeRateSource } from './RateTile';
+import { formatRate, setDisplayedValue, setPinnedRates } from './ratesUtils';
 
 type TypeRateRowProps = {
 	code: string;
@@ -17,49 +15,14 @@ type TypeRateRowProps = {
 	source: TypeRateSource;
 };
 
-export const formatRate = (value: string): string => {
-	return (
-		value.split('.')[0].replace(/\B(?=(\d{3})+(?!\d))/g, ' ') +
-		(getLanguageSettings() === 'cs' ? ',' : '.') +
-		value.split('.')[1]
-	);
-};
-
-const setRates = (
-	currentRates: string[],
-	rateCode: string | undefined,
-	source: TypeRateSource,
-	e: React.MouseEvent<HTMLDivElement>
-) => {
-	if (currentRates.includes(rateCode as string)) {
-		if (source === 'currency')
-			setPinnedCurrenciesSettings(
-				currentRates.filter(item => item !== rateCode)
-			);
-		if (source === 'crypto')
-			setPinnedCryptosSettings(currentRates.filter(item => item !== rateCode));
-
-		(e.target as HTMLDivElement).classList.add('pinned');
-	}
-
-	if (!currentRates.includes(rateCode as string)) {
-		currentRates.push(rateCode as string);
-
-		if (source === 'currency') setPinnedCurrenciesSettings(currentRates.sort());
-		if (source === 'crypto') setPinnedCryptosSettings(currentRates.sort());
-
-		(e.target as HTMLDivElement).classList.remove('pinned');
-	}
-};
-
 const RateRow = ({ code, name, value, pinned, source }: TypeRateRowProps) => {
 	const { baseCurrency, baseCrypto } = use(SettingsContext);
-	let fixedValue: string;
 	const pinnedStyle: string =
 		'bg-[url(src/assets/icons/star-selected-icon.svg)] mr-3 bg-no-repeat bg-center bg-cover h-5 w-5 hover:cursor-pointer hover:bg-[url(src/assets/icons/star-icon.svg)]';
 	const unpinnedStyle: string =
 		'bg-[url(src/assets/icons/star-icon.svg)] mr-3 bg-no-repeat bg-center bg-cover h-5 w-5 hover:cursor-pointer hover:bg-[url(src/assets/icons/star-selected-icon.svg)]';
 
+	/* Set the rate row to be either pinned or unpinned on click of the star icon. */
 	const handlePinnedChange = (e: React.MouseEvent<HTMLDivElement>): void => {
 		const rateCode: string | undefined = (e.target as HTMLDivElement).closest(
 			'li'
@@ -70,12 +33,8 @@ const RateRow = ({ code, name, value, pinned, source }: TypeRateRowProps) => {
 				? (getPinnedCurrenciesSettings() as string[])
 				: (getPinnedCryptosSettings() as string[]);
 
-		setRates(currentPinnedRates, rateCode, source, e);
+		setPinnedRates(currentPinnedRates, rateCode, source, e);
 	};
-
-	fixedValue = value.toFixed(2);
-	if (value.toFixed(2) === '0.00') fixedValue = value.toFixed(3);
-	if (value.toFixed(3) === '0.000') fixedValue = value.toFixed(4);
 
 	return (
 		<li className="my-3 mx-4" id={code} key={code}>
@@ -90,9 +49,9 @@ const RateRow = ({ code, name, value, pinned, source }: TypeRateRowProps) => {
 						<div>{name}</div>
 					</div>
 				</div>
-				<div className="2xl:text-2xl">{`${formatRate(fixedValue)} ${
-					source === 'currency' ? baseCurrency : baseCrypto
-				}`}</div>
+				<div className="2xl:text-2xl">{`${formatRate(
+					setDisplayedValue(value)
+				)} ${source === 'currency' ? baseCurrency : baseCrypto}`}</div>
 			</div>
 		</li>
 	);

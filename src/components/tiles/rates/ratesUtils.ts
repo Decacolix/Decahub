@@ -1,5 +1,11 @@
 import { CRYPTOS } from '../../../constants/cryptos';
 import { CURRENCIES } from '../../../constants/currencies';
+import {
+	getLanguageSettings,
+	setPinnedCryptosSettings,
+	setPinnedCurrenciesSettings,
+} from '../../options/settings/settingsUtils';
+import type { TypeRateSource } from './RateTile';
 
 export type TypeRate = {
 	code: string;
@@ -13,6 +19,7 @@ export type TypeRates = {
 	date?: Date;
 };
 
+/* Fetch the currencies for the currently selected base currency. */
 export const fetchCurrencies = async (base: string): Promise<TypeRates> => {
 	let result: TypeRates = {
 		failed: true,
@@ -48,6 +55,7 @@ export const fetchCurrencies = async (base: string): Promise<TypeRates> => {
 	return result;
 };
 
+/* Fetch the cryptocurrencies for the currently selected base cryptocurrency. */
 export const fetchCryptos = async (base: string): Promise<TypeRates> => {
 	let result: TypeRates = {
 		failed: true,
@@ -83,4 +91,49 @@ export const fetchCryptos = async (base: string): Promise<TypeRates> => {
 		});
 
 	return result;
+};
+
+/* Set the pinned rates for either currencies or cryptocurrencies. */
+export const setPinnedRates = (
+	currentRates: string[],
+	rateCode: string | undefined,
+	source: TypeRateSource,
+	e: React.MouseEvent<HTMLDivElement>
+) => {
+	if (currentRates.includes(rateCode as string)) {
+		if (source === 'currency')
+			setPinnedCurrenciesSettings(
+				currentRates.filter(item => item !== rateCode)
+			);
+		if (source === 'crypto')
+			setPinnedCryptosSettings(currentRates.filter(item => item !== rateCode));
+
+		(e.target as HTMLDivElement).classList.add('pinned');
+	}
+
+	if (!currentRates.includes(rateCode as string)) {
+		currentRates.push(rateCode as string);
+
+		if (source === 'currency') setPinnedCurrenciesSettings(currentRates.sort());
+		if (source === 'crypto') setPinnedCryptosSettings(currentRates.sort());
+
+		(e.target as HTMLDivElement).classList.remove('pinned');
+	}
+};
+
+/* Set the value to have a fixed number of decimal digits. */
+export const setDisplayedValue = (value: number): string => {
+	if (value.toFixed(2) === '0.00') return value.toFixed(3);
+	if (value.toFixed(3) === '0.000') return value.toFixed(4);
+
+	return value.toFixed(2);
+};
+
+/* Format the date, if the language is Czech, use decimal comma, if the language is English, use decimal point. Also add a space separator for thousdands (example: 1000000 is changed to 1 000 000). */
+export const formatRate = (value: string): string => {
+	return (
+		value.split('.')[0].replace(/\B(?=(\d{3})+(?!\d))/g, ' ') +
+		(getLanguageSettings() === 'cs' ? ',' : '.') +
+		value.split('.')[1]
+	);
 };

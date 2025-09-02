@@ -7,7 +7,12 @@ import {
 	type TypeTheme,
 } from './settingsUtils';
 
+/* Settings to set the background theme of the page. */
 const SettingsTheme = () => {
+	const [currentTheme, setCurrentTheme] = useState<TypeTheme>(
+		getThemeSettings()
+	);
+
 	const themeStyles: string =
 		'bg-no-repeat bg-center bg-cover w-[33%] h-20 list-none mx-2 hover:cursor-pointer hover:outline-2 ';
 	const themeUrls: { name: string; url: string }[] = [
@@ -25,16 +30,14 @@ const SettingsTheme = () => {
 		},
 	];
 
-	const [currentTheme, setCurrentTheme] = useState<TypeTheme>(
-		getThemeSettings()
-	);
-
+	/* Set the theme when the current theme is changed. */
 	useEffect(() => {
 		setTheme(currentTheme);
 	}, [currentTheme]);
 
+	/* On click of the theme image, switch to the clicked theme. */
 	const handleThemeChange = useCallback(
-		(theme: TypeTheme) => {
+		(theme: TypeTheme): void => {
 			setCurrentTheme(theme);
 		},
 		[setThemeSettings(currentTheme)]

@@ -12,6 +12,7 @@ type TypeCalendarDayInfo = {
 	y: number;
 };
 
+/* Display information about the day in the calendar that is hovered with cursor. */
 const CalendarDayInfo = ({
 	month,
 	day,
@@ -19,7 +20,6 @@ const CalendarDayInfo = ({
 	x,
 	y,
 }: TypeCalendarDayInfo) => {
-	console.log();
 	return (
 		<div
 			className={`${

@@ -6,6 +6,7 @@ type TypeTileFrameProps = {
 	children?: ReactNode;
 };
 
+/* Tile frame container. */
 const TileFrame = ({ height, z, children }: TypeTileFrameProps) => {
 	return (
 		<div

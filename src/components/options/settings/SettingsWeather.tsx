@@ -7,6 +7,7 @@ import {
 	type TypeLocation,
 } from './settingsUtils';
 
+/* Settings to set the current location for the weather. */
 const SettingsWeather = () => {
 	const { weatherLocation, setWeatherLocation } = use(SettingsContext);
 	const [locationInput, setLocationInput] = useState<string>('');
@@ -14,6 +15,7 @@ const SettingsWeather = () => {
 		`${weatherLocation.municipality}, ${weatherLocation.country}`
 	);
 
+	/* When the enter key is pressed or when the magnifying glass icon is clicked, fetch the location and check if the location was found. If the location was found, set the weather location. */
 	const handleLocationChange = async (): Promise<void> => {
 		setLocationInput('');
 		await fetchLocation(locationInput).then(async location => {

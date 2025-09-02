@@ -1,9 +1,11 @@
 import { use } from 'react';
 import { SettingsContext } from '../../../App';
 
+/* Info icon for the menu. */
 const InfoIcon = () => {
 	const { setInfoDisplayed } = use(SettingsContext);
 
+	/* Set the info panel to be displayed on click of the icon. */
 	const handleInfoOpen = (): void => {
 		setInfoDisplayed(prevInfoDisplayed => !prevInfoDisplayed);
 	};

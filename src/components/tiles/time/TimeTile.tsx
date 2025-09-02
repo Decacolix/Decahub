@@ -6,6 +6,7 @@ import Loader from '../../layout/Loader';
 import { SettingsContext } from '../../../App';
 import Author from '../../layout/Author';
 
+/* The tile to display the clock and the date, and also the information about the author. */
 const TimeTile = ({ clockErrorMessage, timezoneErrorMessage }: TypeGrid) => {
 	const { isTimeLoading } = use(SettingsContext);
 

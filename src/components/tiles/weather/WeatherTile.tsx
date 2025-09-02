@@ -1,83 +1,22 @@
 import { use, useEffect, useState } from 'react';
 import { SettingsContext } from '../../../App';
-import { fetchLocation, fetchWeather, type TypeWeather } from './weatherUtils';
-import Loader from '../../layout/Loader';
-import { WEEKDAYS_DEFAULT, WEEKDAYS_EN } from '../../../constants/weekdays';
 import {
-	getAnimationSettings,
-	getLanguageSettings,
-} from '../../options/settings/settingsUtils';
+	fetchLocation,
+	fetchWeather,
+	setForecastDays,
+	setImage,
+	type TypeWeather,
+} from './weatherUtils';
+import Loader from '../../layout/Loader';
+import { getLanguageSettings } from '../../options/settings/settingsUtils';
 
-const setImage = (code: number): string => {
-	switch (code) {
-		case 0:
-			return getAnimationSettings()
-				? '/src/assets/weather/sun.gif'
-				: '/src/assets/weather/sun-static.svg';
-			break;
-		case 1:
-		case 2:
-		case 3:
-			return getAnimationSettings()
-				? '/src/assets/weather/sun-cloud.gif'
-				: '/src/assets/weather/sun-cloud-static.svg';
-		case 45:
-		case 48:
-		case 51:
-		case 53:
-		case 55:
-		case 56:
-		case 57:
-			return getAnimationSettings()
-				? '/src/assets/weather/cloud.gif'
-				: '/src/assets/weather/cloud-static.svg';
-		case 61:
-		case 63:
-		case 65:
-		case 66:
-		case 67:
-		case 80:
-		case 81:
-		case 82:
-			return getAnimationSettings()
-				? '/src/assets/weather/rain.gif'
-				: '/src/assets/weather/rain-static.svg';
-		case 71:
-		case 73:
-		case 75:
-		case 77:
-		case 85:
-		case 86:
-			return getAnimationSettings()
-				? '/src/assets/weather/snow.gif'
-				: '/src/assets/weather/snow-static.svg';
-		case 95:
-		case 96:
-		case 99:
-			return getAnimationSettings()
-				? '/src/assets/weather/thunder.gif'
-				: '/src/assets/weather/thunder-static.svg';
-		default:
-			return '';
-	}
-};
-
-const setForecastDays = (date: Date): string[] => {
-	const currentDay = new Date(date).getDay();
-
-	return Array.from({ length: 3 }, (_, i) => {
-		const forecastDays = (((currentDay + 6) % 7) + i + 1) % 7;
-		return getLanguageSettings() === 'cs'
-			? WEEKDAYS_DEFAULT[forecastDays]
-			: WEEKDAYS_EN[forecastDays];
-	});
-};
-
+/* Weather tile displaying the information about the current weather and 3-day forecast based on the selected location. */
 const WeatherTile = () => {
 	const { weatherLocation } = use(SettingsContext);
 	const [weatherInfo, setWeatherInfo] = useState<TypeWeather>();
 	const [isWeatherLoading, setisWeatherLoading] = useState<boolean>(true);
 
+	/* Fetch the weather date on change of the weather location. */
 	useEffect(() => {
 		setisWeatherLoading(true);
 

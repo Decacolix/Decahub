@@ -9,6 +9,7 @@ export type TypeFetchFeed = {
 	}[];
 };
 
+/* Fetch the RSS feed data using the currently selected news source URL. */
 export const fetchFeed = async (source: string): Promise<TypeFetchFeed> => {
 	let result: TypeFetchFeed = {
 		failed: true,

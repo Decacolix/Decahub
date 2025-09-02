@@ -1,3 +1,4 @@
+/* Animated loading circle. */
 const Loader = () => {
 	return <div className="loader" />;
 };

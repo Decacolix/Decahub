@@ -1,46 +1,14 @@
 import { use, useEffect } from 'react';
-import { formatClock } from './timeUtils';
+import { formatClock, formatTimezone } from './timeUtils';
 import type { TypeGrid } from '../../layout/Grid';
 import { SettingsContext } from '../../../App';
 import { getLanguageSettings } from '../../options/settings/settingsUtils';
 
-const formatTimezone = (value: number | undefined): string => {
-	if (!value) return '';
-
-	const isNegative: boolean = value < 0 ? true : false;
-	const utcNegative: string = 'UTC: -';
-	const uctPositive: string = 'UTC: +';
-
-	let convertedValue: string = (value / 3600).toString();
-
-	if (isNegative) {
-		convertedValue = convertedValue.substring(1);
-	}
-
-	if (convertedValue.includes('.')) {
-		const index: number = convertedValue.indexOf('.');
-		const resultLeft: string = convertedValue.slice(0, index);
-		const resultRight: string = convertedValue.slice(index + 1);
-
-		return (
-			(isNegative ? utcNegative : uctPositive) +
-			resultLeft.padStart(2, '0') +
-			':' +
-			(('.' + resultRight) as unknown as number) * 60
-		);
-	}
-
-	return (
-		(isNegative ? utcNegative : uctPositive) +
-		convertedValue.padStart(2, '0') +
-		':' +
-		'00'
-	);
-};
-
+/* Display the clock with the current time based on the currently selected time zone. */
 const TimeClock = ({ clockErrorMessage, timezoneErrorMessage }: TypeGrid) => {
 	const { clock, setClock, timezoneInfo } = use(SettingsContext);
 
+	/* Update the clock every second by incrementing the second. */
 	useEffect(() => {
 		const clockUpdateInterval = setInterval(async () => {
 			await setClock(() => {

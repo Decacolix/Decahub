@@ -9,6 +9,7 @@ import {
 	getLanguageSettings,
 	getLocationSettings,
 	getNewsSourceSettings,
+	getThemeSettings,
 	getTimezoneSettings,
 	setDefatuls,
 	type TypeLanguage,
@@ -117,6 +118,7 @@ const processFetchedTime = (
 	return current;
 };
 
+/* Main App component. */
 const App = () => {
 	const [settingsDisplayed, setSettingsDisplayed] = useState(false);
 	const [clock, setClock] = useState(new Date());
@@ -156,6 +158,7 @@ const App = () => {
 	let clockErrorMessage: string = '';
 	let timezoneErrorMessage: string = '';
 
+	/* Update the time every minute by fetching the time data. */
 	useEffect(() => {
 		setDefatuls();
 
@@ -188,6 +191,7 @@ const App = () => {
 		};
 	}, []);
 
+	/* Update the time data on change of the time zone. */
 	useEffect(() => {
 		const fetchDataOnTimezoneChange = async () => {
 			setIsTimeLoading(true);
@@ -232,6 +236,25 @@ const App = () => {
 
 		fetchDataOnTimezoneChange();
 	}, [getTimezoneSettings()]);
+
+	/* Change the favicon based on the current theme. */
+	useEffect(() => {
+		let link: HTMLLinkElement = document.querySelector(
+			"link[rel~='icon']"
+		) as HTMLLinkElement;
+		if (!link) {
+			link = document.createElement('link');
+			link.rel = 'icon';
+			document.getElementsByTagName('head')[0].appendChild(link);
+		}
+
+		if (getThemeSettings() === 'pink')
+			link.href = 'src/assets/favicons/favicon-pink.svg';
+		if (getThemeSettings() === 'green')
+			link.href = 'src/assets/favicons/favicon-green.svg';
+		if (getThemeSettings() === 'blue')
+			link.href = 'src/assets/favicons/favicon-blue.svg';
+	}, [getThemeSettings()]);
 
 	return (
 		<div className="h-screen font-[Nata_Sans] text-white">

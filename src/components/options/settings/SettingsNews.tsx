@@ -29,12 +29,14 @@ export const newsSourceUrls: {
 	},
 ];
 
+/* Settings to select the source of the news on the page. */
 const SettingsNews = () => {
+	const { currentNewsSource, setCurrentNewsSource } = use(SettingsContext);
+
 	const newsStyles: string =
 		'bg-no-repeat bg-center bg-size-[65%] w-[50%] h-20 mx-2 hover:cursor-pointer hover:outline-2 list-none flex';
 
-	const { currentNewsSource, setCurrentNewsSource } = use(SettingsContext);
-
+	/* On click of the news logo, switch to the clicked news source. */
 	const handleNewsSourceChange = useCallback(
 		(source: string): void => {
 			setCurrentNewsSource(source);

@@ -1,3 +1,6 @@
+import { WEEKDAYS_DEFAULT, WEEKDAYS_EN } from '../../../constants/weekdays';
+import { getLanguageSettings } from '../../options/settings/settingsUtils';
+
 export type TypeFetchTime = {
 	failed: boolean;
 	error: string;
@@ -18,6 +21,7 @@ export type TypeFetchTimezone = {
 	isDayLightSavingActive?: boolean;
 };
 
+/* Fetch the current time based on the currently selected time zone. */
 export const fetchTime = async (timezone: string): Promise<TypeFetchTime> => {
 	let result: TypeFetchTime = {
 		failed: true,
@@ -52,6 +56,7 @@ export const fetchTime = async (timezone: string): Promise<TypeFetchTime> => {
 	return result;
 };
 
+/* Fetch the information abount the currently selected time zone. */
 export const fetchTimezone = async (
 	timezone: string
 ): Promise<TypeFetchTimezone> => {
@@ -86,6 +91,7 @@ export const fetchTimezone = async (
 	return result;
 };
 
+/* Format the clock to the HH:MM format. */
 export const formatClock = (
 	hour: number,
 	minute: number,
@@ -94,4 +100,93 @@ export const formatClock = (
 	return `${hour.toString().padStart(2, '0')}:${minute
 		.toString()
 		.padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+};
+
+/* Format the time zone to "UTC: -/+HH:MM" format (example: UTC: +02:00 or UTC: -07:00). */
+export const formatTimezone = (value: number | undefined): string => {
+	if (!value) return '';
+
+	const isNegative: boolean = value < 0 ? true : false;
+	const utcNegative: string = 'UTC: -';
+	const uctPositive: string = 'UTC: +';
+
+	let convertedValue: string = (value / 3600).toString();
+
+	if (isNegative) {
+		convertedValue = convertedValue.substring(1);
+	}
+
+	if (convertedValue.includes('.')) {
+		const index: number = convertedValue.indexOf('.');
+		const resultLeft: string = convertedValue.slice(0, index);
+		const resultRight: string = convertedValue.slice(index + 1);
+
+		return (
+			(isNegative ? utcNegative : uctPositive) +
+			resultLeft.padStart(2, '0') +
+			':' +
+			(('.' + resultRight) as unknown as number) * 60
+		);
+	}
+
+	return (
+		(isNegative ? utcNegative : uctPositive) +
+		convertedValue.padStart(2, '0') +
+		':' +
+		'00'
+	);
+};
+
+/* Calculate the number of the current week. */
+export const getWeekNumber = (date: Date): number => {
+	const firstYearDay: Date = new Date(date.getFullYear(), 0, 1);
+	const today: Date = new Date(
+		date.getFullYear(),
+		date.getMonth(),
+		date.getDate()
+	);
+	const dayOfYear: number =
+		(today.getTime() - firstYearDay.getTime() + 86400000) / 86400000;
+	return Math.ceil(dayOfYear / 7);
+};
+
+/* Get the name of the weekday for current date. */
+export const getWeekday = (date: Date): string => {
+	switch (date.getDay()) {
+		case 0:
+			return getLanguageSettings() === 'cs'
+				? WEEKDAYS_DEFAULT[6]
+				: WEEKDAYS_EN[6];
+		case 1:
+			return getLanguageSettings() === 'cs'
+				? WEEKDAYS_DEFAULT[0]
+				: WEEKDAYS_EN[0];
+		case 2:
+			return getLanguageSettings() === 'cs'
+				? WEEKDAYS_DEFAULT[1]
+				: WEEKDAYS_EN[1];
+
+		case 3:
+			return getLanguageSettings() === 'cs'
+				? WEEKDAYS_DEFAULT[2]
+				: WEEKDAYS_EN[2];
+
+		case 4:
+			return getLanguageSettings() === 'cs'
+				? WEEKDAYS_DEFAULT[3]
+				: WEEKDAYS_EN[3];
+
+		case 5:
+			return getLanguageSettings() === 'cs'
+				? WEEKDAYS_DEFAULT[4]
+				: WEEKDAYS_EN[4];
+
+		case 6:
+			return getLanguageSettings() === 'cs'
+				? WEEKDAYS_DEFAULT[5]
+				: WEEKDAYS_EN[5];
+
+		default:
+			return '';
+	}
 };

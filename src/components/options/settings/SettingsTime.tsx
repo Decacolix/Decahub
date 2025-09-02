@@ -5,13 +5,15 @@ import {
 	setTimezoneSettings,
 } from './settingsUtils';
 
-const handleTimezoneChange = (
-	e: React.ChangeEvent<HTMLSelectElement>
-): void => {
-	setTimezoneSettings(e.target.value);
-};
-
+/* Settings to set the current time zone. */
 const SettingsTime = () => {
+	/* Set the time zone on change of the dropdown box with the list of time zones. */
+	const handleTimezoneChange = (
+		e: React.ChangeEvent<HTMLSelectElement>
+	): void => {
+		setTimezoneSettings(e.target.value);
+	};
+
 	return (
 		<div className="pr-14">
 			<h1 className="my-4 px-7 text-2xl">

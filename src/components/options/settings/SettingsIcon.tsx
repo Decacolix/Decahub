@@ -1,9 +1,11 @@
 import { use } from 'react';
 import { SettingsContext } from '../../../App';
 
+/* Settings icon in the menu to display the settings panel. */
 const SettingsIcon = () => {
 	const { setSettingsDisplayed } = use(SettingsContext);
 
+	/* Display the settings panel on click of the icon. */
 	const handleSettingsOpen = (): void => {
 		setSettingsDisplayed(prevSettingsDisplayed => !prevSettingsDisplayed);
 	};

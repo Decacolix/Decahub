@@ -1,59 +1,13 @@
 import { use } from 'react';
 import { SettingsContext } from '../../../App';
 import { MONTHS_EN, MONTHS_GENITIVE } from '../../../constants/months';
-import { WEEKDAYS_DEFAULT, WEEKDAYS_EN } from '../../../constants/weekdays';
 import { NAMEDAYS, NAMEDAYS_EN } from '../../../constants/namedays';
 import { getLanguageSettings } from '../../options/settings/settingsUtils';
+import { getWeekday, getWeekNumber } from './timeUtils';
 
-const getWeekNumber = (date: Date): number => {
-	const firstYearDay: Date = new Date(date.getFullYear(), 0, 1);
-	const today: Date = new Date(
-		date.getFullYear(),
-		date.getMonth(),
-		date.getDate()
-	);
-	const dayOfYear: number =
-		(today.getTime() - firstYearDay.getTime() + 86400000) / 86400000;
-	return Math.ceil(dayOfYear / 7);
-};
-
+/* Display the current date, week number, weekday, and nameday. */
 const TimeDate = () => {
 	const { date } = use(SettingsContext);
-
-	let weekday: string = '';
-
-	switch (date.getDay()) {
-		case 0:
-			weekday =
-				getLanguageSettings() === 'cs' ? WEEKDAYS_DEFAULT[6] : WEEKDAYS_EN[6];
-			break;
-		case 1:
-			weekday =
-				getLanguageSettings() === 'cs' ? WEEKDAYS_DEFAULT[0] : WEEKDAYS_EN[0];
-			break;
-		case 2:
-			weekday =
-				getLanguageSettings() === 'cs' ? WEEKDAYS_DEFAULT[1] : WEEKDAYS_EN[1];
-			break;
-		case 3:
-			weekday =
-				getLanguageSettings() === 'cs' ? WEEKDAYS_DEFAULT[2] : WEEKDAYS_EN[2];
-			break;
-		case 4:
-			weekday =
-				getLanguageSettings() === 'cs' ? WEEKDAYS_DEFAULT[3] : WEEKDAYS_EN[3];
-			break;
-		case 5:
-			weekday =
-				getLanguageSettings() === 'cs' ? WEEKDAYS_DEFAULT[4] : WEEKDAYS_EN[4];
-			break;
-		case 6:
-			weekday =
-				getLanguageSettings() === 'cs' ? WEEKDAYS_DEFAULT[5] : WEEKDAYS_EN[5];
-			break;
-		default:
-			break;
-	}
 
 	const todayNameday: string =
 		getLanguageSettings() === 'cs'
@@ -89,7 +43,7 @@ const TimeDate = () => {
 						: 'Week ' + getWeekNumber(date)}
 				</span>
 				<span className="mx-1"> &#9679; </span>
-				<span>{weekday}</span>
+				<span>{getWeekday(date)}</span>
 			</p>
 			<p className="mt-6 px-1 text-1xl">
 				{getLanguageSettings() === 'cs'

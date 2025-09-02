@@ -23,14 +23,17 @@ export type TypeSettings = {
 	language: TypeLanguage;
 };
 
+/* Set a local storage item with key and value. */
 const setLocalStorageItem = (key: string, value: object): void => {
 	localStorage.setItem(key, JSON.stringify(value));
 };
 
+/* Get a local storage item by key. */
 const getLocalStorageItem = (key: string): string => {
 	return localStorage.getItem(key) || '{}';
 };
 
+/* Set a specific value of the local storage settings item with property and value. */
 const setSettingsValue = (
 	property:
 		| 'theme'
@@ -53,6 +56,7 @@ const setSettingsValue = (
 	return item;
 };
 
+/* Set default settings. Check if settings for a specific value exists, if not, set it to its default value. Also set the document styles and theme. */
 export const setDefatuls = (): void => {
 	if (!Object.hasOwn(getSettings(), 'theme') || !getThemeSettings())
 		setThemeSettings(DEFAULT_SETTINGS.theme);
@@ -101,26 +105,32 @@ export const setDefatuls = (): void => {
 	setTheme(getThemeSettings());
 };
 
+/* Get the settings local storage item. */
 export const getSettings = (): TypeSettings => {
 	return JSON.parse(getLocalStorageItem(STORAGE_SETTINGS_KEY));
 };
 
+/* Get the set theme. */
 export const getThemeSettings = (): TypeTheme => {
 	return JSON.parse(getLocalStorageItem(STORAGE_SETTINGS_KEY)).theme;
 };
 
+/* Set the theme in the local storage. */
 export const setThemeSettings = (value: TypeTheme): void => {
 	setLocalStorageItem(STORAGE_SETTINGS_KEY, setSettingsValue('theme', value));
 };
 
+/* Set the theme for the document. */
 export const setTheme = (value: TypeTheme): void => {
 	document.body.style.backgroundImage = `url("./src/assets/backgrounds/background-${value}.svg")`;
 };
 
+/* Get the set time zone. */
 export const getTimezoneSettings = (): string => {
 	return JSON.parse(getLocalStorageItem(STORAGE_SETTINGS_KEY)).timezone;
 };
 
+/* Set the time zone. */
 export const setTimezoneSettings = (value: string): void => {
 	setLocalStorageItem(
 		STORAGE_SETTINGS_KEY,
@@ -128,10 +138,12 @@ export const setTimezoneSettings = (value: string): void => {
 	);
 };
 
+/* Get the set location. */
 export const getLocationSettings = (): TypeLocation => {
 	return JSON.parse(getLocalStorageItem(STORAGE_SETTINGS_KEY)).location;
 };
 
+/* Set the location. */
 export const setLocationSettings = (value: TypeLocation): void => {
 	setLocalStorageItem(
 		STORAGE_SETTINGS_KEY,
@@ -139,10 +151,12 @@ export const setLocationSettings = (value: TypeLocation): void => {
 	);
 };
 
+/* Get the set base currency. */
 export const getBaseCurrencySettings = (): string => {
 	return JSON.parse(getLocalStorageItem(STORAGE_SETTINGS_KEY)).baseCurrency;
 };
 
+/* Set the base currency. */
 export const setBaseCurrencySettings = (value: string): void => {
 	setLocalStorageItem(
 		STORAGE_SETTINGS_KEY,
@@ -150,10 +164,12 @@ export const setBaseCurrencySettings = (value: string): void => {
 	);
 };
 
+/* Get the set base cryptocurrency. */
 export const getBaseCryptoSettings = (): string => {
 	return JSON.parse(getLocalStorageItem(STORAGE_SETTINGS_KEY)).baseCrypto;
 };
 
+/* Set the base cryptocurrency. */
 export const setBaseCryptoSettings = (value: string): void => {
 	setLocalStorageItem(
 		STORAGE_SETTINGS_KEY,
@@ -161,10 +177,12 @@ export const setBaseCryptoSettings = (value: string): void => {
 	);
 };
 
+/* Get the set news source. */
 export const getNewsSourceSettings = (): string => {
 	return JSON.parse(getLocalStorageItem(STORAGE_SETTINGS_KEY)).newsSource;
 };
 
+/* Set the news source. */
 export const setNewsSourceSettings = (value: string): void => {
 	setLocalStorageItem(
 		STORAGE_SETTINGS_KEY,
@@ -172,54 +190,54 @@ export const setNewsSourceSettings = (value: string): void => {
 	);
 };
 
+/* Get the set pinned currencies. */
 export const getPinnedCurrenciesSettings = (): string[] => {
 	return JSON.parse(getLocalStorageItem(STORAGE_SETTINGS_KEY)).pinnedCurrencies;
 };
 
-export const setPinnedCurrenciesSettings = (value: string[]) => {
+/* Set the pinnec currencies.*/
+export const setPinnedCurrenciesSettings = (value: string[]): void => {
 	setLocalStorageItem(
 		STORAGE_SETTINGS_KEY,
 		setSettingsValue('pinnedCurrencies', value)
 	);
 };
 
+/* Get the set pinned cryptocurrencies. */
 export const getPinnedCryptosSettings = (): string[] => {
 	return JSON.parse(getLocalStorageItem(STORAGE_SETTINGS_KEY)).pinnedCryptos;
 };
 
-export const setPinnedCryptosSettings = (value: string[]) => {
+/* Set the pinnec cryptocurrencies. */
+export const setPinnedCryptosSettings = (value: string[]): void => {
 	setLocalStorageItem(
 		STORAGE_SETTINGS_KEY,
 		setSettingsValue('pinnedCryptos', value)
 	);
 };
 
+/* Get the set animation on/off. */
 export const getAnimationSettings = (): boolean => {
 	return JSON.parse(getLocalStorageItem(STORAGE_SETTINGS_KEY)).animation;
 };
 
-export const setAnimationSettings = (value: boolean) => {
+/* Set the animation on/off. */
+export const setAnimationSettings = (value: boolean): void => {
 	setLocalStorageItem(
 		STORAGE_SETTINGS_KEY,
 		setSettingsValue('animation', value)
 	);
 };
 
+/* Get the set language. */
 export const getLanguageSettings = (): TypeLanguage => {
 	return JSON.parse(getLocalStorageItem(STORAGE_SETTINGS_KEY)).language;
 };
 
-export const setLanguageSettings = (value: TypeLanguage) => {
+/* Set the language. */
+export const setLanguageSettings = (value: TypeLanguage): void => {
 	setLocalStorageItem(
 		STORAGE_SETTINGS_KEY,
 		setSettingsValue('language', value)
-	);
-};
-
-export const formatNumber = (value: string): string => {
-	return (
-		value.split('.')[0].replace(/\B(?=(\d{3})+(?!\d))/g, ' ') +
-		',' +
-		value.split('.')[1]
 	);
 };

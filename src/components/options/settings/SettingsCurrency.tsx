@@ -7,9 +7,11 @@ import {
 } from './settingsUtils';
 import { SettingsContext } from '../../../App';
 
+/* Settings to set the base currency for the currencies on the page. */
 const SettingsCurrency = () => {
 	const { baseCurrency, setBaseCurrency } = use(SettingsContext);
 
+	/* Set the base currency for currencies on change of the dropdown box with the list of base currencies. */
 	const handleBaseCurrencyChange = useCallback(
 		(e: React.ChangeEvent<HTMLSelectElement>): void => {
 			setBaseCurrency(e.target.value.substring(0, 3));

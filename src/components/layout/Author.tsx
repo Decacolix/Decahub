@@ -1,5 +1,6 @@
 import { getLanguageSettings } from '../options/settings/settingsUtils';
 
+/* Display the information about the author and personal links. */
 const Footer = () => {
 	return (
 		<div className="absolute top-2 text-center text-sm text-gray-800">
