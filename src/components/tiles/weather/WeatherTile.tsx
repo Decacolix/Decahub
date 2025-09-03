@@ -47,7 +47,7 @@ const WeatherTile = () => {
 		<div className="flex flex-col justify-between h-full w-full text-center">
 			<div className="mt-6">
 				<div className="flex justify-between items-center">
-					<span className="ml-8 text-6xl font-bold">
+					<span className="ml-8 text-5xl 2xl:text-6xl font-bold">
 						{getLanguageSettings() === 'cs'
 							? weatherInfo?.current?.temperature
 									.toFixed(1)

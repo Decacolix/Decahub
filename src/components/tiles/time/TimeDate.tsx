@@ -27,8 +27,8 @@ const TimeDate = () => {
 			: NAMEDAYS_EN[date.getMonth() + 1][0];
 
 	return (
-		<div className=" mt-5">
-			<p className="text-4xl">
+		<div className="mt-5">
+			<p className="text-2xl 2xl:text-4xl">
 				{date.getDate()}
 				{getLanguageSettings() === 'cs'
 					? '. ' + MONTHS_GENITIVE[date.getMonth()]

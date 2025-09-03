@@ -16,13 +16,13 @@ const Grid = ({ clockErrorMessage, timezoneErrorMessage }: TypeGrid) => {
 	const bottomHeight: string = 'h-[25rem] 2xl:h-[35rem]';
 
 	return (
-		<div className="grid lg:grid-cols-2 2xl:grid-cols-3 gap-4 2xl:gap-8 py-4 2xl:py-6 2xl:px-20">
-			<div className="order-3 lg:order-2 2xl:order-1">
+		<div className="grid lg:grid-cols-3 gap-4 lg:gap-4 2xl:gap-8 py-4 2xl:py-6 lg:px-4 2xl:px-20">
+			<div className="order-3 lg:order-1">
 				<TileFrame height={topHeight} z="z-1">
 					<WeatherTile />
 				</TileFrame>
 			</div>
-			<div className="order-1 lg:order-1 2xl:order-2">
+			<div className="order-1 lg:order-2">
 				<TileFrame height={topHeight} z="z-1">
 					<TimeTile
 						clockErrorMessage={clockErrorMessage}
@@ -30,22 +30,22 @@ const Grid = ({ clockErrorMessage, timezoneErrorMessage }: TypeGrid) => {
 					/>
 				</TileFrame>
 			</div>
-			<div className="order-4 lg:order-4 2xl:order-3">
+			<div className="order-4 lg:order-3">
 				<TileFrame height={topHeight} z="z-1">
 					<NewsTile />
 				</TileFrame>
 			</div>
-			<div className="order-5 lg:order-5 2xl:order-4">
+			<div className="order-5 lg:order-4">
 				<TileFrame height={bottomHeight} z="z-1">
 					<RateTile source="currency" />
 				</TileFrame>
 			</div>
-			<div className="order-2 lg:order-3 2xl:order-5">
+			<div className="order-2 lg:order-5">
 				<TileFrame height={bottomHeight} z="z-2">
 					<CalendarTile />
 				</TileFrame>
 			</div>
-			<div className="order-6 lg:order-6 2xl:order-6">
+			<div className="order-6 lg:order-6">
 				<TileFrame height={bottomHeight} z="z-1">
 					<RateTile source="crypto" />
 				</TileFrame>

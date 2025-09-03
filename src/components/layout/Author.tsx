@@ -3,7 +3,7 @@ import { getLanguageSettings } from '../options/settings/settingsUtils';
 /* Display the information about the author and personal links. */
 const Footer = () => {
 	return (
-		<div className="absolute top-2 text-center text-sm text-gray-800">
+		<div className="absolute top-2 text-center px-1 text-sm text-gray-800">
 			{getLanguageSettings() === 'cs'
 				? 'Vytvořil David Toman v roce 2025'
 				: 'Created by David Toman in 2025'}{' '}

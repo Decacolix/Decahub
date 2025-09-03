@@ -58,7 +58,7 @@ const TimeClock = ({ clockErrorMessage, timezoneErrorMessage }: TypeGrid) => {
 							: 'Could not load the clock. Error: ') + clockErrorMessage}
 					</p>
 				) : (
-					<p className="font-[Chivo_Mono] text-7xl">
+					<p className="font-[Chivo_Mono] text-5xl 2xl:text-7xl">
 						{formatClock(
 							clock.getHours(),
 							clock.getMinutes(),

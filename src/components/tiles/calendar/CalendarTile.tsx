@@ -179,7 +179,7 @@ const CalendarTile = () => {
 						currentView === 'years'
 							? ''
 							: 'hover:cursor-pointer hover:opacity-50'
-					} text-xl lg:text-2xl absolute left-[50%] translate-x-[-50%]`}
+					} text-xl 2xl:text-2xl absolute left-[50%] translate-x-[-50%]`}
 					onClick={() => handleViewChange()}
 				>
 					{currentView === 'month'
@@ -280,7 +280,7 @@ const CalendarTile = () => {
 						(month, index) => {
 							return (
 								<div
-									className="my-3 lg:my-6 hover:cursor-pointer hover:opacity-50"
+									className="my-3 2xl:my-6 hover:cursor-pointer hover:opacity-50"
 									key={month}
 									onClick={() => {
 										setCurrentMonth(index);
@@ -298,7 +298,7 @@ const CalendarTile = () => {
 				<div className="grid grid-cols-3 gap-8 mb-12 text-center">
 					{Array.from({ length: 12 }, (_, i) => (
 						<div
-							className="my-3 lg:my-6 mx-8 hover:cursor-pointer hover:opacity-50"
+							className="my-3 2xl:my-6 mx-8 hover:cursor-pointer hover:opacity-50"
 							key={i}
 							onClick={() => {
 								setCurrentYear(currentYearRange + i);
