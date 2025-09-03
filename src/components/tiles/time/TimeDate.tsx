@@ -45,7 +45,7 @@ const TimeDate = () => {
 				<span className="mx-1"> &#9679; </span>
 				<span>{getWeekday(date)}</span>
 			</p>
-			<p className="mt-6 px-1 text-1xl">
+			<p className="mt-6 px-2 text-1xl">
 				{getLanguageSettings() === 'cs'
 					? `Dnes ${todayNameday}, zítra ${tomorrowNameday}`
 					: `Today ${todayNameday}, tomorrow ${tomorrowNameday}`}

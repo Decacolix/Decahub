@@ -41,9 +41,7 @@ const NewsTile = () => {
 				>
 					<img
 						className="h-8"
-						src={
-							newsSourceUrls.find(n => n.source === currentNewsSource)?.urlImg
-						}
+						src={newsSourceUrls.find(n => n.source === currentNewsSource)?.url}
 					/>
 				</a>
 			</div>

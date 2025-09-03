@@ -6,6 +6,8 @@ import {
 } from '../../options/settings/settingsUtils';
 import type { TypeRateSource } from './RateTile';
 import { formatRate, setDisplayedValue, setPinnedRates } from './ratesUtils';
+import starSelectedIcon from '../../../assets/icons/star-selected-icon.svg';
+import starIcon from '../../../assets/icons/star-icon.svg';
 
 type TypeRateRowProps = {
 	code: string;
@@ -17,10 +19,6 @@ type TypeRateRowProps = {
 
 const RateRow = ({ code, name, value, pinned, source }: TypeRateRowProps) => {
 	const { baseCurrency, baseCrypto } = use(SettingsContext);
-	const pinnedStyle: string =
-		'bg-[url(src/assets/icons/star-selected-icon.svg)] mr-3 bg-no-repeat bg-center bg-cover h-5 w-5 hover:cursor-pointer hover:bg-[url(src/assets/icons/star-icon.svg)]';
-	const unpinnedStyle: string =
-		'bg-[url(src/assets/icons/star-icon.svg)] mr-3 bg-no-repeat bg-center bg-cover h-5 w-5 hover:cursor-pointer hover:bg-[url(src/assets/icons/star-selected-icon.svg)]';
 
 	/* Set the rate row to be either pinned or unpinned on click of the star icon. */
 	const handlePinnedChange = (e: React.MouseEvent<HTMLDivElement>): void => {
@@ -41,8 +39,23 @@ const RateRow = ({ code, name, value, pinned, source }: TypeRateRowProps) => {
 			<div className="flex justify-between items-center">
 				<div className="flex items-center">
 					<div
-						className={pinned ? pinnedStyle : unpinnedStyle}
+						className="mr-3 bg-no-repeat bg-center bg-cover h-5 w-5 hover:cursor-pointer"
 						onClick={e => handlePinnedChange(e)}
+						onMouseEnter={e => {
+							e.currentTarget.style.backgroundImage = pinned
+								? `url("${starIcon}")`
+								: `url("${starSelectedIcon}")`;
+						}}
+						onMouseLeave={e =>
+							(e.currentTarget.style.backgroundImage = pinned
+								? `url("${starSelectedIcon}")`
+								: `url("${starIcon}")`)
+						}
+						style={
+							pinned
+								? { backgroundImage: `url("${starSelectedIcon}")` }
+								: { backgroundImage: `url("${starIcon}")` }
+						}
 					/>
 					<div>
 						<div className="font-bold 2xl:font-normal 2xl:text-2xl">{code}</div>

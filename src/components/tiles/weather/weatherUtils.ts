@@ -3,6 +3,18 @@ import {
 	getAnimationSettings,
 	getLanguageSettings,
 } from '../../options/settings/settingsUtils';
+import sunImage from '../../../assets/weather/sun.gif';
+import sunStaticImage from '../../../assets/weather/sun-static.svg';
+import sunCloudImage from '../../../assets/weather/sun-cloud.gif';
+import sunCloudStaticImage from '../../../assets/weather/sun-cloud-static.svg';
+import cloudImage from '../../../assets/weather/cloud.gif';
+import cloudStaticImage from '../../../assets/weather/cloud-static.svg';
+import rainImage from '../../../assets/weather/rain.gif';
+import rainStaticImage from '../../../assets/weather/rain-static.svg';
+import snowImage from '../../../assets/weather/snow.gif';
+import snowStaticImage from '../../../assets/weather/snow-static.svg';
+import thunderImage from '../../../assets/weather/thunder.gif';
+import thunderStaticImage from '../../../assets/weather/thunder-static.svg';
 
 type TypeLocation = {
 	failed: boolean;
@@ -141,16 +153,12 @@ export const setForecastDays = (date: Date): string[] => {
 export const setImage = (code: number): string => {
 	switch (code) {
 		case 0:
-			return getAnimationSettings()
-				? '/src/assets/weather/sun.gif'
-				: '/src/assets/weather/sun-static.svg';
+			return getAnimationSettings() ? sunImage : sunStaticImage;
 			break;
 		case 1:
 		case 2:
 		case 3:
-			return getAnimationSettings()
-				? '/src/assets/weather/sun-cloud.gif'
-				: '/src/assets/weather/sun-cloud-static.svg';
+			return getAnimationSettings() ? sunCloudImage : sunCloudStaticImage;
 		case 45:
 		case 48:
 		case 51:
@@ -158,9 +166,7 @@ export const setImage = (code: number): string => {
 		case 55:
 		case 56:
 		case 57:
-			return getAnimationSettings()
-				? '/src/assets/weather/cloud.gif'
-				: '/src/assets/weather/cloud-static.svg';
+			return getAnimationSettings() ? cloudImage : cloudStaticImage;
 		case 61:
 		case 63:
 		case 65:
@@ -169,24 +175,18 @@ export const setImage = (code: number): string => {
 		case 80:
 		case 81:
 		case 82:
-			return getAnimationSettings()
-				? '/src/assets/weather/rain.gif'
-				: '/src/assets/weather/rain-static.svg';
+			return getAnimationSettings() ? rainImage : rainStaticImage;
 		case 71:
 		case 73:
 		case 75:
 		case 77:
 		case 85:
 		case 86:
-			return getAnimationSettings()
-				? '/src/assets/weather/snow.gif'
-				: '/src/assets/weather/snow-static.svg';
+			return getAnimationSettings() ? snowImage : snowStaticImage;
 		case 95:
 		case 96:
 		case 99:
-			return getAnimationSettings()
-				? '/src/assets/weather/thunder.gif'
-				: '/src/assets/weather/thunder-static.svg';
+			return getAnimationSettings() ? thunderImage : thunderStaticImage;
 		default:
 			return '';
 	}

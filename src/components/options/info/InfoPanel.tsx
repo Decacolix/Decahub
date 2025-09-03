@@ -1,6 +1,10 @@
 import { use } from 'react';
 import { SettingsContext } from '../../../App';
 import { getLanguageSettings } from '../settings/settingsUtils';
+import closeIcon from '../../../assets/icons/close-icon.svg';
+import calendarDayImage from '../../../assets/images/calendar-day.png';
+import calendarYearsImage from '../../../assets/images/calendar-years.png';
+import pinImage from '../../../assets/images/pin.png';
 
 /* Info panel containing the information about the page, displayed when user clicks on the info icon in the menu. */
 const InfoPanel = () => {
@@ -12,7 +16,7 @@ const InfoPanel = () => {
 
 	const infoStyles: string =
 		(infoDisplayed ? 'pointer-events-auto' : 'pointer-events-none opacity-0') +
-		' duration-500 overflow-y-auto overflow-x-auto bg-black/40 backdrop-blur-sm fixed top-[50%] left-[50%] translate-[-50%] z-30 w-[100vw] h-[100vh] lg:w-[1000px] lg:h-auto p-8 flex flex-col justify-center items-center pt-35 sm:pt-15 lg:pt-10';
+		' duration-500 overflow-y-auto overflow-x-auto bg-black/40 backdrop-blur-sm fixed top-[50%] left-[50%] translate-[-50%] z-30 w-[100vw] h-[100vh] lg:w-[1000px] lg:h-auto p-8 flex flex-col justify-center items-center pt-[50vh] sm:pt-15 lg:pt-10';
 
 	/* Hide the info panel on click of the close icon. */
 	const handleInfoClose = (): void => {
@@ -22,12 +26,13 @@ const InfoPanel = () => {
 	return (
 		<div className={infoStyles}>
 			<div
-				className="bg-[url(src/assets/icons/close-icon.svg)] w-6 h-6 absolute top-4 right-4 hover:cursor-pointer hover:opacity-50"
+				className="w-6 h-6 absolute top-10 lg:top-4 right-4 hover:cursor-pointer hover:opacity-50"
 				onClick={() => handleInfoClose()}
+				style={{ backgroundImage: `url("${closeIcon}")` }}
 			/>
 			<div className="flex justify-between w-[100%]">
 				<div className={imagePanelStyles}>
-					<img src="src/assets/images/calendar-day.png" />
+					<img src={calendarDayImage} />
 					<p className={imageTextStyles}>
 						{getLanguageSettings() === 'cs'
 							? 'Najeďte na den v kalendáři pro zobrazení svátku.'
@@ -35,7 +40,7 @@ const InfoPanel = () => {
 					</p>
 				</div>
 				<div className={imagePanelStyles}>
-					<img src="src/assets/images/calendar-years.png" />
+					<img src={calendarYearsImage} />
 					<p className={imageTextStyles}>
 						{getLanguageSettings() === 'cs'
 							? 'Klikněte na rok v horní části kalendáře pro přepnutí zobrazení mezi měsíci a roky.'
@@ -43,7 +48,7 @@ const InfoPanel = () => {
 					</p>
 				</div>
 				<div className={imagePanelStyles}>
-					<img src="src/assets/images/pin.png" />
+					<img src={pinImage} />
 					<p className={imageTextStyles}>
 						{getLanguageSettings() === 'cs'
 							? 'Pro připnutí měny na vrch seznamu klikněte na ikonu hvězdy.'
@@ -51,8 +56,8 @@ const InfoPanel = () => {
 					</p>
 				</div>
 			</div>
-			<div className="flex justify-between w-[100%] px-4 ">
-				<div className="mt-6 px-4">
+			<div className="flex justify-between w-[100%] px-2 lg:px-4 ">
+				<div className="mt-6 px-2 lg:px-4">
 					<p>
 						{getLanguageSettings() === 'cs'
 							? 'Použité technologie pro tvorbu stránky:'
@@ -131,7 +136,7 @@ const InfoPanel = () => {
 						</li>
 					</ul>
 				</div>
-				<div className="mt-6 px-4">
+				<div className="mt-6 px-2 lg:px-4">
 					<p>
 						{getLanguageSettings() === 'cs' ? 'Zdroje dat:' : 'Data sources:'}
 					</p>

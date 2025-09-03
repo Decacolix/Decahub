@@ -2,29 +2,28 @@ import { NEWS_SOURCES } from '../../../constants/newsSources';
 import { SettingsContext } from '../../../App';
 import { use, useCallback } from 'react';
 import { getLanguageSettings, setNewsSourceSettings } from './settingsUtils';
+import newsSourceLogoA from '../../../assets/logos/idnes-logo.svg';
+import newsSourceLogoB from '../../../assets/logos/ct24-logo.svg';
+import newsSourceLogoC from '../../../assets/logos/newyorktimes-logo.svg';
 
 export const newsSourceUrls: {
 	source: string;
-	urlBg: string;
-	urlImg: string;
+	url: string;
 	page: string;
 }[] = [
 	{
 		source: NEWS_SOURCES[0],
-		urlBg: 'bg-[url(src/assets/logos/idnes-logo.svg)]',
-		urlImg: 'src/assets/logos/idnes-logo.svg',
+		url: newsSourceLogoA,
 		page: 'https://www.idnes.cz/',
 	},
 	{
 		source: NEWS_SOURCES[1],
-		urlBg: 'bg-[url(src/assets/logos/ct24-logo.svg)]',
-		urlImg: 'src/assets/logos/ct24-logo.svg',
+		url: newsSourceLogoB,
 		page: 'https://ct24.ceskatelevize.cz/',
 	},
 	{
 		source: NEWS_SOURCES[2],
-		urlBg: 'bg-[url(src/assets/logos/newyorktimes-logo.svg)]',
-		urlImg: 'src/assets/logos/newyorktimes-logo.svg',
+		url: newsSourceLogoC,
 		page: 'https://www.nytimes.com/',
 	},
 ];
@@ -32,9 +31,6 @@ export const newsSourceUrls: {
 /* Settings to select the source of the news on the page. */
 const SettingsNews = () => {
 	const { currentNewsSource, setCurrentNewsSource } = use(SettingsContext);
-
-	const newsStyles: string =
-		'bg-no-repeat bg-center bg-size-[65%] w-[50%] h-20 mx-2 hover:cursor-pointer hover:outline-2 list-none flex';
 
 	/* On click of the news logo, switch to the clicked news source. */
 	const handleNewsSourceChange = useCallback(
@@ -57,14 +53,13 @@ const SettingsNews = () => {
 								? 'outline-2'
 								: 'outline-0') +
 							' ' +
-							newsStyles +
-							' ' +
-							newsSourceUrl.urlBg
+							'bg-no-repeat bg-center bg-size-[65%] w-[50%] h-20 mx-2 hover:cursor-pointer hover:outline-2 list-none flex'
 						}
 						key={newsSourceUrl.source}
 						onClick={() => {
 							handleNewsSourceChange(newsSourceUrl.source);
 						}}
+						style={{ backgroundImage: `url("${newsSourceUrl.url}")` }}
 					/>
 				))}
 			</div>

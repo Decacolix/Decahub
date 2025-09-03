@@ -11,6 +11,8 @@ import {
 import CalendarDay from './CalendarDay';
 import CalendarDayInfo from './CalendarDayInfo';
 import { getLanguageSettings } from '../../options/settings/settingsUtils';
+import arrowLeftIcon from '../../../assets/icons/arrow-left.svg';
+import arrowRightIcon from '../../../assets/icons/arrow-right.svg';
 
 type TypeViews = 'month' | 'year' | 'years';
 
@@ -168,15 +170,16 @@ const CalendarTile = () => {
 						minimumReached
 							? 'opacity-0 pointer-events-none'
 							: 'opacity-100 pointer-events-auto'
-					} bg-[url(src/assets/icons/arrow-left.svg)] h-[100%] w-14 bg-no-repeat bg-center bg-size-[30%] absolute left-0 top-[50%] translate-y-[-50%] hover:cursor-pointer hover:opacity-50`}
+					} h-[100%] w-14 bg-no-repeat bg-center bg-size-[30%] absolute left-0 top-[50%] translate-y-[-50%] hover:cursor-pointer hover:opacity-50`}
 					onClick={() => handleLeftArrowClick()}
+					style={{ backgroundImage: `url("${arrowLeftIcon}")` }}
 				/>
 				<div
 					className={`${
 						currentView === 'years'
 							? ''
 							: 'hover:cursor-pointer hover:opacity-50'
-					} text-2xl absolute left-[50%] translate-x-[-50%]`}
+					} text-xl lg:text-2xl absolute left-[50%] translate-x-[-50%]`}
 					onClick={() => handleViewChange()}
 				>
 					{currentView === 'month'
@@ -193,8 +196,9 @@ const CalendarTile = () => {
 						maximumReached
 							? 'opacity-0 pointer-events-none'
 							: 'opacity-100 pointer-events-auto'
-					} bg-[url(src/assets/icons/arrow-right.svg)] h-[100%] w-14 bg-no-repeat bg-center bg-size-[30%] absolute right-0 top-[50%] translate-y-[-50%] hover:cursor-pointer hover:opacity-50`}
+					} h-[100%] w-14 bg-no-repeat bg-center bg-size-[30%] absolute right-0 top-[50%] translate-y-[-50%] hover:cursor-pointer hover:opacity-50`}
 					onClick={() => handleRightArrowClick()}
+					style={{ backgroundImage: `url("${arrowRightIcon}")` }}
 				/>
 			</div>
 			{currentView === 'month' ? (
@@ -276,7 +280,7 @@ const CalendarTile = () => {
 						(month, index) => {
 							return (
 								<div
-									className="my-6 hover:cursor-pointer hover:opacity-50"
+									className="my-3 lg:my-6 hover:cursor-pointer hover:opacity-50"
 									key={month}
 									onClick={() => {
 										setCurrentMonth(index);
@@ -294,7 +298,7 @@ const CalendarTile = () => {
 				<div className="grid grid-cols-3 gap-8 mb-12 text-center">
 					{Array.from({ length: 12 }, (_, i) => (
 						<div
-							className="my-6 mx-8 hover:cursor-pointer hover:opacity-50"
+							className="my-3 lg:my-6 mx-8 hover:cursor-pointer hover:opacity-50"
 							key={i}
 							onClick={() => {
 								setCurrentYear(currentYearRange + i);

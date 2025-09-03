@@ -23,6 +23,9 @@ import {
 } from './components/tiles/time/timeUtils';
 import { DEFAULT_SETTINGS } from './constants/defaultSettings';
 import InfoPanel from './components/options/info/InfoPanel';
+import pinkFavicon from '/src/assets/favicons/favicon-pink.svg';
+import greenFavicon from '/src/assets/favicons/favicon-green.svg';
+import blueFavicon from '/src/assets/favicons/favicon-blue.svg';
 
 type TypeSettingsContext = {
 	settingsDisplayed: boolean;
@@ -248,12 +251,9 @@ const App = () => {
 			document.getElementsByTagName('head')[0].appendChild(link);
 		}
 
-		if (getThemeSettings() === 'pink')
-			link.href = 'src/assets/favicons/favicon-pink.svg';
-		if (getThemeSettings() === 'green')
-			link.href = 'src/assets/favicons/favicon-green.svg';
-		if (getThemeSettings() === 'blue')
-			link.href = 'src/assets/favicons/favicon-blue.svg';
+		if (getThemeSettings() === 'pink') link.href = pinkFavicon;
+		if (getThemeSettings() === 'green') link.href = greenFavicon;
+		if (getThemeSettings() === 'blue') link.href = blueFavicon;
 	}, [getThemeSettings()]);
 
 	return (

@@ -1,5 +1,8 @@
 import { DEFAULT_SETTINGS } from '../../../constants/defaultSettings';
 import { STORAGE_SETTINGS_KEY } from '../../../constants/storageSettingsKey';
+import pinkBackground from '../../../assets/backgrounds/background-pink.svg';
+import greenBackground from '../../../assets/backgrounds/background-green.svg';
+import blueBackground from '../../../assets/backgrounds/background-blue.svg';
 
 export type TypeTheme = 'pink' | 'green' | 'blue';
 
@@ -102,7 +105,6 @@ export const setDefatuls = (): void => {
 	document.body.style.backgroundSize = 'cover';
 	document.body.style.backgroundPosition = 'center';
 	document.body.style.backgroundAttachment = 'fixed';
-	setTheme(getThemeSettings());
 };
 
 /* Get the settings local storage item. */
@@ -122,7 +124,12 @@ export const setThemeSettings = (value: TypeTheme): void => {
 
 /* Set the theme for the document. */
 export const setTheme = (value: TypeTheme): void => {
-	document.body.style.backgroundImage = `url("./src/assets/backgrounds/background-${value}.svg")`;
+	if (value === 'pink')
+		document.body.style.backgroundImage = `url("${pinkBackground}")`;
+	if (value === 'green')
+		document.body.style.backgroundImage = `url("${greenBackground}")`;
+	if (value === 'blue')
+		document.body.style.backgroundImage = `url("${blueBackground}")`;
 };
 
 /* Get the set time zone. */

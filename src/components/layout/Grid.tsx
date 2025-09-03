@@ -16,7 +16,7 @@ const Grid = ({ clockErrorMessage, timezoneErrorMessage }: TypeGrid) => {
 	const bottomHeight: string = 'h-[25rem] 2xl:h-[35rem]';
 
 	return (
-		<div className="grid lg:grid-cols-2 2xl:grid-cols-3 gap-2 2xl:gap-8 py-2 2xl:py-6 2xl:px-20">
+		<div className="grid lg:grid-cols-2 2xl:grid-cols-3 gap-4 2xl:gap-8 py-2 2xl:py-6 2xl:px-20">
 			<div className="order-3 lg:order-2 2xl:order-1">
 				<TileFrame height={topHeight} z="z-1">
 					<WeatherTile />

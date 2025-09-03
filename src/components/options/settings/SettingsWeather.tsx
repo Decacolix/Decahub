@@ -6,6 +6,7 @@ import {
 	setLocationSettings,
 	type TypeLocation,
 } from './settingsUtils';
+import searchIcon from '../../../assets/icons/search-icon.svg';
 
 /* Settings to set the current location for the weather. */
 const SettingsWeather = () => {
@@ -67,7 +68,7 @@ const SettingsWeather = () => {
 				<img
 					className="absolute w-8 right-[-1rem] top-[50%] translate-y-[-50%] hover:cursor-pointer hover:opacity-50 "
 					onClick={() => handleLocationChange()}
-					src="src/assets/icons/search-icon.svg"
+					src={searchIcon}
 				/>
 			</div>
 		</div>

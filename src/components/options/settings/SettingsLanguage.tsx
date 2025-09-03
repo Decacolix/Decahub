@@ -11,7 +11,7 @@ const SettingsLanguage = () => {
 	/* On click of either 'CS' or 'EN', switch to the clicked language. */
 	const handleLanguageChange = useCallback(
 		(e: React.MouseEvent<HTMLSpanElement, MouseEvent>): void => {
-			setLanguage(e.currentTarget.textContent.toLowerCase() as TypeLanguage);
+			setLanguage(e.currentTarget?.textContent?.toLowerCase() as TypeLanguage);
 		},
 		[setLanguageSettings(language)]
 	);

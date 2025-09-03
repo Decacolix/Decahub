@@ -8,4 +8,6 @@ export default defineConfig({
 	server: {
 		allowedHosts: ['localho.st'],
 	},
+	base: '',
+	assetsInclude: ['**/*.png', '**/*.jpg', '**/*.jpeg', '**/*.svg', '**/*.gif'],
 });

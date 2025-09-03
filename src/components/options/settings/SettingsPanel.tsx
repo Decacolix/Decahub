@@ -8,6 +8,7 @@ import { SettingsContext } from '../../../App';
 import SettingsNews from './SettingsNews';
 import SettingsAnimation from './SettingsAnimation';
 import SettingsLanguage from './SettingsLanguage';
+import confirmIcon from '../../../assets/icons/confirm-icon.svg';
 
 /* Settings panel containing multiple settings for different sections of the page.  */
 const SettingsPanel = () => {
@@ -27,8 +28,9 @@ const SettingsPanel = () => {
 	return (
 		<div className={panelStyles}>
 			<div
-				className="bg-[url(src/assets/icons/confirm-icon.svg)] bg-no-repeat bg-center h-6 w-6 absolute top-6 right-6 hover:cursor-pointer hover:opacity-50"
+				className="bg-no-repeat bg-center h-6 w-6 absolute top-6 right-6 hover:cursor-pointer hover:opacity-50"
 				onClick={() => handleSettingsClose()}
+				style={{ backgroundImage: `url("${confirmIcon}")` }}
 			/>
 			<SettingsLanguage />
 			<SettingsTheme />
