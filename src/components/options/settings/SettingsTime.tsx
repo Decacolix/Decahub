@@ -1,6 +1,7 @@
 import { TIME_ZONES, TIME_ZONES_EN } from '../../../constants/timeZones';
 import {
 	getLanguageSettings,
+	getLocalTimeSettings,
 	getTimezoneSettings,
 	setTimezoneSettings,
 } from './settingsUtils';
@@ -20,7 +21,13 @@ const SettingsTime = () => {
 				{getLanguageSettings() === 'cs' ? 'Časové pásmo' : 'Time zone'}
 			</h1>
 			<select
-				className="border text-sm rounded-lg block w-[100%] ml-7 p-2.5 bg-gray-800 border-gray-800 placeholder-gray-400 text-white focus:outline-0 white cursor-pointer"
+				className={`${
+					getLocalTimeSettings() === 'on'
+						? 'cursor-not-allowed bg-gray-500 text-gray-400'
+						: 'cursor-pointer bg-gray-800 text-white'
+				}
+					'border text-sm rounded-lg block w-[100%] ml-7 p-2.5  border-gray-800 placeholder-gray-400  focus:outline-0 white`}
+				disabled={getLocalTimeSettings() === 'on' ? true : false}
 				onChange={e => handleTimezoneChange(e)}
 				value={getTimezoneSettings()}
 			>

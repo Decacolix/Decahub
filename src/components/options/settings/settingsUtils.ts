@@ -22,8 +22,9 @@ export type TypeSettings = {
 	newsSource: string;
 	pinnedCurrencies: string[];
 	pinnedCryptos: string[];
-	animation: boolean;
+	animation: string;
 	language: TypeLanguage;
+	localTime: string;
 };
 
 /* Set a local storage item with key and value. */
@@ -48,8 +49,9 @@ const setSettingsValue = (
 		| 'pinnedCurrencies'
 		| 'pinnedCryptos'
 		| 'animation'
-		| 'language',
-	value: string | string[] | TypeLocation | TypeTheme | TypeLanguage | boolean
+		| 'language'
+		| 'localTime',
+	value: string | string[] | TypeLocation | TypeTheme | TypeLanguage
 ): TypeSettings => {
 	const item: TypeSettings = {
 		...JSON.parse(getLocalStorageItem(STORAGE_SETTINGS_KEY)),
@@ -224,12 +226,12 @@ export const setPinnedCryptosSettings = (value: string[]): void => {
 };
 
 /* Get the set animation on/off. */
-export const getAnimationSettings = (): boolean => {
+export const getAnimationSettings = (): string => {
 	return JSON.parse(getLocalStorageItem(STORAGE_SETTINGS_KEY)).animation;
 };
 
 /* Set the animation on/off. */
-export const setAnimationSettings = (value: boolean): void => {
+export const setAnimationSettings = (value: string): void => {
 	setLocalStorageItem(
 		STORAGE_SETTINGS_KEY,
 		setSettingsValue('animation', value)
@@ -246,5 +248,18 @@ export const setLanguageSettings = (value: TypeLanguage): void => {
 	setLocalStorageItem(
 		STORAGE_SETTINGS_KEY,
 		setSettingsValue('language', value)
+	);
+};
+
+/* Get the set local time on/off. */
+export const getLocalTimeSettings = (): string => {
+	return JSON.parse(getLocalStorageItem(STORAGE_SETTINGS_KEY)).localTime;
+};
+
+/* Set the animation on/off. */
+export const setLocalTimeSettings = (value: string): void => {
+	setLocalStorageItem(
+		STORAGE_SETTINGS_KEY,
+		setSettingsValue('localTime', value)
 	);
 };

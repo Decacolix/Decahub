@@ -9,6 +9,7 @@ import SettingsNews from './SettingsNews';
 import SettingsAnimation from './SettingsAnimation';
 import SettingsLanguage from './SettingsLanguage';
 import confirmIcon from '../../../assets/icons/confirm-icon.svg';
+import SettingsLocalTime from './SettingsLocalTime';
 
 /* Settings panel containing multiple settings for different sections of the page.  */
 const SettingsPanel = () => {
@@ -34,12 +35,13 @@ const SettingsPanel = () => {
 			/>
 			<SettingsLanguage />
 			<SettingsTheme />
-			<SettingsTime />
 			<SettingsNews />
-			<SettingsWeather />
+			<SettingsAnimation />
+			<SettingsLocalTime />
+			<SettingsTime />
 			<SettingsCurrency />
 			<SettingsCrypto />
-			<SettingsAnimation />
+			<SettingsWeather />
 		</div>
 	);
 };

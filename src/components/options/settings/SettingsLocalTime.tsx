@@ -1,28 +1,30 @@
 import { use, useCallback } from 'react';
+import { getLanguageSettings, setLocalTimeSettings } from './settingsUtils';
 import { SettingsContext } from '../../../App';
-import { getLanguageSettings, setAnimationSettings } from './settingsUtils';
 
-/* Settings to enable or disable animated GIF icons on the page. */
-const SettingsAnimation = () => {
-	const { animationOn, setAnimationOn } = use(SettingsContext);
+/* Settings to enable or disable the local time instead of the time fetched from API. */
+const SettingsLocalTime = () => {
+	const { localTimeOn, setLocalTimeOn } = use(SettingsContext);
 
-	/* Set the animation to be on or off on click of the switch. */
-	const handleAnimationChange = useCallback((): void => {
-		console.log(animationOn);
-		setAnimationOn(prevAnimationOn =>
-			prevAnimationOn === 'on' ? 'off' : 'on'
+	/* Set the local time to be on or off on click of the switch. */
+	const handleLocalTimeChange = useCallback((): void => {
+		console.log(localTimeOn);
+		setLocalTimeOn(prevLocalTimeOn =>
+			prevLocalTimeOn === 'on' ? 'off' : 'on'
 		);
-	}, [setAnimationSettings(animationOn)]);
+	}, [setLocalTimeSettings(localTimeOn)]);
 
 	return (
 		<div className="flex justify-between">
 			<h1 className="my-4 px-7 text-2xl">
-				{getLanguageSettings() === 'cs' ? 'Animace' : 'Animation'}
+				{getLanguageSettings() === 'cs'
+					? 'Použít lokální čas'
+					: 'Use local time'}
 			</h1>
 			<div className="flex px-6">
 				<label className="inline-flex items-center cursor-pointer">
 					<span className="mr-3 text-sm font-medium text-gray-900 dark:text-gray-300">
-						{animationOn === 'on'
+						{localTimeOn === 'on'
 							? getLanguageSettings() === 'cs'
 								? 'Zapnuto'
 								: 'On'
@@ -31,9 +33,9 @@ const SettingsAnimation = () => {
 							: 'Off'}
 					</span>
 					<input
-						checked={animationOn === 'on'}
+						checked={localTimeOn === 'on'}
 						className="sr-only peer"
-						onChange={() => handleAnimationChange()}
+						onChange={() => handleLocalTimeChange()}
 						type="checkbox"
 					/>
 					<div className="relative w-14 h-7 mr-2 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600 dark:peer-checked:bg-blue-600" />
@@ -43,4 +45,4 @@ const SettingsAnimation = () => {
 	);
 };
 
-export default SettingsAnimation;
+export default SettingsLocalTime;

@@ -2,11 +2,15 @@ import { use, useEffect } from 'react';
 import { formatClock, formatTimezone } from './timeUtils';
 import type { TypeGrid } from '../../layout/Grid';
 import { SettingsContext } from '../../../App';
-import { getLanguageSettings } from '../../options/settings/settingsUtils';
+import {
+	getLanguageSettings,
+	getLocalTimeSettings,
+} from '../../options/settings/settingsUtils';
 
 /* Display the clock with the current time based on the currently selected time zone. */
 const TimeClock = ({ clockErrorMessage, timezoneErrorMessage }: TypeGrid) => {
-	const { clock, setClock, timezoneInfo } = use(SettingsContext);
+	const { clock, setClock, timezoneInfo, localTime, setLocalTime } =
+		use(SettingsContext);
 
 	/* Update the clock every second by incrementing the second. */
 	useEffect(() => {
@@ -25,6 +29,17 @@ const TimeClock = ({ clockErrorMessage, timezoneErrorMessage }: TypeGrid) => {
 		};
 	}, [clock]);
 
+	/* Update the local clock every 500 milliseconds for better precision. */
+	useEffect(() => {
+		const localClockUpdateInterval = setInterval(async () => {
+			setLocalTime(new Date());
+		}, 500);
+
+		return () => {
+			clearInterval(localClockUpdateInterval);
+		};
+	}, [localTime]);
+
 	return (
 		<>
 			<div className="absolute bottom-2 left-[50%] translate-x-[-50%]">
@@ -37,12 +52,20 @@ const TimeClock = ({ clockErrorMessage, timezoneErrorMessage }: TypeGrid) => {
 					</p>
 				) : (
 					<p>
-						<span>{formatTimezone(timezoneInfo.currentUtcOffset)}</span>
+						<span>
+							{getLocalTimeSettings() === 'on'
+								? ''
+								: formatTimezone(timezoneInfo.currentUtcOffset)}
+						</span>
 						<span>
 							{timezoneInfo.isDayLightSavingActive
 								? `${
 										getLanguageSettings() === 'cs'
-											? ' (letní čas)'
+											? getLocalTimeSettings() === 'on'
+												? '(lokální čas)'
+												: ' (letní čas)'
+											: getLocalTimeSettings() === 'on'
+											? '(local time)'
 											: ' (summer time)'
 								  }`
 								: ''}
@@ -59,11 +82,17 @@ const TimeClock = ({ clockErrorMessage, timezoneErrorMessage }: TypeGrid) => {
 					</p>
 				) : (
 					<p className="font-[Chivo_Mono] text-5xl 2xl:text-7xl">
-						{formatClock(
-							clock.getHours(),
-							clock.getMinutes(),
-							clock.getSeconds()
-						)}
+						{getLocalTimeSettings() === 'on'
+							? formatClock(
+									localTime.getHours(),
+									localTime.getMinutes(),
+									localTime.getSeconds()
+							  )
+							: formatClock(
+									clock.getHours(),
+									clock.getMinutes(),
+									clock.getSeconds()
+							  )}
 					</p>
 				)}
 			</div>

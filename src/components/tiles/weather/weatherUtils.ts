@@ -153,12 +153,14 @@ export const setForecastDays = (date: Date): string[] => {
 export const setImage = (code: number): string => {
 	switch (code) {
 		case 0:
-			return getAnimationSettings() ? sunImage : sunStaticImage;
+			return getAnimationSettings() === 'on' ? sunImage : sunStaticImage;
 			break;
 		case 1:
 		case 2:
 		case 3:
-			return getAnimationSettings() ? sunCloudImage : sunCloudStaticImage;
+			return getAnimationSettings() === 'on'
+				? sunCloudImage
+				: sunCloudStaticImage;
 		case 45:
 		case 48:
 		case 51:
@@ -166,7 +168,7 @@ export const setImage = (code: number): string => {
 		case 55:
 		case 56:
 		case 57:
-			return getAnimationSettings() ? cloudImage : cloudStaticImage;
+			return getAnimationSettings() === 'on' ? cloudImage : cloudStaticImage;
 		case 61:
 		case 63:
 		case 65:
@@ -175,18 +177,20 @@ export const setImage = (code: number): string => {
 		case 80:
 		case 81:
 		case 82:
-			return getAnimationSettings() ? rainImage : rainStaticImage;
+			return getAnimationSettings() === 'on' ? rainImage : rainStaticImage;
 		case 71:
 		case 73:
 		case 75:
 		case 77:
 		case 85:
 		case 86:
-			return getAnimationSettings() ? snowImage : snowStaticImage;
+			return getAnimationSettings() === 'on' ? snowImage : snowStaticImage;
 		case 95:
 		case 96:
 		case 99:
-			return getAnimationSettings() ? thunderImage : thunderStaticImage;
+			return getAnimationSettings() === 'on'
+				? thunderImage
+				: thunderStaticImage;
 		default:
 			return '';
 	}

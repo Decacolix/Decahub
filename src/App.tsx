@@ -7,6 +7,7 @@ import {
 	getBaseCryptoSettings,
 	getBaseCurrencySettings,
 	getLanguageSettings,
+	getLocalTimeSettings,
 	getLocationSettings,
 	getNewsSourceSettings,
 	getThemeSettings,
@@ -48,10 +49,14 @@ type TypeSettingsContext = {
 	setBaseCrypto: React.Dispatch<React.SetStateAction<string>>;
 	infoDisplayed: boolean;
 	setInfoDisplayed: React.Dispatch<React.SetStateAction<boolean>>;
-	animationOn: boolean;
-	setAnimationOn: React.Dispatch<React.SetStateAction<boolean>>;
+	animationOn: string;
+	setAnimationOn: React.Dispatch<React.SetStateAction<string>>;
 	language: TypeLanguage;
 	setLanguage: React.Dispatch<React.SetStateAction<TypeLanguage>>;
+	localTime: Date;
+	setLocalTime: React.Dispatch<React.SetStateAction<Date>>;
+	localTimeOn: string;
+	setLocalTimeOn: React.Dispatch<React.SetStateAction<string>>;
 };
 
 export const SettingsContext = createContext<TypeSettingsContext>({
@@ -78,10 +83,14 @@ export const SettingsContext = createContext<TypeSettingsContext>({
 	setBaseCrypto: () => '',
 	infoDisplayed: false,
 	setInfoDisplayed: () => false,
-	animationOn: true,
-	setAnimationOn: () => true,
+	animationOn: '',
+	setAnimationOn: () => '',
 	language: 'cs',
 	setLanguage: () => '',
+	localTime: new Date(),
+	setLocalTime: () => '',
+	localTimeOn: '',
+	setLocalTimeOn: () => '',
 });
 
 const processFetchedTime = (
@@ -149,6 +158,10 @@ const App = () => {
 	);
 	const [language, setLanguage] = useState<TypeLanguage>(
 		getLanguageSettings() || DEFAULT_SETTINGS.language
+	);
+	const [localTime, setLocalTime] = useState<Date>(new Date());
+	const [localTimeOn, setLocalTimeOn] = useState(
+		getLocalTimeSettings() || DEFAULT_SETTINGS.localTime
 	);
 
 	const hour: number = 0;
@@ -284,6 +297,10 @@ const App = () => {
 					setAnimationOn,
 					language,
 					setLanguage,
+					localTime,
+					setLocalTime,
+					localTimeOn,
+					setLocalTimeOn,
 				}}
 			>
 				<Menu />
