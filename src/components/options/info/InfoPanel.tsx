@@ -16,7 +16,7 @@ const InfoPanel = () => {
 
 	const infoStyles: string =
 		(infoDisplayed ? 'pointer-events-auto' : 'pointer-events-none opacity-0') +
-		' duration-500 overflow-y-auto overflow-x-auto bg-black/40 backdrop-blur-sm fixed top-[50%] left-[50%] translate-[-50%] z-30 w-[100vw] h-[100vh] lg:w-[1000px] lg:h-auto p-8 flex flex-col justify-center items-center pt-[50vh] sm:pt-15 lg:pt-10';
+		' duration-500 overflow-y-auto overflow-x-auto bg-black/40 backdrop-blur-sm fixed top-[50%] left-[50%] translate-[-50%] z-30 w-[100vw] h-[100vh] lg:w-[1000px] lg:h-auto p-8 flex flex-col justify-center items-center pt-[75vh] sm:pt-15 lg:pt-10';
 
 	/* Hide the info panel on click of the close icon. */
 	const handleInfoClose = (): void => {
