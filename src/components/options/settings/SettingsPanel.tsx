@@ -19,7 +19,7 @@ const SettingsPanel = () => {
 		(settingsDisplayed
 			? 'translate-x-0 pointer-events-auto'
 			: 'translate-x-full pointer-events-none opacity-0') +
-		' fixed top-0 right-0 h-[100vh] 2xl:w-[30vw] bg-black/40 backdrop-blur-sm pt-16 pb-4 z-20 duration-500 overflow-y-scroll';
+		' fixed top-0 right-0 h-[100vh] 2xl:w-[30vw] bg-black/40 backdrop-blur-sm pt-16 pb-16 lg:pb-4 z-20 duration-500 overflow-y-scroll';
 
 	/* Hide the settings panel on click of the check icon. */
 	const handleSettingsClose = (): void => {
