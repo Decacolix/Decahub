@@ -10,7 +10,10 @@ import {
 } from './calendarUtils';
 import CalendarDay from './CalendarDay';
 import CalendarDayInfo from './CalendarDayInfo';
-import { getLanguageSettings } from '../../options/settings/settingsUtils';
+import {
+	getLanguageSettings,
+	getLocalTimeSettings,
+} from '../../options/settings/settingsUtils';
 import arrowLeftIcon from '../../../assets/icons/arrow-left.svg';
 import arrowRightIcon from '../../../assets/icons/arrow-right.svg';
 
@@ -21,12 +24,18 @@ const endYear: number = 2151;
 
 /* Calendar tile has three different views, that can be switched by clicking on the header of the calendar. Month view displays list of days of the current month, year view displays list of months of the year, and years view displays list of 12 years. */
 const CalendarTile = () => {
-	const { date } = use(SettingsContext);
+	const { date, localTime } = use(SettingsContext);
+	const displayedDate = getLocalTimeSettings() === 'on' ? localTime : date;
+
 	const [currentView, setCurrentView] = useState<TypeViews>('month');
-	const [currentMonth, setCurrentMonth] = useState<number>(date.getMonth());
-	const [currentYear, setCurrentYear] = useState<number>(date.getFullYear());
+	const [currentMonth, setCurrentMonth] = useState<number>(
+		displayedDate.getMonth()
+	);
+	const [currentYear, setCurrentYear] = useState<number>(
+		displayedDate.getFullYear()
+	);
 	const [currentYearRange, setCurrentYearRange] = useState<number>(
-		calculateYearRange(date.getFullYear())
+		calculateYearRange(displayedDate.getFullYear())
 	);
 	const [minimumReached, setMinimumReached] = useState<boolean>(false);
 	const [maximumReached, setMaximumReached] = useState<boolean>(false);
@@ -249,9 +258,9 @@ const CalendarTile = () => {
 									current={true}
 									day={i + 1}
 									today={
-										currentYear === date.getFullYear() &&
-										currentMonth === date.getMonth() &&
-										i + 1 === date.getDate()
+										currentYear === displayedDate.getFullYear() &&
+										currentMonth === displayedDate.getMonth() &&
+										i + 1 === displayedDate.getDate()
 											? true
 											: false
 									}
