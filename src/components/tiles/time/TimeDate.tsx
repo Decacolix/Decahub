@@ -39,7 +39,7 @@ const TimeDate = () => {
 				<span>
 					{' '}
 					{getLanguageSettings() === 'cs'
-						? getWeekNumber(date) + ' . týden'
+						? getWeekNumber(date) + '. týden'
 						: 'Week ' + getWeekNumber(date)}
 				</span>
 				<span className="mx-1"> &#9679; </span>
