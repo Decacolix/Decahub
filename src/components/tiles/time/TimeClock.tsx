@@ -67,18 +67,17 @@ const TimeClock = ({
 					<p>
 						<span>
 							{getLocalTimeSettings() === 'on'
-								? ''
+								? getLanguageSettings() === 'cs'
+									? '(lokální čas)'
+									: '(local time)'
 								: formatTimezone(timezoneInfo.currentUtcOffset)}
 						</span>
 						<span>
-							{timezoneInfo.isDayLightSavingActive
+							{timezoneInfo.isDayLightSavingActive &&
+							getLocalTimeSettings() === 'off'
 								? `${
 										getLanguageSettings() === 'cs'
-											? getLocalTimeSettings() === 'on'
-												? '(lokální čas)'
-												: ' (letní čas)'
-											: getLocalTimeSettings() === 'on'
-											? '(local time)'
+											? ' (letní čas)'
 											: ' (summer time)'
 								  }`
 								: ''}
