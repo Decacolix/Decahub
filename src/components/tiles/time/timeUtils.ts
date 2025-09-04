@@ -21,7 +21,11 @@ export type TypeFetchTimezone = {
 	isDayLightSavingActive?: boolean;
 };
 
-/* Fetch the current time based on the currently selected time zone. */
+/*
+ *	Function that fetches the current time based on the currently selected time zone.
+ *	@param {string} timezone – The time zone.
+ *	@returns {Promise<TypeRates>}
+ */
 export const fetchTime = async (timezone: string): Promise<TypeFetchTime> => {
 	let result: TypeFetchTime = {
 		failed: true,
@@ -56,7 +60,11 @@ export const fetchTime = async (timezone: string): Promise<TypeFetchTime> => {
 	return result;
 };
 
-/* Fetch the information abount the currently selected time zone. */
+/*
+ *	Function that fetches the information abount the currently selected time zone.
+ *	@param {string} timezone – The time zone.
+ *	@returns {Promise<TypeFetchTimezone>}
+ */
 export const fetchTimezone = async (
 	timezone: string
 ): Promise<TypeFetchTimezone> => {
@@ -91,7 +99,13 @@ export const fetchTimezone = async (
 	return result;
 };
 
-/* Format the clock to the HH:MM format. */
+/*
+ *	Function to format the clock to the HH:MM format
+ *	@param {number} hour – The hour.
+ *	@param {number} minute – The minute.
+ *	@param {number} seconds – The seconds.
+ *	@returns {Promise<TypeFetchTimezone>}
+ */
 export const formatClock = (
 	hour: number,
 	minute: number,
@@ -102,7 +116,11 @@ export const formatClock = (
 		.padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
 };
 
-/* Format the time zone to "UTC: -/+HH:MM" format (example: UTC: +02:00 or UTC: -07:00). */
+/*
+ *	Function to format the time zone to "UTC: -/+HH:MM" format (example: UTC: +02:00 or UTC: -07:00).
+ *	@param {number | undefined} value – The value to be formatted.
+ *	@returns {string}
+ */
 export const formatTimezone = (value: number | undefined): string => {
 	if (!value) return '';
 
@@ -137,7 +155,11 @@ export const formatTimezone = (value: number | undefined): string => {
 	);
 };
 
-/* Calculate the number of the current week. */
+/*
+ *	Function to calculate the number of the current week.
+ *	@param {Date} date – The date.
+ *	@returns {number}
+ */
 export const getWeekNumber = (date: Date): number => {
 	const firstYearDay: Date = new Date(date.getFullYear(), 0, 1);
 	const today: Date = new Date(
@@ -150,7 +172,11 @@ export const getWeekNumber = (date: Date): number => {
 	return Math.ceil(dayOfYear / 7);
 };
 
-/* Get the name of the weekday for current date. */
+/*
+ *	Function to return the name of the weekday for current date.
+ *	@param {Date} date – The date.
+ *	@returns {string}
+ */
 export const getWeekday = (date: Date): string => {
 	switch (date.getDay()) {
 		case 0:

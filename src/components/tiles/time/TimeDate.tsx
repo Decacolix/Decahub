@@ -8,7 +8,10 @@ import {
 } from '../../options/settings/settingsUtils';
 import { getWeekday, getWeekNumber } from './timeUtils';
 
-/* Display the current date, week number, weekday, and nameday. */
+/*
+ *	Component that displays the current date, week number, weekday, and nameday.
+ *	@returns {JSX:Element}
+ */
 const TimeDate = () => {
 	const { date, localTime } = use(SettingsContext);
 

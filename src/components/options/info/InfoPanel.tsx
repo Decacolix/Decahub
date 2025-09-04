@@ -6,7 +6,10 @@ import calendarDayImage from '../../../assets/images/calendar-day.png';
 import calendarYearsImage from '../../../assets/images/calendar-years.png';
 import pinImage from '../../../assets/images/pin.png';
 
-/* Info panel containing the information about the page, displayed when user clicks on the info icon in the menu. */
+/*
+ *	Component that displays the info panel containing the information about the page, displayed when user clicks on the info icon in the menu.
+ *	@returns {JSX:Element}
+ */
 const InfoPanel = () => {
 	const imagePanelStyles: string = 'w-[200px] lg:w-[300px] p-4';
 	const imageTextStyles: string = 'text-center pt-3';
@@ -18,7 +21,10 @@ const InfoPanel = () => {
 		(infoDisplayed ? 'pointer-events-auto' : 'pointer-events-none opacity-0') +
 		' duration-500 overflow-y-auto overflow-x-auto bg-black/40 backdrop-blur-sm fixed top-[50%] left-[50%] translate-[-50%] z-30 w-[100vw] h-[100vh] lg:w-[1000px] lg:h-auto p-8 flex flex-col justify-center items-center pt-[75vh] sm:pt-15 lg:pt-10';
 
-	/* Hide the info panel on click of the close icon. */
+	/*
+	 *	Function that handles hiding the info panel on click of the close icon.
+	 *	@returns {void}
+	 */
 	const handleInfoClose = (): void => {
 		setInfoDisplayed(prevInfoDisplayed => !prevInfoDisplayed);
 	};

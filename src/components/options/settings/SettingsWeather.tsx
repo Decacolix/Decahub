@@ -8,7 +8,10 @@ import {
 } from './settingsUtils';
 import searchIcon from '../../../assets/icons/search-icon.svg';
 
-/* Settings to set the current location for the weather. */
+/*
+ *	Component that displays a textbox for the location to set.
+ *	@returns {JSX:Element}
+ */
 const SettingsWeather = () => {
 	const { weatherLocation, setWeatherLocation } = use(SettingsContext);
 	const [locationInput, setLocationInput] = useState<string>('');
@@ -16,7 +19,10 @@ const SettingsWeather = () => {
 		`${weatherLocation.municipality}, ${weatherLocation.country}`
 	);
 
-	/* When the enter key is pressed or when the magnifying glass icon is clicked, fetch the location and check if the location was found. If the location was found, set the weather location. */
+	/*
+	 *	Function that handles the change of the location and fetches the location data from the API.
+	 *	@returns {Promise<void>}
+	 */
 	const handleLocationChange = async (): Promise<void> => {
 		setLocationInput('');
 		await fetchLocation(locationInput).then(async location => {

@@ -13,6 +13,8 @@ export type TypeLocation = {
 
 export type TypeLanguage = 'cs' | 'en';
 
+export type TypeSwitch = 'on' | 'off';
+
 export type TypeSettings = {
 	theme: TypeTheme;
 	timezone: string;
@@ -22,22 +24,36 @@ export type TypeSettings = {
 	newsSource: string;
 	pinnedCurrencies: string[];
 	pinnedCryptos: string[];
-	animation: string;
+	animation: TypeSwitch;
 	language: TypeLanguage;
-	localTime: string;
+	localTime: TypeSwitch;
 };
 
-/* Set a local storage item with key and value. */
+/*
+ *	Function that sets an item in local storage.
+ * 	@param {string} key – The key of the item.
+ * 	@param {object} value – The value of the item.
+ *	@returns {void}
+ */
 const setLocalStorageItem = (key: string, value: object): void => {
 	localStorage.setItem(key, JSON.stringify(value));
 };
 
-/* Get a local storage item by key. */
+/*
+ *	Function that returns an item from local storage.
+ * 	@param {string} key – The key of the item.
+ *	@returns {string}
+ */
 const getLocalStorageItem = (key: string): string => {
 	return localStorage.getItem(key) || '{}';
 };
 
-/* Set a specific value of the local storage settings item with property and value. */
+/*
+ *	Function that sets a specific value of the settings item in the local storage.
+ * 	@param {'theme' | 'timezone' | 'location' | 'baseCurrency' | 'baseCrypto' | 'newsSource' | 'pinnedCurrencies' | 'pinnedCryptos' | 'animation' | 'language' | 'localTime'} property – The specific settings property to be set.
+ * 	@param {string | string[] | TypeLocation | TypeTheme | TypeLanguage | TypeSwitch} value – The value of the property.
+ *	@returns {TypeSettings}
+ */
 const setSettingsValue = (
 	property:
 		| 'theme'
@@ -51,7 +67,13 @@ const setSettingsValue = (
 		| 'animation'
 		| 'language'
 		| 'localTime',
-	value: string | string[] | TypeLocation | TypeTheme | TypeLanguage
+	value:
+		| string
+		| string[]
+		| TypeLocation
+		| TypeTheme
+		| TypeLanguage
+		| TypeSwitch
 ): TypeSettings => {
 	const item: TypeSettings = {
 		...JSON.parse(getLocalStorageItem(STORAGE_SETTINGS_KEY)),
@@ -61,7 +83,10 @@ const setSettingsValue = (
 	return item;
 };
 
-/* Set default settings. Check if settings for a specific value exists, if not, set it to its default value. Also set the document styles and theme. */
+/*
+ *	Function that sets the default settings value if no values are set.
+ *	@returns {void}
+ */
 export const setDefatuls = (): void => {
 	if (!Object.hasOwn(getSettings(), 'theme') || !getThemeSettings())
 		setThemeSettings(DEFAULT_SETTINGS.theme);
@@ -109,22 +134,36 @@ export const setDefatuls = (): void => {
 	document.body.style.backgroundAttachment = 'fixed';
 };
 
-/* Get the settings local storage item. */
+/*
+ *	Function that returns the settings object from the local storage.
+ *	@returns {TypeSettings}
+ */
 export const getSettings = (): TypeSettings => {
 	return JSON.parse(getLocalStorageItem(STORAGE_SETTINGS_KEY));
 };
 
-/* Get the set theme. */
+/*
+ *	Function that gets the current theme settings.
+ *	@returns {TypeTheme}
+ */
 export const getThemeSettings = (): TypeTheme => {
 	return JSON.parse(getLocalStorageItem(STORAGE_SETTINGS_KEY)).theme;
 };
 
-/* Set the theme in the local storage. */
+/*
+ *	Function that sets the current theme settings.
+ * 	@param {TypeTheme} value – The value of the theme.
+ *	@returns {void}
+ */
 export const setThemeSettings = (value: TypeTheme): void => {
 	setLocalStorageItem(STORAGE_SETTINGS_KEY, setSettingsValue('theme', value));
 };
 
-/* Set the theme for the document. */
+/*
+ *	Function that sets the current theme for the document.
+ * 	@param {TypeTheme} value – The value of the theme.
+ *	@returns {void}
+ */
 export const setTheme = (value: TypeTheme): void => {
 	if (value === 'pink')
 		document.body.style.backgroundImage = `url("${pinkBackground}")`;
@@ -134,12 +173,19 @@ export const setTheme = (value: TypeTheme): void => {
 		document.body.style.backgroundImage = `url("${blueBackground}")`;
 };
 
-/* Get the set time zone. */
+/*
+ *	Function that gets the current time zone settings.
+ *	@returns {string}
+ */
 export const getTimezoneSettings = (): string => {
 	return JSON.parse(getLocalStorageItem(STORAGE_SETTINGS_KEY)).timezone;
 };
 
-/* Set the time zone. */
+/*
+ *	Function that sets the current time zone settings.
+ * 	@param {string} value – The value of the time zone.
+ *	@returns {void}
+ */
 export const setTimezoneSettings = (value: string): void => {
 	setLocalStorageItem(
 		STORAGE_SETTINGS_KEY,
@@ -147,12 +193,19 @@ export const setTimezoneSettings = (value: string): void => {
 	);
 };
 
-/* Get the set location. */
+/*
+ *	Function that gets the current location settings.
+ *	@returns {TypeLocation}
+ */
 export const getLocationSettings = (): TypeLocation => {
 	return JSON.parse(getLocalStorageItem(STORAGE_SETTINGS_KEY)).location;
 };
 
-/* Set the location. */
+/*
+ *	Function that sets the current location settings.
+ * 	@param {TypeLocation} value – The value of the location.
+ *	@returns {void}
+ */
 export const setLocationSettings = (value: TypeLocation): void => {
 	setLocalStorageItem(
 		STORAGE_SETTINGS_KEY,
@@ -160,12 +213,19 @@ export const setLocationSettings = (value: TypeLocation): void => {
 	);
 };
 
-/* Get the set base currency. */
+/*
+ *	Function that gets the current base currency settings.
+ *	@returns {string}
+ */
 export const getBaseCurrencySettings = (): string => {
 	return JSON.parse(getLocalStorageItem(STORAGE_SETTINGS_KEY)).baseCurrency;
 };
 
-/* Set the base currency. */
+/*
+ *	Function that sets the current base currency settings.
+ * 	@param {string} value – The value of the base currency.
+ *	@returns {void}
+ */
 export const setBaseCurrencySettings = (value: string): void => {
 	setLocalStorageItem(
 		STORAGE_SETTINGS_KEY,
@@ -173,12 +233,19 @@ export const setBaseCurrencySettings = (value: string): void => {
 	);
 };
 
-/* Get the set base cryptocurrency. */
+/*
+ *	Function that gets the current cryptocurrency settings.
+ *	@returns {string}
+ */
 export const getBaseCryptoSettings = (): string => {
 	return JSON.parse(getLocalStorageItem(STORAGE_SETTINGS_KEY)).baseCrypto;
 };
 
-/* Set the base cryptocurrency. */
+/*
+ *	Function that sets the current base cryptocurrency settings.
+ * 	@param {string} value – The value of the base cryptocurrency.
+ *	@returns {void}
+ */
 export const setBaseCryptoSettings = (value: string): void => {
 	setLocalStorageItem(
 		STORAGE_SETTINGS_KEY,
@@ -186,12 +253,19 @@ export const setBaseCryptoSettings = (value: string): void => {
 	);
 };
 
-/* Get the set news source. */
+/*
+ *	Function that gets the current news source settings.
+ *	@returns {string}
+ */
 export const getNewsSourceSettings = (): string => {
 	return JSON.parse(getLocalStorageItem(STORAGE_SETTINGS_KEY)).newsSource;
 };
 
-/* Set the news source. */
+/*
+ *	Function that sets the current news source settings.
+ * 	@param {string} value – The value of the news source.
+ *	@returns {void}
+ */
 export const setNewsSourceSettings = (value: string): void => {
 	setLocalStorageItem(
 		STORAGE_SETTINGS_KEY,
@@ -199,12 +273,19 @@ export const setNewsSourceSettings = (value: string): void => {
 	);
 };
 
-/* Get the set pinned currencies. */
+/*
+ *	Function that gets the current pinned currencies settings.
+ *	@returns {string[]}
+ */
 export const getPinnedCurrenciesSettings = (): string[] => {
 	return JSON.parse(getLocalStorageItem(STORAGE_SETTINGS_KEY)).pinnedCurrencies;
 };
 
-/* Set the pinnec currencies.*/
+/*
+ *	Function that sets the current pinned currencies settings.
+ * 	@param {string[]} value – The currencies to be pinned.
+ *	@returns {void}
+ */
 export const setPinnedCurrenciesSettings = (value: string[]): void => {
 	setLocalStorageItem(
 		STORAGE_SETTINGS_KEY,
@@ -212,12 +293,19 @@ export const setPinnedCurrenciesSettings = (value: string[]): void => {
 	);
 };
 
-/* Get the set pinned cryptocurrencies. */
+/*
+ *	Function that gets the current pinned cryptocurrencies settings.
+ *	@returns {string[]}
+ */
 export const getPinnedCryptosSettings = (): string[] => {
 	return JSON.parse(getLocalStorageItem(STORAGE_SETTINGS_KEY)).pinnedCryptos;
 };
 
-/* Set the pinnec cryptocurrencies. */
+/*
+ *	Function that sets the current pinned cryptocurrencies settings.
+ * 	@param {string[]} value – The cryptocurrencies to be pinned.
+ *	@returns {void}
+ */
 export const setPinnedCryptosSettings = (value: string[]): void => {
 	setLocalStorageItem(
 		STORAGE_SETTINGS_KEY,
@@ -225,25 +313,39 @@ export const setPinnedCryptosSettings = (value: string[]): void => {
 	);
 };
 
-/* Get the set animation on/off. */
-export const getAnimationSettings = (): string => {
+/*
+ *	Function that gets the current animation settings.
+ *	@returns {TypeSwitch}
+ */
+export const getAnimationSettings = (): TypeSwitch => {
 	return JSON.parse(getLocalStorageItem(STORAGE_SETTINGS_KEY)).animation;
 };
 
-/* Set the animation on/off. */
-export const setAnimationSettings = (value: string): void => {
+/*
+ *	Function that sets the animation to or on off settings.
+ * 	@param {TypeSwitch} value – The value of the animation.
+ *	@returns {void}
+ */
+export const setAnimationSettings = (value: TypeSwitch): void => {
 	setLocalStorageItem(
 		STORAGE_SETTINGS_KEY,
 		setSettingsValue('animation', value)
 	);
 };
 
-/* Get the set language. */
+/*
+ *	Function that gets the current language settings.
+ *	@returns {TypeLanguage}
+ */
 export const getLanguageSettings = (): TypeLanguage => {
 	return JSON.parse(getLocalStorageItem(STORAGE_SETTINGS_KEY)).language;
 };
 
-/* Set the language. */
+/*
+ *	Function that sets the language to either Czech or English settings.
+ * 	@param {TypeLanguage} value – The value of the language.
+ *	@returns {void}
+ */
 export const setLanguageSettings = (value: TypeLanguage): void => {
 	setLocalStorageItem(
 		STORAGE_SETTINGS_KEY,
@@ -251,13 +353,20 @@ export const setLanguageSettings = (value: TypeLanguage): void => {
 	);
 };
 
-/* Get the set local time on/off. */
-export const getLocalTimeSettings = (): string => {
+/*
+ *	Function that gets the current local time settings.
+ *	@returns {TypeSwitch}
+ */
+export const getLocalTimeSettings = (): TypeSwitch => {
 	return JSON.parse(getLocalStorageItem(STORAGE_SETTINGS_KEY)).localTime;
 };
 
-/* Set the animation on/off. */
-export const setLocalTimeSettings = (value: string): void => {
+/*
+ *	Function that sets the local time to or on off settings.
+ * 	@param {TypeSwitch} value – The value of the local time.
+ *	@returns {void}
+ */
+export const setLocalTimeSettings = (value: TypeSwitch): void => {
 	setLocalStorageItem(
 		STORAGE_SETTINGS_KEY,
 		setSettingsValue('localTime', value)

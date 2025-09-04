@@ -4,7 +4,7 @@ import { WEEKDAYS_ACCUSATIVE, WEEKDAYS_EN } from '../../../constants/weekdays';
 import { getLanguageSettings } from '../../options/settings/settingsUtils';
 import { getBackgroundColor } from './calendarUtils';
 
-type TypeCalendarDayInfo = {
+type TypeCalendarDayInfoProps = {
 	month: number;
 	day: number;
 	weekday: number;
@@ -12,14 +12,23 @@ type TypeCalendarDayInfo = {
 	y: number;
 };
 
-/* Display information about the day in the calendar that is hovered with cursor. */
+/*
+ *	Component that displays an information about the day in the calendar that is hovered with cursor.
+ *	@typedef {object} TypeCalendarDayInfoProps
+ *	@property {number} month – The month.
+ *	@property {number} day – The day.
+ *	@property {number} weekday – The weekday.
+ *	@property {number} x – The x coordinate of the day on the screen.
+ *	@property {number} y – The y coordinate of the day on the screen
+ *	@returns {JSX:Element}
+ */
 const CalendarDayInfo = ({
 	month,
 	day,
 	weekday,
 	x,
 	y,
-}: TypeCalendarDayInfo) => {
+}: TypeCalendarDayInfoProps) => {
 	return (
 		<div
 			className={`${

@@ -1,18 +1,27 @@
 import { use, useCallback } from 'react';
 import { SettingsContext } from '../../../App';
-import { getLanguageSettings, setAnimationSettings } from './settingsUtils';
+import {
+	getLanguageSettings,
+	setAnimationSettings,
+	type TypeSwitch,
+} from './settingsUtils';
 
-/* Settings to enable or disable animated GIF icons on the page. */
+/*
+ *	Component that displays a switch to set the animation on or off.
+ *	@returns {JSX:Element}
+ */
 const SettingsAnimation = () => {
 	const { animationOn, setAnimationOn } = use(SettingsContext);
 
-	/* Set the animation to be on or off on click of the switch. */
+	/*
+	 *	Function that handles the change of the animation switch value.
+	 *	@returns {void}
+	 */
 	const handleAnimationChange = useCallback((): void => {
-		console.log(animationOn);
 		setAnimationOn(prevAnimationOn =>
 			prevAnimationOn === 'on' ? 'off' : 'on'
 		);
-	}, [setAnimationSettings(animationOn)]);
+	}, [setAnimationSettings(animationOn as TypeSwitch)]);
 
 	return (
 		<div className="flex justify-between">

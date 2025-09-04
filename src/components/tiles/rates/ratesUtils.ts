@@ -19,7 +19,11 @@ export type TypeRates = {
 	date?: Date;
 };
 
-/* Fetch the currencies for the currently selected base currency. */
+/*
+ *	Function that fetches the currencies for the currently selected base currency.
+ *	@param {string} base – Base currency.
+ *	@returns {Promise<TypeRates>}
+ */
 export const fetchCurrencies = async (base: string): Promise<TypeRates> => {
 	let result: TypeRates = {
 		failed: true,
@@ -55,7 +59,11 @@ export const fetchCurrencies = async (base: string): Promise<TypeRates> => {
 	return result;
 };
 
-/* Fetch the cryptocurrencies for the currently selected base cryptocurrency. */
+/*
+ *	Function that fetches the cryptocurrencies for the currently selected base cryptocurrency.
+ *	@param {string} base – Base currency.
+ *	@returns {Promise<TypeRates>}
+ */
 export const fetchCryptos = async (base: string): Promise<TypeRates> => {
 	let result: TypeRates = {
 		failed: true,
@@ -93,7 +101,14 @@ export const fetchCryptos = async (base: string): Promise<TypeRates> => {
 	return result;
 };
 
-/* Set the pinned rates for either currencies or cryptocurrencies. */
+/*
+ *	Function that sets the pinned rates for either currencies or cryptocurrencies.
+ *	@param {string[]} currentRates – Current pinned rates.
+ *	@param {string | undefined} rateCode – The code of the selected rate.
+ *	@param {TypeRateSource} source – The source of the selected rate.
+ *	@param {React.MouseEvent<HTMLDivElement>} e – Event of the clicked element.
+ *	@returns {Promise<TypeRates>}
+ */
 export const setPinnedRates = (
 	currentRates: string[],
 	rateCode: string | undefined,
@@ -121,7 +136,11 @@ export const setPinnedRates = (
 	}
 };
 
-/* Set the value to have a fixed number of decimal digits. */
+/*
+ *	Function that sets the value to have a fixed number of decimal digits.
+ *	@param {number} value – The value to be set.
+ *	@returns {string}
+ */
 export const setDisplayedValue = (value: number): string => {
 	if (value.toFixed(2) === '0.00') return value.toFixed(3);
 	if (value.toFixed(3) === '0.000') return value.toFixed(4);
@@ -129,7 +148,11 @@ export const setDisplayedValue = (value: number): string => {
 	return value.toFixed(2);
 };
 
-/* Format the date, if the language is Czech, use decimal comma, if the language is English, use decimal point. Also add a space separator for thousdands (example: 1000000 is changed to 1 000 000). */
+/*
+ *	Function that formats the date, if the language is Czech, use decimal comma, if the language is English, use decimal point. Also add a space separator for thousdands (example: 1000000 is changed to 1 000 000).
+ *	@param {string} value – The value to be formatted.
+ *	@returns {string}
+ */
 export const formatRate = (value: string): string => {
 	return (
 		value.split('.')[0].replace(/\B(?=(\d{3})+(?!\d))/g, ' ') +

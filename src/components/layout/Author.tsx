@@ -1,7 +1,10 @@
 import { getLanguageSettings } from '../options/settings/settingsUtils';
 
-/* Display the information about the author and personal links. */
-const Footer = () => {
+/*
+ *	Component that displays the information about the author and personal links.
+ *	@returns {JSX:Element}
+ */
+const Author = () => {
 	return (
 		<div className="absolute top-2 text-center px-1 text-sm text-gray-800">
 			{getLanguageSettings() === 'cs'
@@ -23,4 +26,4 @@ const Footer = () => {
 	);
 };
 
-export default Footer;
+export default Author;

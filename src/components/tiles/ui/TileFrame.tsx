@@ -6,7 +6,14 @@ type TypeTileFrameProps = {
 	children?: ReactNode;
 };
 
-/* Tile frame container. */
+/*
+ *	Component that wraps a tile.
+ *	@typedef {object} TypeTileFrameProps
+ *	@property {string} height – The height of the tile.
+ *	@property {string} z – The z-index of the tile.
+ *	@property {ReactNode} children – The child component of the tile.
+ *	@returns {JSX:Element}
+ */
 const TileFrame = ({ height, z, children }: TypeTileFrameProps) => {
 	return (
 		<div

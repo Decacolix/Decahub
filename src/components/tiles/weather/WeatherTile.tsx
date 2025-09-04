@@ -10,13 +10,18 @@ import {
 import Loader from '../../layout/Loader';
 import { getLanguageSettings } from '../../options/settings/settingsUtils';
 
-/* Weather tile displaying the information about the current weather and 3-day forecast based on the selected location. */
+/*
+ *	Component that displays the information about the current weather and 3-day forecast based on the selected location.
+ *	@returns {JSX:Element}
+ */
 const WeatherTile = () => {
 	const { weatherLocation } = use(SettingsContext);
 	const [weatherInfo, setWeatherInfo] = useState<TypeWeather>();
 	const [isWeatherLoading, setisWeatherLoading] = useState<boolean>(true);
 
-	/* Fetch the weather date on change of the weather location. */
+	/*
+	 *	Hook that fetches the weather date on change of the weather location.
+	 */
 	useEffect(() => {
 		setisWeatherLoading(true);
 

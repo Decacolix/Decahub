@@ -2,13 +2,20 @@ import { use, useCallback } from 'react';
 import { SettingsContext } from '../../../App';
 import { setLanguageSettings, type TypeLanguage } from './settingsUtils';
 
-/* Settings to switch between the Czech and the English language. */
+/*
+ *	Component that displays a switch to set the language to either Czech or English.
+ *	@returns {JSX:Element}
+ */
 const SettingsLanguage = () => {
 	const { language, setLanguage } = use(SettingsContext);
 
 	const languageStyles: string = 'cursor-pointer';
 
-	/* On click of either 'CS' or 'EN', switch to the clicked language. */
+	/*
+	 *	Function that handles the change of the language.
+	 *  @param {React.MouseEvent<HTMLSpanElement, MouseEvent>} e – Event of the clicked element.
+	 *	@returns {void}
+	 */
 	const handleLanguageChange = useCallback(
 		(e: React.MouseEvent<HTMLSpanElement, MouseEvent>): void => {
 			setLanguage(e.currentTarget?.textContent?.toLowerCase() as TypeLanguage);

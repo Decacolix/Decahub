@@ -15,6 +15,7 @@ import {
 	setDefatuls,
 	type TypeLanguage,
 	type TypeLocation,
+	type TypeSwitch,
 } from './components/options/settings/settingsUtils';
 import {
 	fetchTime,
@@ -50,13 +51,13 @@ type TypeSettingsContext = {
 	infoDisplayed: boolean;
 	setInfoDisplayed: React.Dispatch<React.SetStateAction<boolean>>;
 	animationOn: string;
-	setAnimationOn: React.Dispatch<React.SetStateAction<string>>;
+	setAnimationOn: React.Dispatch<React.SetStateAction<TypeSwitch>>;
 	language: TypeLanguage;
 	setLanguage: React.Dispatch<React.SetStateAction<TypeLanguage>>;
 	localTime: Date;
 	setLocalTime: React.Dispatch<React.SetStateAction<Date>>;
 	localTimeOn: string;
-	setLocalTimeOn: React.Dispatch<React.SetStateAction<string>>;
+	setLocalTimeOn: React.Dispatch<React.SetStateAction<TypeSwitch>>;
 };
 
 export const SettingsContext = createContext<TypeSettingsContext>({
@@ -130,7 +131,10 @@ const processFetchedTime = (
 	return current;
 };
 
-/* Main App component. */
+/*
+ *	The main component.
+ *	@returns {JSX:Element}
+ */
 const App = () => {
 	const [settingsDisplayed, setSettingsDisplayed] = useState(false);
 	const [clock, setClock] = useState(new Date());
@@ -174,7 +178,9 @@ const App = () => {
 	let clockErrorMessage: string = '';
 	let timezoneErrorMessage: string = '';
 
-	/* Update the time every minute by fetching the time data. */
+	/*
+	 *	Hook that updates the time every minute by fetching the time data.
+	 */
 	useEffect(() => {
 		setDefatuls();
 
@@ -207,7 +213,9 @@ const App = () => {
 		};
 	}, []);
 
-	/* Update the time data on change of the time zone. */
+	/*
+	 *	Hook that updates the time data on change of the time zone.
+	 */
 	useEffect(() => {
 		const fetchDataOnTimezoneChange = async () => {
 			setIsTimeLoading(true);
@@ -253,7 +261,9 @@ const App = () => {
 		fetchDataOnTimezoneChange();
 	}, [getTimezoneSettings()]);
 
-	/* Change the favicon based on the current theme. */
+	/*
+	 *	Hook that changes the favicon based on the current theme.
+	 */
 	useEffect(() => {
 		let link: HTMLLinkElement = document.querySelector(
 			"link[rel~='icon']"

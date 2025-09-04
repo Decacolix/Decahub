@@ -11,7 +11,10 @@ import greenBackground from '../../../assets/backgrounds/background-green.svg';
 import blueBackground from '../../../assets/backgrounds/background-blue.svg';
 import { DEFAULT_SETTINGS } from '../../../constants/defaultSettings';
 
-/* Settings to set the background theme of the page. */
+/*
+ *	Component that displays images of different themes to set one of them.
+ *	@returns {JSX:Element}
+ */
 const SettingsTheme = () => {
 	const [currentTheme, setCurrentTheme] = useState<TypeTheme>(
 		getThemeSettings()
@@ -32,12 +35,18 @@ const SettingsTheme = () => {
 		},
 	];
 
-	/* Set the theme when the current theme is changed. */
+	/*
+	 *	Hook that handles setting the theme when it changes.
+	 */
 	useEffect(() => {
 		setTheme(currentTheme || DEFAULT_SETTINGS.theme);
 	}, [currentTheme]);
 
-	/* On click of the theme image, switch to the clicked theme. */
+	/*
+	 *	Function that handles the change of the theme.
+	 * 	@param {TypeTheme} theme – The selected theme.
+	 *	@returns {void}
+	 */
 	const handleThemeChange = useCallback(
 		(theme: TypeTheme): void => {
 			setCurrentTheme(theme);

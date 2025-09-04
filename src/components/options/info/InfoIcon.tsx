@@ -1,11 +1,17 @@
 import { use } from 'react';
 import { SettingsContext } from '../../../App';
 
-/* Info icon for the menu. */
+/*
+ *	Component that displays the info icon for the menu
+ *	@returns {JSX:Element}
+ */
 const InfoIcon = () => {
 	const { setInfoDisplayed } = use(SettingsContext);
 
-	/* Set the info panel to be displayed on click of the icon. */
+	/*
+	 *	Function that handles setting the info panel to be displayed on click of the icon.
+	 *	@returns {void}
+	 */
 	const handleInfoOpen = (): void => {
 		setInfoDisplayed(prevInfoDisplayed => !prevInfoDisplayed);
 	};

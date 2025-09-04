@@ -10,11 +10,17 @@ import {
 	CRYPTO_BASE_VALUES_EN,
 } from '../../../constants/cryptoBaseValues';
 
-/* Settings to set the base currency for the cryptocurrencies on the page. */
+/*
+ *	Component that displays a dropdown with base cryptocurrencies.
+ *	@returns {JSX:Element}
+ */
 const SettingsCrypto = () => {
 	const { baseCrypto, setBaseCrypto } = use(SettingsContext);
 
-	/* Set the base currency for cryptocurrencies on change of the dropdown box with the list of base currencies. */
+	/*
+	 *	Function that handles the change of the dropdown.
+	 *	@returns {void}
+	 */
 	const handleBaseCryptoChange = useCallback(
 		(e: React.ChangeEvent<HTMLSelectElement>): void => {
 			setBaseCrypto(e.target.value.substring(0, 3));

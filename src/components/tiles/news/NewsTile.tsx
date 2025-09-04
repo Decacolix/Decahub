@@ -5,14 +5,19 @@ import { SettingsContext } from '../../../App';
 import { newsSourceUrls } from '../../options/settings/SettingsNews';
 import { getLanguageSettings } from '../../options/settings/settingsUtils';
 
-/* News tile for displaying a list of current news, based on the selected news source. */
+/*
+ *	Component that displays a list of current news based on the selected news source.
+ *	@returns {JSX:Element}
+ */
 const NewsTile = () => {
 	const { currentNewsSource } = use(SettingsContext);
 
 	const [feed, setFeed] = useState<TypeFetchFeed>();
 	const [isFeedLoading, setIsFeedLoading] = useState<boolean>(true);
 
-	/* Fetch the feed when the current news source changes. */
+	/*
+	 *	Hook that handles fetching the feed when the current news source changes.
+	 */
 	useEffect(() => {
 		setIsFeedLoading(true);
 		const fetchFeedOnLoad = async () => {

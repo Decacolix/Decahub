@@ -5,13 +5,19 @@ import WeatherTile from '../tiles/weather/WeatherTile';
 import TileFrame from '../tiles/ui/TileFrame';
 import RateTile from '../tiles/rates/RateTile';
 
-export type TypeGrid = {
+export type TypeGridProps = {
 	clockErrorMessage: string;
 	timezoneErrorMessage: string;
 };
 
-/* Main grid of the page, containing the tiles. On the largest screens, the grid has 2 rows and 3 columns, on medium to large screens, it has 3 rows and 2 columns, and on the smallest screens, it has 6 rows and 1 column. */
-const Grid = ({ clockErrorMessage, timezoneErrorMessage }: TypeGrid) => {
+/*
+ *	Component that displays the grid of the page, containing the tiles. On the largest screens, the grid has 2 rows and 3 columns, on medium to large screens, it has 3 rows and 2 columns, and on the smallest screens, it has 6 rows and 1 column.
+ *	@typedef {object} TypeGridProps
+ *	@property {string} clockErrorMessage – Error message if the clock is not loaded.
+ *	@property {string} timezoneErrorMessage – Error message if the timezone is not loaded.
+ *	@returns {JSX:Element}
+ */
+const Grid = ({ clockErrorMessage, timezoneErrorMessage }: TypeGridProps) => {
 	const topHeight: string = 'h-[25rem] 2xl:h-[25rem]';
 	const bottomHeight: string = 'h-[25rem] 2xl:h-[35rem]';
 

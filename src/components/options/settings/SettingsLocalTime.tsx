@@ -1,18 +1,28 @@
 import { use, useCallback } from 'react';
-import { getLanguageSettings, setLocalTimeSettings } from './settingsUtils';
+import {
+	getLanguageSettings,
+	setLocalTimeSettings,
+	type TypeSwitch,
+} from './settingsUtils';
 import { SettingsContext } from '../../../App';
 
-/* Settings to enable or disable the local time instead of the time fetched from API. */
+/*
+ *	Component that displays a switch to set the local time on or off.
+ *	@returns {JSX:Element}
+ */
 const SettingsLocalTime = () => {
 	const { localTimeOn, setLocalTimeOn } = use(SettingsContext);
 
-	/* Set the local time to be on or off on click of the switch. */
+	/*
+	 *	Function that handles the change of the local time switch value.
+	 *	@returns {void}
+	 */
 	const handleLocalTimeChange = useCallback((): void => {
 		console.log(localTimeOn);
 		setLocalTimeOn(prevLocalTimeOn =>
 			prevLocalTimeOn === 'on' ? 'off' : 'on'
 		);
-	}, [setLocalTimeSettings(localTimeOn)]);
+	}, [setLocalTimeSettings(localTimeOn as TypeSwitch)]);
 
 	return (
 		<div className="flex justify-between">

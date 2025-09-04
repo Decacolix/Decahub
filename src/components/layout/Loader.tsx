@@ -1,15 +1,22 @@
 import { useEffect, useState } from 'react';
 
-type TypeLoader = {
+type TypeLoaderProps = {
 	infoText?: string;
 };
 
-/* Animated loading circle with an optional info text. */
-const Loader = ({ infoText }: TypeLoader) => {
+/*
+ *	Component that displays an animated loading circle with an optional info text.
+ *	@typedef {object} TypeLoaderProps
+ *	@property {string} infoText – The info text to be displayed with the loader.
+ *	@returns {JSX:Element}
+ */
+const Loader = ({ infoText }: TypeLoaderProps) => {
 	const [displayAdditionalInfo, setDisplayAdditionalInfo] =
 		useState<boolean>(false);
 
-	/* Display the optional info text after 1 second of loading. */
+	/*
+	 *	Hook that handles displaying the optional info text after 1 second of loading.
+	 */
 	useEffect(() => {
 		const timeoutId = setTimeout(() => {
 			setDisplayAdditionalInfo(

@@ -1,18 +1,29 @@
 import { use, useEffect } from 'react';
 import { formatClock, formatTimezone } from './timeUtils';
-import type { TypeGrid } from '../../layout/Grid';
+import type { TypeGridProps } from '../../layout/Grid';
 import { SettingsContext } from '../../../App';
 import {
 	getLanguageSettings,
 	getLocalTimeSettings,
 } from '../../options/settings/settingsUtils';
 
-/* Display the clock with the current time based on the currently selected time zone. */
-const TimeClock = ({ clockErrorMessage, timezoneErrorMessage }: TypeGrid) => {
+/*
+ *	Component that displays the clock with the current time based on the currently selected time zone.
+ *	@typedef {object} TypeGridProps
+ *	@property {string} clockErrorMessage – Error message if the clock is not loaded.
+ *	@property {string} timezoneErrorMessage – Error message if the timezone is not loaded.
+ *	@returns {JSX:Element}
+ */
+const TimeClock = ({
+	clockErrorMessage,
+	timezoneErrorMessage,
+}: TypeGridProps) => {
 	const { clock, setClock, timezoneInfo, localTime, setLocalTime } =
 		use(SettingsContext);
 
-	/* Update the clock every second by incrementing the second. */
+	/*
+	 *	Hook that handles updating the clock every second by incrementing the second.
+	 */
 	useEffect(() => {
 		const clockUpdateInterval = setInterval(async () => {
 			await setClock(() => {
@@ -29,7 +40,9 @@ const TimeClock = ({ clockErrorMessage, timezoneErrorMessage }: TypeGrid) => {
 		};
 	}, [clock]);
 
-	/* Update the local clock every 500 milliseconds for better precision. */
+	/*
+	 *	Hook that handles updating the local clock every 500 milliseconds for better precision.
+	 */
 	useEffect(() => {
 		const localClockUpdateInterval = setInterval(async () => {
 			setLocalTime(new Date());

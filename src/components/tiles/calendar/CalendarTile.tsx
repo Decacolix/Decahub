@@ -22,7 +22,10 @@ type TypeViews = 'month' | 'year' | 'years';
 const startYear: number = 1900;
 const endYear: number = 2151;
 
-/* Calendar tile has three different views, that can be switched by clicking on the header of the calendar. Month view displays list of days of the current month, year view displays list of months of the year, and years view displays list of 12 years. */
+/*
+ *	Component that displays a calendar tile which has three different views that can be switched by clicking on the header of the calendar. Month view displays a list of days of the current month, year view displays a list of months of the year, and years view displays a list of 12 years.
+ *	@returns {JSX:Element}
+ */
 const CalendarTile = () => {
 	const { date, localTime } = use(SettingsContext);
 	const displayedDate = getLocalTimeSettings() === 'on' ? localTime : date;
@@ -51,7 +54,10 @@ const CalendarTile = () => {
 		display: boolean;
 	}>({ month: 1, day: 1, weekday: 0, x: 0, y: 0, display: false });
 
-	/* Decrease the number of the current month or year or years, depending on the current view. */
+	/*
+	 *	Function that handles the change of the month, year or years by reducing its number.
+	 *	@returns {void}
+	 */
 	const handleLeftArrowClick = (): void => {
 		setMaximumReached(false);
 
@@ -88,7 +94,10 @@ const CalendarTile = () => {
 		}
 	};
 
-	/* Increase the number of the current month or year or years, depending on the current view. */
+	/*
+	 *	Function that handles the change of the month, year or years by increasing its number.
+	 *	@returns {void}
+	 */
 	const handleRightArrowClick = (): void => {
 		setMinimumReached(false);
 
@@ -125,13 +134,20 @@ const CalendarTile = () => {
 		}
 	};
 
-	/* Change the view between month, year and years view. */
+	/*
+	 *	Function that handles the change of the view between month, year or years.
+	 *	@returns {void}
+	 */
 	const handleViewChange = (): void => {
 		if (currentView === 'month') setCurrentView('year');
 		if (currentView === 'year') setCurrentView('years');
 	};
 
-	/* Display information about the day of the month when hovered with cursor. */
+	/*
+	 *	Function that handles the display of the information about the current hovered day.
+	 *  @param {React.MouseEvent<HTMLDivElement, MouseEvent>} e – Event of the hovered element.
+	 *	@returns {void}
+	 */
 	const handleHoverDay = (
 		e: React.MouseEvent<HTMLDivElement, MouseEvent>
 	): void => {
@@ -153,7 +169,9 @@ const CalendarTile = () => {
 		e.currentTarget.style.backgroundColor = getBackgroundColor().hex;
 	};
 
-	/* Set the displayed month days when the current month or year changes.  */
+	/*
+	 *	Hook that handles setting of the displayed month days when the current month or year changes.
+	 */
 	useEffect(() => {
 		setPreviousMonthDays([]);
 

@@ -43,7 +43,11 @@ export type TypeWeather = {
 	};
 };
 
-/* Fetch the information about selected location. */
+/*
+ *	Function to fetch the information about selected location.
+ *	@param {string} location – The location.
+ *	@returns {Promise<TypeLocation>}
+ */
 export const fetchLocation = async (
 	location: string
 ): Promise<TypeLocation> => {
@@ -78,7 +82,12 @@ export const fetchLocation = async (
 	return result;
 };
 
-/* Fetch the information about current weather and 3-day forecast. */
+/*
+ *	Function to fetch the information about current weather and 3-day forecast.
+ *	@param {number} latitude – The latitude for the location.
+ *	@param {number} longitude – The longitude for the location.
+ *	@returns {Promise<TypeWeather>}
+ */
 export const fetchWeather = async (
 	latitude: number,
 	longitude: number
@@ -137,7 +146,11 @@ export const fetchWeather = async (
 	return result;
 };
 
-/* Set the names of the three forecast days. */
+/*
+ *	Function to set the names of the three forecast days.
+ *	@param {Date} date – The date.
+ *	@returns {string[]}
+ */
 export const setForecastDays = (date: Date): string[] => {
 	const currentDay = new Date(date).getDay();
 
@@ -149,7 +162,11 @@ export const setForecastDays = (date: Date): string[] => {
 	});
 };
 
-/* Set the image for the displayed weather. */
+/*
+ *	Function to set the image for the displayed weather.
+ *	@param {number} code – The code of the weather.
+ *	@returns {string}
+ */
 export const setImage = (code: number): string => {
 	switch (code) {
 		case 0:

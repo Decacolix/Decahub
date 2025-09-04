@@ -1,5 +1,5 @@
 import { use } from 'react';
-import type { TypeGrid } from '../../layout/Grid';
+import type { TypeGridProps } from '../../layout/Grid';
 import TimeClock from './TimeClock';
 import TimeDay from './TimeDate';
 import Loader from '../../layout/Loader';
@@ -10,8 +10,17 @@ import {
 	getLocalTimeSettings,
 } from '../../options/settings/settingsUtils';
 
-/* The tile to display the clock and the date, and also the information about the author. */
-const TimeTile = ({ clockErrorMessage, timezoneErrorMessage }: TypeGrid) => {
+/*
+ *	Component that displays the tile to display the clock and the date, and also the information about the author.
+ *	@typedef {object} TypeGridProps
+ *	@property {string} clockErrorMessage – Error message if the clock is not loaded.
+ *	@property {string} timezoneErrorMessage – Error message if the timezone is not loaded.
+ *	@returns {JSX:Element}
+ */
+const TimeTile = ({
+	clockErrorMessage,
+	timezoneErrorMessage,
+}: TypeGridProps) => {
 	const { isTimeLoading } = use(SettingsContext);
 
 	return (

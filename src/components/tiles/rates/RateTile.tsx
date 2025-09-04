@@ -22,14 +22,25 @@ type TypeRateTileProps = {
 	source: TypeRateSource;
 };
 
-/* Rate tile to display either a list of currencies or cryptocurrencies. */
+/*
+ *	Component that displays either a list of currencies or cryptocurrencies.
+ *	@typedef {object} TypeRateTileProps
+ *	@property {TypeRateSource} source – The source of the rates.
+ *	@returns {JSX:Element}
+ */
 const RateTile = ({ source }: TypeRateTileProps) => {
 	const { baseCurrency, baseCrypto } = use(SettingsContext);
 	const [rates, setRates] = useState<TypeRate[]>();
 	const [isRatesLoading, setIsRatesLoading] = useState<boolean>(true);
 	let ratesError: string = '';
 
-	/* Display one row of the currency, containing the information about the currency and its value. */
+	/*
+	 *	Function that displays one row of the currency, containing the information about the currency and its value.
+	 *	@param {TypeRateSource} source – Source of the rate.
+	 *	@param {TypeRate} rate – The specific rate.
+	 *	@param {boolean} pinned – If the rate is pinned or not.
+	 *	@returns {JSX.Element | false}
+	 */
 	const displayRateRow = (
 		source: TypeRateSource,
 		rate: TypeRate,
@@ -61,8 +72,10 @@ const RateTile = ({ source }: TypeRateTileProps) => {
 		);
 	};
 
-	/* Fetch the currencies on change of the base currency. */
 	if (source === 'currency') {
+		/*
+		 *	Hook that handles fetching the currencies on change of the base currency.
+		 */
 		useEffect(() => {
 			setIsRatesLoading(true);
 			const fetchCurrenciesOnLoad = async () => {
@@ -76,8 +89,10 @@ const RateTile = ({ source }: TypeRateTileProps) => {
 		}, [baseCurrency]);
 	}
 
-	/* Fetch the cryptocurrencies on change of the base currency. */
 	if (source === 'crypto') {
+		/*
+		 *	Hook that handles fetching the cryptocurrencies on change of the base currency.
+		 */
 		useEffect(() => {
 			setIsRatesLoading(true);
 			const fetchCryptosOnLoad = async () => {

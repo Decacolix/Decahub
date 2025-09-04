@@ -1,11 +1,20 @@
 import { getThemeSettings } from '../../options/settings/settingsUtils';
 
-/* Calculate the range of 12 years, starting with the year 1900 (the first range is from 1900 to 1911, the second from 1912 to 1923, etc.) */
+/*
+ *	Function that calculates the range of 12 years, starting with the year 1900 (the first range is from 1900 to 1911, the second from 1912 to 1923, etc.).
+ * 	@param {number} year – The value of the year.
+ *	@returns {number}
+ */
 export const calculateYearRange = (year: number): number => {
 	return year >= 4 ? year - ((year % 12) - 4) : year - ((year % 12) + 8);
 };
 
-/* Get the number of days for the displayed month. */
+/*
+ *	Function that calculates the number of days for the displayed month.
+ * 	@param {number} currentMonth – The value of the current month.
+ * 	@param {number} currentYear – The value of the current year.
+ *	@returns {number}
+ */
 export const getCurrentMonthDays = (
 	currentMonth: number,
 	currentYear: number
@@ -13,7 +22,12 @@ export const getCurrentMonthDays = (
 	return new Date(currentYear, currentMonth + 1, 0).getDate();
 };
 
-/* Get the last day of the previous month for the displayed month. */
+/*
+ *	Function that returns the last day of the previous month for the displayed month.
+ * 	@param {number} currentMonth – The value of the current month.
+ * 	@param {number} currentYear – The value of the current year.
+ *	@returns {number}
+ */
 export const getPreviousMonthDays = (
 	currentMonth: number,
 	currentYear: number
@@ -22,7 +36,12 @@ export const getPreviousMonthDays = (
 	return new Date(currentYear, currentMonth, 0).getDate();
 };
 
-/* Get the weekday of the first day for the displayed month. */
+/*
+ *	Function that returns the weekday of the first day for the displayed month.
+ * 	@param {number} currentMonth – The value of the current month.
+ * 	@param {number} currentYear – The value of the current year.
+ *	@returns {number}
+ */
 export const getCurrentMonthFirstWeekday = (
 	currentMonth: number,
 	currentYear: number
@@ -30,7 +49,10 @@ export const getCurrentMonthFirstWeekday = (
 	return new Date(currentYear, currentMonth, 1).getDay();
 };
 
-/* Get the background color for the day info box, based on the current theme. */
+/*
+ *	Function that returns the background color for the day info box, based on the current theme.
+ *	@returns {{ name: string; hex: string }}
+ */
 export const getBackgroundColor = (): { name: string; hex: string } => {
 	const theme: string = getThemeSettings();
 

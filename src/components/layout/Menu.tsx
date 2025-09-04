@@ -3,7 +3,10 @@ import SettingsIcon from '../options/settings/SettingsIcon';
 import { SettingsContext } from '../../App';
 import InfoIcon from '../options/info/InfoIcon';
 
-/* Menu of the page, containing the settings icon and the info icon. The menu is displayed only if the settings panel and the info panel are not displayed. */
+/*
+ *	Component that displays the menu of the page, containing the settings icon and the info icon. The menu is displayed only if the settings panel and the info panel are not displayed.
+ *	@returns {JSX:Element}
+ */
 const Menu = () => {
 	const { settingsDisplayed, infoDisplayed } = use(SettingsContext);
 

@@ -17,10 +17,24 @@ type TypeRateRowProps = {
 	source: TypeRateSource;
 };
 
+/*
+ *	Component that displays a row with a currency or cryptocurrency information.
+ *	@typedef {object} TypeRateRowProps
+ *	@property {string} code – The code of the rate.
+ *	@property {string} name – The name of the rate.
+ *	@property {number} value – The value of the rate.
+ *	@property {boolean} pinned – If the rate is pinned.
+ *	@property {TypeRateSource} source – The source of the rate.
+ *	@returns {JSX:Element}
+ */
 const RateRow = ({ code, name, value, pinned, source }: TypeRateRowProps) => {
 	const { baseCurrency, baseCrypto } = use(SettingsContext);
 
-	/* Set the rate row to be either pinned or unpinned on click of the star icon. */
+	/*
+	 *	Function that sets the rate row to be either pinned or unpinned on click of the star icon.
+	 *  @param {React.MouseEvent<HTMLDivElement>} e – Event of the clicked element.
+	 *	@returns {void}
+	 */
 	const handlePinnedChange = (e: React.MouseEvent<HTMLDivElement>): void => {
 		const rateCode: string | undefined = (e.target as HTMLDivElement).closest(
 			'li'

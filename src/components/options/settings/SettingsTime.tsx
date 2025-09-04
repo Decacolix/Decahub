@@ -6,9 +6,16 @@ import {
 	setTimezoneSettings,
 } from './settingsUtils';
 
-/* Settings to set the current time zone. */
+/*
+ *	Component that displays a dropdown with time zones.
+ *	@returns {JSX:Element}
+ */
 const SettingsTime = () => {
-	/* Set the time zone on change of the dropdown box with the list of time zones. */
+	/*
+	 *	Function that handles the change of the time zone.
+	 *  @param {React.ChangeEvent<HTMLSelectElement>} e – Event of the dropdown select element.
+	 *	@returns {void}
+	 */
 	const handleTimezoneChange = (
 		e: React.ChangeEvent<HTMLSelectElement>
 	): void => {

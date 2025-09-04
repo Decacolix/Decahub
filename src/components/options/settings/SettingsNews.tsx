@@ -28,11 +28,18 @@ export const newsSourceUrls: {
 	},
 ];
 
-/* Settings to select the source of the news on the page. */
+/*
+ *	Component that displays logos of the news sources to set one of them.
+ *	@returns {JSX:Element}
+ */
 const SettingsNews = () => {
 	const { currentNewsSource, setCurrentNewsSource } = use(SettingsContext);
 
-	/* On click of the news logo, switch to the clicked news source. */
+	/*
+	 *	Function that handles the change of the news source.
+	 *  @param {string} source – Source of the news.
+	 *	@returns {void}
+	 */
 	const handleNewsSourceChange = useCallback(
 		(source: string): void => {
 			setCurrentNewsSource(source);

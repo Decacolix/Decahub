@@ -1,11 +1,17 @@
 import { use } from 'react';
 import { SettingsContext } from '../../../App';
 
-/* Settings icon in the menu to display the settings panel. */
+/*
+ *	Component that displays an icon for settings.
+ *	@returns {JSX:Element}
+ */
 const SettingsIcon = () => {
 	const { setSettingsDisplayed } = use(SettingsContext);
 
-	/* Display the settings panel on click of the icon. */
+	/*
+	 *	Function that handles the click on the icon.
+	 *	@returns {void}
+	 */
 	const handleSettingsOpen = (): void => {
 		setSettingsDisplayed(prevSettingsDisplayed => !prevSettingsDisplayed);
 	};
