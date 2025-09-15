@@ -136,9 +136,9 @@ const processFetchedTime = (
  *	@returns {JSX:Element}
  */
 const App = () => {
-	const [settingsDisplayed, setSettingsDisplayed] = useState(false);
-	const [clock, setClock] = useState(new Date());
-	const [date, setDate] = useState(new Date());
+	const [settingsDisplayed, setSettingsDisplayed] = useState<boolean>(false);
+	const [clock, setClock] = useState<Date>(new Date());
+	const [date, setDate] = useState<Date>(new Date());
 	const [timezoneInfo, setTimezoneInfo] = useState<TypeFetchTimezone>({
 		failed: false,
 		error: '',
@@ -156,15 +156,15 @@ const App = () => {
 	const [baseCrypto, setBaseCrypto] = useState<string>(
 		getBaseCryptoSettings() || DEFAULT_SETTINGS.baseCrypto
 	);
-	const [infoDisplayed, setInfoDisplayed] = useState(false);
-	const [animationOn, setAnimationOn] = useState(
+	const [infoDisplayed, setInfoDisplayed] = useState<boolean>(false);
+	const [animationOn, setAnimationOn] = useState<TypeSwitch>(
 		getAnimationSettings() || DEFAULT_SETTINGS.animation
 	);
 	const [language, setLanguage] = useState<TypeLanguage>(
 		getLanguageSettings() || DEFAULT_SETTINGS.language
 	);
 	const [localTime, setLocalTime] = useState<Date>(new Date());
-	const [localTimeOn, setLocalTimeOn] = useState(
+	const [localTimeOn, setLocalTimeOn] = useState<TypeSwitch>(
 		getLocalTimeSettings() || DEFAULT_SETTINGS.localTime
 	);
 
